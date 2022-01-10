@@ -1,0 +1,88 @@
+/*
+ * @Author: Mario
+ * @Date: 2021-11-17 16:23:57
+ * @LastEditTime: 2021-11-20 02:06:16
+ * @LastEditors: Mario
+ * @Description: 配置文件
+ */
+const { whenProd } = require("@craco/craco");
+const CracoLessPlugin = require("craco-less");
+const WebpackBar = require("webpackbar");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const path = require("path");
+
+// 防止create-react-app 构建时清空控制台
+// process.stdout.isTTY = false;
+const resolve = (localPath) => {
+  return path.join(__dirname, localPath);
+};
+
+module.exports = {
+  webpack: {
+    alias: {
+      "@": resolve("./src"),
+    },
+    plugins: [
+      // webpack构建进度条
+      new WebpackBar({ profile: true, color: "#1a9c70" }),
+      // webpack依赖包分析器
+      ...whenProd(() => [new BundleAnalyzerPlugin()], []),
+    ],
+    configure: (webpackConfig, { env, paths }) => {
+      // 加载module.less文件时开启
+      // webpackConfig.module.rules = [
+      //   ...webpackConfig.module.rules,
+      //   {
+      //     test: /\.less$/,
+      //     use: [
+      //       "style-loader",
+      //       {
+      //         loader: "css-loader",
+      //         options: {
+      //           importLoaders: 1,
+      //           modules: true,
+      //         },
+      //       },
+      //       "less-loader",
+      //     ],
+      //     include: /\.module\.less$/,
+      //   },
+      // ];
+      return webpackConfig;
+    },
+  },
+  plugins: [
+    {
+      plugin: CracoLessPlugin,
+      options: {
+        lessLoaderOptions: {
+          lessOptions: {
+            // 覆盖antd默认主题变量
+            // modifyVars: { "@primary-color": "#cddbfa" },
+            javascriptEnabled: true,
+          },
+        },
+      },
+    },
+  ],
+  style: {
+    postcss: {
+      plugins: [require("tailwindcss"), require("autoprefixer")],
+    },
+  },
+  babel: {
+    plugins: [
+      [
+        "import",
+        {
+          libraryName: "antd",
+          libraryDirectory: "es",
+          style: true, // 设置为true即是less
+        },
+      ],
+    ],
+  },
+  devServer: {
+    open: true,
+  },
+};
