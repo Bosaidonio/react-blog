@@ -42,12 +42,14 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "prettier"
     ]
   },
   "browserslist": {
@@ -63,10 +65,20 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.0.2",
+    "@commitlint/config-conventional": "^16.0.0",
     "autoprefixer": "^9",
     "babel-plugin-import": "^1.13.3",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "postcss": "^7",
+    "prettier": "2.5.1",
     "stylelint": "^14.1.0",
     "stylelint-config-standard": "^24.0.0"
+  },
+  "lint-staged": {
+    "*.css": "stylelint --fix",
+    "*.{js,css,md,ts,tsx}": "prettier --write"
   }
 }
