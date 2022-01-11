@@ -77,7 +77,7 @@ const menuList = [
   },
 ]
 
-const Navbar = () => {
+const Navbar = ({width}: {width: number}) => {
   const [collapsed, setCollapsed] = useState(false)
   const [selectedKeys, setSelectedKeys] = useState(['首页'])
   const toggleCollapsed = () => {
@@ -107,7 +107,7 @@ const Navbar = () => {
     setSelectedKeys([key])
   }
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width }}>
       {menuList.map((menu) => {
         return (
           <span key={menu.title}>

@@ -1,12 +1,13 @@
 .content {
   background-color: #f1f3f4;
-  width: calc(100% - 220px);
+  // width: calc(100% - 220px);
   height: calc(100vh - 50px);
   margin-left: 220px;
   .progress {
     position: relative;
   }
 }
+
 .w-full {
   width: 100%;
   margin-left: 0;

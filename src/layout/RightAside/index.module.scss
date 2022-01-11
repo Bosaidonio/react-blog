@@ -1,5 +1,16 @@
 .rightaside {
+  position: relative;
+  right: 0;
   width: 240px;
   background-color: #f9f9f9;
   height: calc(100vh - 50px);
+  transition: transform 0.4s ease;
+  transform: translate3d(0, 0, 0);
+}
+.aside-active {
+  position: fixed;
+  width: 240px;
+  z-index: 1010;
+  transition: transform 0.4s ease;
+  transform: translate3d(100%, 0, 0);
 }

@@ -7,13 +7,14 @@ import NProgress from '@/components/NProgress'
 import RightAside from '@/layout/RightAside'
 import styles from '@/layout/Content/index.module.scss'
 
-const Content = () => {
+const Content = ({ initWidth }: { initWidth: number }) => {
   const isLoading = useSelector((state: State) => state.loading)
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
   })
+
   return (
-    <div className={classnames(styles.content, isMobile ? styles['w-full'] : '')}>
+    <div id="content" className={classnames(styles.content, isMobile ? styles['w-full'] : '')} style={{ marginLeft: isMobile ? '0' : initWidth }}>
       <NProgress loading={isLoading} />
       <div className={classnames('flex')}>
         <div className={styles['flex-1']}>

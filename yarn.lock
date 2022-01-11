@@ -5480,6 +5480,11 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
   resolved "https://mirrors.tencent.com/npm/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
 
+fast-memoize@^2.5.1:
+  version "2.5.2"
+  resolved "https://registry.npmmirror.com/fast-memoize/download/fast-memoize-2.5.2.tgz#79e3bb6a4ec867ea40ba0e7146816f6cdce9b57e"
+  integrity sha1-eeO7ak7IZ+pAug5xRoFvbNzptX4=
+
 fastest-levenshtein@^1.0.12:
   version "1.0.12"
   resolved "http://mirrors.cloud.tencent.com/npm/fastest-levenshtein/-/fastest-levenshtein-1.0.12.tgz#9990f7d3a88cc5a9ffd1f1745745251700d497e2"
@@ -10336,6 +10341,13 @@ rc-virtual-list@^3.2.0, rc-virtual-list@^3.4.1:
     classnames "^2.2.6"
     rc-resize-observer "^1.0.0"
     rc-util "^5.0.7"
+
+re-resizable@^6.9.1:
+  version "6.9.1"
+  resolved "https://registry.npmmirror.com/re-resizable/download/re-resizable-6.9.1.tgz#6be082b55d02364ca4bfee139e04feebdf52441c"
+  integrity sha1-a+CCtV0CNkykv+4TngT+699SRBw=
+  dependencies:
+    fast-memoize "^2.5.1"
 
 react-app-polyfill@^2.0.0:
   version "2.0.0"

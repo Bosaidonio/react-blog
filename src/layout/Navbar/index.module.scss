@@ -2,7 +2,7 @@
   position: fixed;
   height: calc(100vh - 50px);
   background-color: #f9f9f9;
-  border-right: 1px solid pink;
+  // border-right: 1px solid pink;
   :global {
     .ant-divider-horizontal {
       margin: 10px 0;
@@ -104,6 +104,16 @@
   width: 75%;
   transition: transform 0.4s ease;
   transform: translate3d(-100%, 0, 0);
+}
+.move-resizable {
+  & > div:nth-child(2) {
+    width: 2px !important;
+    transition: all 0.2s ease;
+    &:hover {
+      transition: all 0.2s ease;
+      background-color: #426ff6;
+    }
+  }
 }
 @media (min-width: 768px) {
   .navbar {
