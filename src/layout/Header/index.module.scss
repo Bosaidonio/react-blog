@@ -11,6 +11,16 @@
   .logo {
     max-height: 50px;
     padding: 0 20px;
+    .BreadCrumbs {
+      cursor: pointer;
+      padding: 10px 17px;
+      font-size: 16px;
+      line-height: 30px;
+      text-decoration: none;
+      background-color: transparent;
+      border: none;
+    }
+
     .img {
       display: flex;
       align-items: center;
@@ -41,6 +51,14 @@
           background-position: -100% 0;
         }
       }
+    }
+  }
+  .isMobile {
+    width: 100%;
+    .img {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
   .header-right {

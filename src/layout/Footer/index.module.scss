@@ -1,0 +1,19 @@
+.footer {
+  width: calc(100% - 240px);
+  color: #58666e;
+  text-align: center;
+  font-size: 14px;
+  .wrapper {
+    padding: 15px;
+    .author {
+      font-style: inherit;
+    }
+    a {
+      color: #58666e;
+      font-weight: normal;
+    }
+  }
+}
+.w-full {
+  width: 100%;
+}

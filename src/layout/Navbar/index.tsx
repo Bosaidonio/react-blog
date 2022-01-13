@@ -6,26 +6,30 @@ import { Resizable } from 're-resizable'
 import Navbar from '@/layout/Navbar/navbar'
 import { CaretDownOutlined } from '@ant-design/icons'
 import styles from '@/layout/Navbar/index.module.scss'
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 
 interface AsideProps {
+  isCollapse: boolean
   initWidth: number
   setInitWidth: (arg: number) => void
 }
-const Aside: FC<AsideProps> = ({ initWidth, setInitWidth }) => {
+const Aside: FC<AsideProps> = ({ isCollapse, initWidth, setInitWidth }) => {
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
   })
-
+  const NavRef = useRef<HTMLElement>(null)
   return (
-    <nav className={classnames('w-220', styles.navbar, 'bg', isMobile ? styles['navbar-active'] : '')} style={{ width: initWidth }}>
+    <nav ref={NavRef} className={classnames('w-220', styles.navbar, 'bg', isMobile && isCollapse ? styles['navbar-active'] : '')} style={{ width: initWidth }}>
       <Resizable
         handleWrapperClass={styles['move-resizable']}
         maxWidth={280}
         minWidth={200}
         size={{ width: initWidth, height: '100vh' }}
         onResize={(e) => {
-          const currentWidth = (e as MouseEvent).x
+          const navOffsetLeft = NavRef.current ? NavRef.current.offsetLeft : 0
+          const currentWidth = (e as MouseEvent).x - navOffsetLeft
+          console.log(currentWidth)
+
           if (currentWidth < 280 && currentWidth > 200) {
             setInitWidth(currentWidth)
           }
@@ -35,7 +39,7 @@ const Aside: FC<AsideProps> = ({ initWidth, setInitWidth }) => {
           <div className={classnames(styles['nav-wrap'])}>
             <div className={classnames(styles['aside-user'], 'p-warrper')}>
               <div className={classnames(styles.img)}>
-                <img src="https://mariowork.com/static/react-blog/avatar.jpeg" alt="" />
+                <img src="https://cdn.mariowork.com/auth/avatar.jpeg" alt="" />
               </div>
               <div className={styles.username}>
                 <strong className={classnames(styles.name)}>星河万里</strong>

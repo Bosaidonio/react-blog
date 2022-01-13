@@ -1,0 +1,11 @@
+.text-ellipsis {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bg-light {
+  color: #58666e;
+  background-color: #edf1f2;
+}

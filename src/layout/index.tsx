@@ -6,13 +6,15 @@ import classnames from 'classnames'
 import styles from '@/layout/index.module.scss'
 
 const Layout = () => {
+  const [isCollapse, setIsCollapse] = useState(true)
   const [initWidth, setInitWidth] = useState(220)
+
   return (
     <div className={classnames(styles.layout)}>
-      <Header />
-      <div>
-        <Navbar initWidth={initWidth} setInitWidth={setInitWidth} />
-        <Content initWidth={initWidth} />
+      <Header isCollapse={isCollapse} setIsCollapse={setIsCollapse} />
+      <div style={{ backgroundColor: '#f9f9f9', height: '100vh' }}>
+        <Navbar isCollapse={isCollapse} initWidth={initWidth} setInitWidth={setInitWidth} />
+        <Content isCollapse={isCollapse} initWidth={initWidth} />
       </div>
     </div>
   )
