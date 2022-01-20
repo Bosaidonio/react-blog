@@ -1,0 +1,46 @@
+.wrapper-md {
+  padding: 20px;
+  .text-md {
+    font-size: 16px;
+  }
+
+  .m-t-none {
+    margin-top: 0 !important;
+  }
+  h5 {
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: rgb(119, 119, 119);
+  }
+  a {
+    color: rgb(119, 119, 119);
+  }
+  .l-h-2x {
+    line-height: 2em;
+  }
+  .badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #cfdadd;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+  .badge,
+  .label {
+    font-weight: 700;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 20%);
+  }
+}
+
+.clear {
+  display: block;
+  overflow: hidden;
+}

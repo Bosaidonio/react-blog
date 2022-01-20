@@ -6,7 +6,7 @@
   transition: transform 0.4s ease;
   transform: translate3d(0, 0, 0);
   z-index: 1010;
-  overflow: scroll;
+  // overflow: scroll;
   :global {
     .ant-divider-horizontal {
       margin: 10px 0;
@@ -20,7 +20,7 @@
     .ant-menu-item {
       display: flex;
       justify-content: center;
-      margin-top: 0px !important;
+      margin-top: 0 !important;
       color: #777 !important;
       background-color: #f9f9f9;
       // padding: 0 !important;

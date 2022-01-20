@@ -15,7 +15,16 @@
     transform: translate(2px, 2px);
   }
 }
-
+.search-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.3);
+}
 .ldio > div {
   transform: scale(0.8);
   transform-origin: 100px 100px;
@@ -54,7 +63,7 @@
   height: 200px;
   display: inline-block;
   overflow: hidden;
-  background: #ffffff;
+  background: transparent;
 }
 
 .ldio {

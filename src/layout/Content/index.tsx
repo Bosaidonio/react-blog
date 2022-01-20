@@ -1,12 +1,13 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import classnames from 'classnames'
 import { useMediaQuery } from 'react-responsive'
 import { useSelector } from 'react-redux'
-import { Outlet } from 'react-router-dom'
+// import { Outlet } from 'react-router-dom'
 import { State } from '@/store'
 import NProgress from '@/components/NProgress'
 import RightAside from '@/layout/RightAside'
 import Footer from '@/layout/Footer'
+import EmptyRouter from '@/views/EmptyRouter'
 import styles from '@/layout/Content/index.module.scss'
 
 interface ContentProps {
@@ -18,7 +19,7 @@ const Content: FC<ContentProps> = ({ initWidth, isCollapse }) => {
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
   })
-
+  const [isFinished, setIsFinished] = useState(false)
   return (
     <div
       id="content"
@@ -28,11 +29,11 @@ const Content: FC<ContentProps> = ({ initWidth, isCollapse }) => {
       <NProgress loading={isLoading} />
       <div className={classnames('flex')}>
         <div className={classnames(styles['flex-1'], styles['w-computed'])}>
-          <Outlet />
+          <EmptyRouter isFinished={isFinished} setIsFinished={setIsFinished} />
         </div>
         <RightAside />
       </div>
-      <Footer />
+      {isFinished ? <Footer /> : null}
     </div>
   )
 }

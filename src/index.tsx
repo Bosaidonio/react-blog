@@ -6,8 +6,11 @@ import '@/plugins'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
-// 捕获aplayer错误
-window.addEventListener('error', (event) => {})
+
+window.addEventListener('error', (event) => {
+  console.log(event)
+})
+
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>

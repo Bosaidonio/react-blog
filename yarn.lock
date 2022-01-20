@@ -1206,7 +1206,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.15.4", "@babel/runtime@^7.7.6":
+"@babel/runtime@^7.15.4", "@babel/runtime@^7.16.5", "@babel/runtime@^7.16.7", "@babel/runtime@^7.7.6":
   version "7.16.7"
   resolved "https://registry.npmmirror.com/@babel/runtime/download/@babel/runtime-7.16.7.tgz#03ff99f64106588c9c403c6ecb8c3bafbbdff1fa"
   integrity sha512-9E9FJowqAsytyOY6LG+1KuueckRL+aQW+mKvXRXnuFGyRAyepJPmEo9vgMfXUA6O9u3IeEdv9MAkppFcaQwogQ==
@@ -2014,6 +2014,15 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
+"@tanem/svg-injector@^10.1.14":
+  version "10.1.14"
+  resolved "https://registry.npmmirror.com/@tanem/svg-injector/download/@tanem/svg-injector-10.1.14.tgz#e42f5defb524551770c1a583f950d4bc89e6fd73"
+  integrity sha512-VjcuoKb2jCyx7FeOoz+p3LfH+V2HYXpPPVbTqWdHNV4R8d6DtHYNfQWPivSVcNi0cAtkLnDuEE+2c714YA2l5A==
+  dependencies:
+    "@babel/runtime" "^7.16.5"
+    content-type "^1.0.4"
+    tslib "^2.3.1"
+
 "@testing-library/dom@^7.28.1":
   version "7.31.2"
   resolved "https://mirrors.tencent.com/npm/@testing-library%2fdom/-/dom-7.31.2.tgz#df361db38f5212b88555068ab8119f5d841a8c4a"
@@ -2247,7 +2256,7 @@
   resolved "https://mirrors.cloud.tencent.com/npm/@types%2fprettier/-/prettier-2.4.2.tgz#4c62fae93eb479660c3bd93f9d24d561597a8281"
   integrity sha512-ekoj4qOQYp7CvjX8ZDBgN86w3MqQhLE1hczEJbEIjgFEumDy+na/4AJAbLXfgEWFNB2pKadM5rPFtuSGMWK7xA==
 
-"@types/prop-types@*":
+"@types/prop-types@*", "@types/prop-types@^15.7.4":
   version "15.7.4"
   resolved "https://mirrors.tencent.com/npm/@types%2fprop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
@@ -2269,13 +2278,6 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-lazyload@^3.1.1":
-  version "3.1.1"
-  resolved "https://registry.npmmirror.com/@types/react-lazyload/download/@types/react-lazyload-3.1.1.tgz#98b0565031d058c84802e7c965f495c5fb89d864"
-  integrity sha1-mLBWUDHQWMhIAufJZfSVxfuJ2GQ=
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-redux@^7.1.20", "@types/react-redux@^7.1.21":
   version "7.1.21"
   resolved "https://registry.npmmirror.com/@types/react-redux/download/@types/react-redux-7.1.21.tgz#f32bbaf7cbc4b93f51e10d340aa54035c084b186"
@@ -2285,6 +2287,13 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
+
+"@types/react-svg@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npmmirror.com/@types/react-svg/download/@types/react-svg-5.0.0.tgz#32c9b5e987cadff2797468bbee0abd265f44b75c"
+  integrity sha1-Msm16YfK3/J5dGi77gq9Jl9Et1w=
+  dependencies:
+    react-svg "*"
 
 "@types/react@*", "@types/react@^17.0.0":
   version "17.0.35"
@@ -4211,7 +4220,7 @@ content-disposition@0.5.3:
   dependencies:
     safe-buffer "5.1.2"
 
-content-type@~1.0.4:
+content-type@^1.0.4, content-type@~1.0.4:
   version "1.0.4"
   resolved "https://mirrors.tencent.com/npm/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
@@ -10286,7 +10295,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.1:
+prop-types@^15.6.1, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmmirror.com/prop-types/download/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -10899,11 +10908,6 @@ react-is@^17.0.1, react-is@^17.0.2:
   resolved "https://mirrors.cloud.tencent.com/npm/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-lazyload@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npmmirror.com/react-lazyload/download/react-lazyload-3.2.0.tgz#497bd06a6dbd7015e3376e1137a67dc47d2dd021"
-  integrity sha512-zJlrG8QyVZz4+xkYZH5v1w3YaP5wEFaYSUWC4CT9UXfK75IfRAIEdnyIUF+dXr3kX2MOtL1lUaZmaQZqrETwgw==
-
 react-redux@^7.2.6:
   version "7.2.6"
   resolved "https://registry.npmmirror.com/react-redux/download/react-redux-7.2.6.tgz#49633a24fe552b5f9caf58feb8a138936ddfe9aa"
@@ -11023,6 +11027,16 @@ react-spring@^9.3.1:
     "@react-spring/three" "~9.3.0"
     "@react-spring/web" "~9.3.0"
     "@react-spring/zdog" "~9.3.0"
+
+react-svg@*, react-svg@^14.1.7:
+  version "14.1.7"
+  resolved "https://registry.npmmirror.com/react-svg/download/react-svg-14.1.7.tgz#19da63b9dae0a7513993926e0d89a135b4137869"
+  integrity sha512-iAwLHQAX6rk6ysuB8YCMfxPuze+17YDmH1Ww2OFNT/+YiHRnZuX5ddpZOGb5R5/Wv7AEmeuxFAe+4XLWuo/ZCA==
+  dependencies:
+    "@babel/runtime" "^7.16.7"
+    "@tanem/svg-injector" "^10.1.14"
+    "@types/prop-types" "^15.7.4"
+    prop-types "^15.8.1"
 
 react@^17.0.2:
   version "17.0.2"
@@ -12801,7 +12815,7 @@ tslib@^1.8.1:
   resolved "https://mirrors.tencent.com/npm/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0:
+tslib@^2, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1:
   version "2.3.1"
   resolved "https://mirrors.tencent.com/npm/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
