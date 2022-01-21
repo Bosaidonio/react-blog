@@ -4,7 +4,13 @@ import { Link, useNavigate } from 'react-router-dom'
 import { HomeOutlined, GithubOutlined, HeartOutlined, PictureOutlined, CoffeeOutlined, LockOutlined, UserOutlined, MessageOutlined, AppstoreOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import { MenuList } from '@/types'
+import { ReactSVG } from 'react-svg'
 import styles from '@/layout/Navbar/index.module.scss'
+import homeIcon from '@/layout/Navbar/assets/svgs/home.svg'
+import respoIcon from '@/layout/Navbar/assets/svgs/respo.svg'
+import photoIcon from '@/layout/Navbar/assets/svgs/photo.svg'
+import lockIcon from '@/layout/Navbar/assets/svgs/lock.svg'
+import coffeIcon from '@/layout/Navbar/assets/svgs/coffe.svg'
 const { SubMenu } = Menu
 const menuList = [
   {
@@ -12,31 +18,31 @@ const menuList = [
     list: [
       {
         label: '首页',
-        icon: <HomeOutlined />,
+        icon: <ReactSVG src={homeIcon} />,
         path: '/',
       },
       {
         label: '仓库',
-        icon: <GithubOutlined />,
+        icon: <ReactSVG src={respoIcon} />,
         path: '/respositories',
       },
       {
         label: '相册',
-        icon: <PictureOutlined />,
+        icon: <ReactSVG src={photoIcon} />,
         path: '/photo',
       },
       {
         label: '日记',
-        icon: <LockOutlined />,
+        icon: <ReactSVG src={lockIcon} />,
         path: '/diary',
       },
       {
         label: '关于',
-        icon: <CoffeeOutlined />,
+        icon: <ReactSVG src={coffeIcon} />,
         children: [
           {
             label: '关于我',
-            icon: <UserOutlined />,
+            icon: <ReactSVG src={coffeIcon} />,
             path: '/about',
           },
           {
@@ -69,7 +75,7 @@ const menuList = [
           },
           {
             label: '兴趣爱好',
-            path: '/hobby'
+            path: '/hobby',
           },
         ],
       },
@@ -77,7 +83,7 @@ const menuList = [
   },
 ]
 
-const Navbar = ({width}: {width: number}) => {
+const Navbar = ({ width }: { width: number }) => {
   const [collapsed, setCollapsed] = useState(false)
   const [selectedKeys, setSelectedKeys] = useState(['首页'])
   const toggleCollapsed = () => {
@@ -104,6 +110,7 @@ const Navbar = ({width}: {width: number}) => {
 
   const onClickMenu = ({ key }: { key: string }) => {
     navigate(key)
+    window.scroll(0, 0)
     setSelectedKeys([key])
   }
   return (

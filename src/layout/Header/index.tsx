@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2022-01-16 12:49:49
+ * @LastEditTime: 2022-01-21 15:45:18
  * @LastEditors: Mario
  * @Description: 头部组件
  */
@@ -121,7 +121,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
 
   return (
     <header className={classnames('flex', styles['bg-header'], 'bg')}>
-      <div className={classnames('w-220', styles.logo, 'flex', isMobile ? styles.isMobile : '')} style={{ paddingLeft: isMobile ? '0' : '20px' }}>
+      <div className={classnames('w-220', 'header-left', styles.logo, 'flex', isMobile ? styles.isMobile : '')} style={{ paddingLeft: isMobile ? '0' : '20px' }}>
         {isMobile ? <MenuUnfoldOutlined className={styles.BreadCrumbs} onClick={() => setIsCollapse(!isCollapse)} /> : null}
         <div className={classnames('cursor-pointer', styles.img)}>
           <img src={logo} alt="" />
@@ -129,7 +129,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
         </div>
       </div>
       {isMobile ? null : (
-        <div className={classnames('flex', 'items-center', 'flex-auto', 'justify-between', styles['header-right'])}>
+        <div className={classnames('flex', 'items-center', 'flex-auto', 'justify-between', styles['header-right'], 'header-right')}>
           <div className="flex h-full">
             <div className={classnames('flex', 'items-center', 'cursor-pointer', 'md-and-down:hidden', styles.echarts)}>
               <svg

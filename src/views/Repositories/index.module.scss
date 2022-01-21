@@ -1,0 +1,18 @@
+.respositories {
+  .entry-thumbnail {
+    position: relative;
+  }
+  .item-thumb {
+    min-height: 250px;
+    position: relative;
+    display: block;
+    background-position: 50% 50%;
+    background-size: cover;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-image: url(https://www.ihewro.com/usr/uploads/2019/04/1350170390.jpg);
+  }
+  :global(.ant-col) {
+    margin-bottom: 20px;
+  }
+}

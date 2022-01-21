@@ -30,7 +30,7 @@ const routes = [
       },
       {
         path: '/photo',
-        component: lazy(() => import('@/views/Repositories')),
+        component: lazy(() => import('@/views/Photo')),
         meta: {
           title: '相册',
         },

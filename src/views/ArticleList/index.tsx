@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Pagination } from 'antd'
+import WarrperPagination from '@/components/Pagination'
 import ArticleHeader from '@/views/ArticleList/components/ArticleHeader'
 import styles from '@/views/ArticleList/index.module.scss'
 const ArticleList = () => {
@@ -34,9 +34,7 @@ const ArticleList = () => {
       {articleList.map((article, index) => (
         <ArticleHeader key={index} {...article} />
       ))}
-      <div className={styles.pagination}>
-        <Pagination size="small" defaultCurrent={1} total={500} showSizeChanger={false} />
-      </div>
+      <WarrperPagination />
     </div>
   )
 }

@@ -1,0 +1,21 @@
+.header-md {
+  padding: 20px;
+  background-color: #f9f9f9;
+  .font-thin {
+    display: flex;
+    font-weight: 300;
+    font-size: 30px;
+    font-family: 'TheNautigal';
+    .title-icons {
+      margin-right: 10px;
+      margin-top: 6px;
+      svg {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+}
+.center {
+  text-align: center;
+}

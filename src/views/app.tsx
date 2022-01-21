@@ -4,8 +4,6 @@ import routes, { RouteRule } from '@/router'
 import classnames from 'classnames'
 import EmptyRouter from '@/views/EmptyRouter'
 import SearchLoading from '@/components/SearchLoading'
-import '@/style/theme/dark.scss'
-import '@/style/global.scss'
 
 const renderRoutes = (routes: RouteRule[]) => {
   return routes.map((route) => (
@@ -21,7 +19,7 @@ const renderRoutes = (routes: RouteRule[]) => {
 }
 function App() {
   return (
-    <div className={classnames('App')}>
+    <div className={classnames('App')} style={{ backgroundColor: '#efefef' }}>
       <Routes>{renderRoutes(routes)}</Routes>
     </div>
   )

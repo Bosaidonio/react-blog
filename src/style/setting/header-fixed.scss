@@ -1,0 +1,20 @@
+.header-fixed {
+  padding-top: 0 !important;
+  & > header {
+    position: relative;
+    & > .header-left {
+      position: fixed;
+      top: 0;
+      // left: 0;
+      background-color: #f9f9f9;
+    }
+    & > .header-right {
+      margin-left: 220px;
+    }
+    @media (max-width: 776px) {
+      & > .header-left {
+        position: relative;
+      }
+    }
+  }
+}

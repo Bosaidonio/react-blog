@@ -1,0 +1,121 @@
+.comment-body {
+  .thumb-sm {
+    display: inline-block;
+    width: 40px;
+    height: auto;
+    img {
+      height: auto;
+      vertical-align: middle;
+      max-width: 100% !important;
+      border: 0;
+    }
+    .normal-shadow {
+      box-shadow: 2px 2px 3px #e1e1e1;
+    }
+
+    .img-40px {
+      width: 40px !important;
+    }
+    .img-square {
+      border-radius: 20%;
+    }
+    .comment-author-logo {
+      padding: 4px 3px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -9px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      background: #feb356;
+      border: 2px solid #fff;
+    }
+
+    .m-l-xs {
+      margin-left: 5px;
+    }
+    .label {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.2em 0.6em 0.3em;
+      font-size: 75%;
+      line-height: 1;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      font-weight: 700;
+      text-shadow: 0 1px 0 rgb(0 0 0 / 20%);
+      svg {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+  .pull-left {
+    float: left !important;
+  }
+  a {
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    word-break: break-all;
+  }
+  .m-b {
+    margin-bottom: 15px;
+  }
+
+  .m-l-xxl {
+    margin-left: 50px;
+    color: rgb(119, 119, 119);
+    .comment-meta {
+      .format_time {
+        display: inline;
+      }
+
+      .text-xs {
+        font-size: 12px;
+      }
+      .m-t-xs {
+        margin-top: 5px;
+      }
+      .text-muted {
+        color: #a0a0a0;
+      }
+    }
+    .comment-content {
+      margin-top: 10px;
+      .comment-author-at {
+        float: left;
+        margin-right: 5px;
+        // line-height: 18px;
+      }
+      .comment-content-true {
+        p {
+          margin: 0 0 10px;
+        }
+      }
+    }
+    .comment-reply {
+      margin-top: 10px;
+      a {
+        position: relative;
+        display: inline;
+        padding: 0.2em 0.6em 0.3em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25em;
+        font-weight: 700;
+        text-shadow: 0 1px 0 rgb(0 0 0 / 20%);
+        color: #dcf2f8;
+        background-color: #23b7e5;
+      }
+    }
+  }
+}

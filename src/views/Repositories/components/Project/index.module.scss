@@ -1,0 +1,105 @@
+.panel {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px 1px rgb(0 0 0 / 5%);
+  transition: all 0.2s ease;
+  text-align: center;
+  & > div {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 1px rgb(0 0 0 / 5%);
+    transition: all 0.2s ease;
+    text-align: center;
+  }
+  .panel-body {
+    padding: 15px;
+    .github_language {
+      position: absolute;
+      font-size: 20px;
+      color: #ccc;
+      bottom: 8px;
+      right: 40px;
+    }
+    .clear {
+      .text-ellipsis {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .font-thin {
+        font-weight: 300;
+      }
+      .h3 {
+        font-size: 24px;
+      }
+      .block {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        svg {
+          margin: 0 5px;
+        }
+      }
+
+      .m-sm {
+        margin: 10px;
+      }
+      small {
+        font-size: 13px;
+      }
+
+      .lter {
+        background-color: #f9f9f9;
+      }
+      a.btn {
+        border: none !important;
+      }
+      a {
+        color: #58666e;
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+      .btn-rounded {
+        padding-right: 15px;
+        padding-left: 15px;
+        border-radius: 50px;
+      }
+      .btn {
+        display: inline-block;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        user-select: none;
+        background-image: none;
+        font-weight: 500;
+        outline: 0 !important;
+        :global(svg) {
+          vertical-align: unset;
+          margin-left: 5px;
+          width: 12px;
+          height: 12px;
+        }
+      }
+      .btn-sm {
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    }
+  }
+  :global(.ant-skeleton-content) {
+    padding: 20px;
+  }
+}
+.b-light {
+  border-color: rgba(237, 241, 242, 0.6);
+}
+.bg-light {
+  color: #58666e;
+  background-color: #fff;
+}

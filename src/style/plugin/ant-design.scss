@@ -1,0 +1,20 @@
+.active {
+  .ant-input-affix-wrapper {
+    border-color: #40a9ff !important;
+    transition: all 0.3s;
+  }
+}
+
+// ant-design组件库样式覆盖
+.ant-form-item {
+  margin-bottom: 15px;
+}
+.ant-input,
+.ant-input-affix-wrapper {
+  border-color: rgba(135, 150, 165, 0.15);
+}
+.ant-btn-loading-icon {
+  span {
+    vertical-align: middle;
+  }
+}

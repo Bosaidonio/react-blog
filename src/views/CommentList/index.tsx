@@ -1,0 +1,65 @@
+import { useEffect, useState } from 'react'
+
+// 自定义组件
+import Comment, { CommentProps } from '@/views/CommentList/components/Comment'
+// 工具库
+import { warrperClass } from '@/utils/classnames'
+// 模块样式
+import styles from '@/views/CommentList/index.module.scss'
+
+const CommentList = () => {
+  const [commentList, setCommentList] = useState<CommentProps[]>([])
+  useEffect(() => {
+    setTimeout(() => {
+      const list = [
+        {
+          commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
+          commentName: '躲闪的大黄',
+          commentTime: '7 个月前',
+          commentContent: '好哥哥还有往年北化人工智能试题吗',
+          children: [
+            {
+              isAuthor: true,
+              commentAvatar: 'https://cdn.helingqi.com/wavatar/9e543b9d68c191fdc484c3bbe9f953a4',
+              commentName: 'Mario',
+              commentTime: '7 个月前',
+              atAuthor: '@躲闪的大黄',
+              commentContent: 'https://www.ihewro.com/archives/798/ 可以看下这里，没有试题，当年也是给了一个题库提纲',
+            },
+          ],
+        },
+        {
+          commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
+          commentName: '躲闪的大黄',
+          commentTime: '7 个月前',
+          commentContent: '好哥哥还有往年北化人工智能试题吗',
+          children: [
+            {
+              isAuthor: true,
+              commentAvatar: 'https://cdn.helingqi.com/wavatar/9e543b9d68c191fdc484c3bbe9f953a4',
+              commentName: 'Mario',
+              commentTime: '7 个月前',
+              atAuthor: '@躲闪的大黄',
+              commentContent: 'https://www.ihewro.com/archives/798/ 可以看下这里，没有试题，当年也是给了一个题库提纲',
+            },
+          ],
+        },
+      ]
+      setCommentList(list)
+    }, 1000)
+  }, [])
+  return (
+    <div className={warrperClass(styles, 'comments')}>
+      <div className={warrperClass(styles, 'post-comment-list')}>
+        <h4 className={warrperClass(styles, 'comments-title m-t-lg m-b')}>49 条评论</h4>
+        <ol className={warrperClass(styles, 'comment-list')}>
+          {commentList.map((comment, index) => (
+            <Comment {...comment} key={index} />
+          ))}
+        </ol>
+      </div>
+    </div>
+  )
+}
+
+export default CommentList

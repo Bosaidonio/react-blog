@@ -15,9 +15,12 @@ interface ArticleProps {
 const ArticleHeader: FC<ArticleProps> = ({ title, article, author, banner, isLeftRight, time }) => {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(false)
-    }, 3000)
+    }, 300)
+    return () => {
+      clearTimeout(timer)
+    }
   }, [])
   return (
     <div className={classnames(styles['article-header'], loading ? styles['warrper-20'] : '')}>

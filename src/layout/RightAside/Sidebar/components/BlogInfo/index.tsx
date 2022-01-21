@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-
 import { ReactSVG } from 'react-svg'
 import { warrperClass } from '@/utils/classnames'
 import styles from '@/layout/RightAside/Sidebar/components/BlogInfo/index.module.scss'
-import articleCountSvg from '@/assets/svgs/BlogInfo/article-count.svg'
-import commentCountSvg from '@/assets/svgs/BlogInfo/comment-count.svg'
-import runDateSvg from '@/assets/svgs/BlogInfo/run-date.svg'
-import activitySvg from '@/assets/svgs/BlogInfo/activity.svg'
+import articleCountSvg from '@/layout/RightAside/Sidebar/components/BlogInfo/assets/svgs/article-count.svg'
+import commentCountSvg from '@/layout/RightAside/Sidebar/components/BlogInfo/assets/svgs/comment-count.svg'
+import runDateSvg from '@/layout/RightAside/Sidebar/components/BlogInfo/assets/svgs/run-date.svg'
+import activitySvg from '@/layout/RightAside/Sidebar/components/BlogInfo/assets/svgs/activity.svg'
 import { add0, diffTime } from '@/utils/date'
 
 // 运行时间

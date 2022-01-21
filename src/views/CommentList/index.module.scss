@@ -1,0 +1,23 @@
+.comments {
+  .post-comment-list {
+    .comments-title {
+      font-weight: 300;
+      font-size: 14px;
+      ine-height: 1.1;
+      color: rgb(119, 119, 119);
+    }
+    .m-b {
+      margin-bottom: 15px;
+    }
+
+    .m-t-lg {
+      margin-top: 30px;
+    }
+    .comment-list {
+      margin-bottom: 0 !important;
+      padding-left: 0;
+      list-style: none;
+      margin-top: 0;
+    }
+  }
+}
