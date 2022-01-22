@@ -1,3 +1,5 @@
+//初始化样式
+@import '~@/style/base/index.scss';
 // 公共样式
 @import 'common.scss';
 // 动态配置样式
@@ -5,6 +7,7 @@
 // 第三方插件全局样式
 @import '~@/style/plugin/aplayer.scss';
 @import '~@/style/plugin/ant-design.scss';
+@import '~@/style/plugin/emoji.scss';
 @font-face {
   font-family: 'TheNautigal';
   src: url('~@/assets/fonts/TheNautigal-Regular.ttf');

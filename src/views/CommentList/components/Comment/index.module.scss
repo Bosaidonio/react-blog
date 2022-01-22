@@ -100,22 +100,21 @@
     }
     .comment-reply {
       margin-top: 10px;
-      a {
-        position: relative;
-        display: inline;
-        padding: 0.2em 0.6em 0.3em;
-        font-size: 75%;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: baseline;
-        border-radius: 0.25em;
-        font-weight: 700;
-        text-shadow: 0 1px 0 rgb(0 0 0 / 20%);
-        color: #dcf2f8;
-        background-color: #23b7e5;
-      }
+      position: relative;
+      display: inline;
+      padding: 0.2em 0.6em 0.3em;
+      font-size: 75%;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 0.25em;
+      font-weight: 700;
+      text-shadow: 0 1px 0 rgb(0 0 0 / 20%);
+      color: #dcf2f8;
+      background-color: #23b7e5;
+      cursor: pointer;
     }
   }
 }

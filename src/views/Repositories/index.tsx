@@ -76,20 +76,21 @@ const Respositories = () => {
   }
   const [loadingProject, setLoadingProject] = useState(true)
   // 获取仓库列表
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { loading, run } = useRequest(getGithubRespoList, {
     manual: true,
     onSuccess: (result) => {
       // const filterResult = result.filter((item: any) => item.language)
       const projectList = chunk([...result], 2)
       setProjectList(projectList)
+      setTimeout(() => {
+        setLoadingProject(false)
+      }, 300)
     },
   })
 
   useEffect(() => {
     run()
-    setTimeout(() => {
-      setLoadingProject(false)
-    }, 300)
   }, [run])
   return (
     <div className={styles.respositories}>

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-01-21 12:59:46
- * @LastEditTime: 2022-01-21 13:19:48
+ * @LastEditTime: 2022-01-22 16:21:00
  * @LastEditors: Mario
  * @Description: 判断是否为某种类型
  */
@@ -132,4 +132,13 @@ export const isEmptyObject = (val: any) => {
  */
 export const isDate = (val: any) => {
   return toString.call(val) === '[object Date]'
+}
+
+/**
+ * @description: 判断是否为空
+ * @param {any} val
+ * @return {boolean}
+ */
+export const isEmpty = (val: any) => {
+  return val === null || val === '' || val === undefined || val === 'null' || val === 'undefined'
 }

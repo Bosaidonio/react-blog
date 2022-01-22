@@ -1,21 +1,31 @@
 import { FC } from 'react'
 import { ReactSVG } from 'react-svg'
 import { warrperClass } from '@/utils/classnames'
+import { Emoji } from 'emoji-mart'
+import Reply from '@/views/CommentList/components/Reply'
 import bloggerSvg from '@/views/CommentList/components/Comment/assets/svgs/blogger.svg'
 import styles from '@/views/CommentList/components/Comment/index.module.scss'
 
 export interface IComment {
+  id: number
   commentAvatar: string
   commentName: string
   commentTime: string
   atAuthor?: string
   commentContent: string
   isAuthor?: boolean
+  isReply?: boolean
+  parentId?: number
+  emojiList?: string[]
 }
-export interface CommentProps extends IComment {
+export interface CommentProp extends IComment {
   children?: IComment[]
 }
-const Comment: FC<CommentProps> = ({ commentAvatar, commentName, commentTime, atAuthor, commentContent, isAuthor, children }) => {
+export interface CommentProps extends CommentProp {
+  filterCommentList: (id: number) => void
+  onCancelReply: () => void
+}
+const Comment: FC<CommentProps> = ({ id, parentId, onCancelReply, commentAvatar, commentName, commentTime, atAuthor, commentContent, emojiList, isAuthor, children, isReply, filterCommentList }) => {
   return (
     <>
       <li className={warrperClass(styles, 'comment-body comment-parent comment-odd')}>
@@ -44,14 +54,18 @@ const Comment: FC<CommentProps> = ({ commentAvatar, commentName, commentTime, at
                 <b>{atAuthor}</b>
               </span>
               <div className={warrperClass(styles, 'comment-content-true')}>
-                <p>{commentContent}</p>
+                <p>
+                  {
+                    // 展示表情
+                    emojiList ? emojiList.map((eomjiId, index) => <Emoji emoji={eomjiId} set="google" size={16} key={index} />) : null
+                  }
+                  {commentContent}
+                </p>
               </div>
             </div>
 
-            <div className={warrperClass(styles, 'comment-reply m-t-sm')}>
-              <a href="https://www.ihewro.com/project.html/comment-page-1?replyTo=9073#respond-page-265" rel="nofollow">
-                回复
-              </a>
+            <div className={warrperClass(styles, 'comment-reply m-t-sm')} onClick={() => filterCommentList(parentId ? parentId : id)}>
+              回复
             </div>
           </div>
         </div>
@@ -59,8 +73,9 @@ const Comment: FC<CommentProps> = ({ commentAvatar, commentName, commentTime, at
         {children ? (
           <ol className={warrperClass(styles, 'comment-children list-unstyled m-l-xxl')}>
             {children.map((comment, index) => (
-              <Comment {...comment} key={index} />
+              <Comment onCancelReply={onCancelReply} {...comment} key={index} filterCommentList={filterCommentList} />
             ))}
+            {isReply ? <Reply id={id} onCancelReply={onCancelReply} filterCommentList={filterCommentList} /> : null}
           </ol>
         ) : null}
       </li>

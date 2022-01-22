@@ -18,3 +18,21 @@
     vertical-align: middle;
   }
 }
+
+// 提示框样式覆盖
+.ant-tooltip-inner {
+  min-width: unset !important;
+  min-height: unset !important;
+  font-size: 12px !important;
+  padding: 1px 6px !important;
+}
+
+// 通知框样式覆盖
+.ant-notification-notice {
+  top: 50px;
+  border-radius: 10px !important;
+  .ant-notification-notice-description {
+    color: rgb(119, 119, 119);
+    font-size: 12px !important;
+  }
+}

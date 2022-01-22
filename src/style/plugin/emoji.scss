@@ -1,0 +1,29 @@
+.emoji-mart {
+  width: 100% !important;
+  height: 100%;
+  font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif, monospace !important;
+  border: none;
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 14%);
+  .emoji-mart-anchors {
+    display: none;
+  }
+  .emoji-mart-bar {
+    display: none;
+  }
+  .emoji-mart-scroll {
+    height: 274px;
+  }
+  .emoji-mart-search {
+    display: none;
+  }
+  .emoji-mart-category-label {
+    color: #777;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}
+
+.emoji-mart-emoji {
+  vertical-align: middle;
+  margin-right: 3px !important;
+}

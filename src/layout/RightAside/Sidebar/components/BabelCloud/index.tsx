@@ -1,3 +1,4 @@
+import { Tooltip } from 'antd'
 import { warrperClass } from '@/utils/classnames'
 import styles from '@/layout/RightAside/Sidebar/components/BabelCloud/index.module.scss'
 
@@ -36,9 +37,11 @@ const BabelCloud = () => {
       <h5 className={warrperClass(styles, 'widget-title m-t-none text-md')}>标签云</h5>
       <div className={warrperClass(styles, 'tags l-h-2x')}>
         {babelList.map((babel, index) => (
-          <a key={index} href="https://www.ihewro.com/tag/%E6%97%B6%E5%80%99/" className={warrperClass(styles, 'label badge')} title="" data-toggle="tooltip" data-original-title="时候">
-            {babel.label}
-          </a>
+          <Tooltip key={index} placement="top" title={babel.label}>
+            <a href="https://www.ihewro.com/tag/%E6%97%B6%E5%80%99/" className={warrperClass(styles, 'label badge')} title="" data-toggle="tooltip" data-original-title="时候">
+              {babel.label}
+            </a>
+          </Tooltip>
         ))}
       </div>
     </section>
