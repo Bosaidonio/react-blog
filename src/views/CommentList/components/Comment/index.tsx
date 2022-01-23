@@ -1,13 +1,13 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { ReactSVG } from 'react-svg'
 import { warrperClass } from '@/utils/classnames'
-import { Emoji } from 'emoji-mart'
+
 import Reply from '@/views/CommentList/components/Reply'
 import bloggerSvg from '@/views/CommentList/components/Comment/assets/svgs/blogger.svg'
 import styles from '@/views/CommentList/components/Comment/index.module.scss'
-
 export interface IComment {
   id: number
+  parentID?: number
   commentAvatar: string
   commentName: string
   commentTime: string
@@ -15,8 +15,9 @@ export interface IComment {
   commentContent: string
   isAuthor?: boolean
   isReply?: boolean
-  parentId?: number
-  emojiList?: string[]
+  isIndex?: boolean
+  // emojiList?: string[]
+  children?: IComment[]
 }
 export interface CommentProp extends IComment {
   children?: IComment[]
@@ -24,8 +25,26 @@ export interface CommentProp extends IComment {
 export interface CommentProps extends CommentProp {
   filterCommentList: (id: number) => void
   onCancelReply: () => void
+  commentList: CommentProp[]
+  setCommentList: (commentList: CommentProp[]) => void
 }
-const Comment: FC<CommentProps> = ({ id, parentId, onCancelReply, commentAvatar, commentName, commentTime, atAuthor, commentContent, emojiList, isAuthor, children, isReply, filterCommentList }) => {
+const Comment: FC<CommentProps> = ({
+  commentList,
+  setCommentList,
+  id,
+  isIndex,
+  onCancelReply,
+  commentAvatar,
+  commentName,
+  commentTime,
+  atAuthor,
+  commentContent,
+  // emojiList,
+  isAuthor,
+  children,
+  isReply,
+  filterCommentList,
+}) => {
   return (
     <>
       <li className={warrperClass(styles, 'comment-body comment-parent comment-odd')}>
@@ -55,27 +74,23 @@ const Comment: FC<CommentProps> = ({ id, parentId, onCancelReply, commentAvatar,
               </span>
               <div className={warrperClass(styles, 'comment-content-true')}>
                 <p>
-                  {
-                    // 展示表情
-                    emojiList ? emojiList.map((eomjiId, index) => <Emoji emoji={eomjiId} set="google" size={16} key={index} />) : null
-                  }
-                  {commentContent}
+                  <span dangerouslySetInnerHTML={{ __html: commentContent }}></span>
                 </p>
               </div>
             </div>
 
-            <div className={warrperClass(styles, 'comment-reply m-t-sm')} onClick={() => filterCommentList(parentId ? parentId : id)}>
+            <div className={warrperClass(styles, 'comment-reply m-t-sm')} onClick={() => filterCommentList(id)}>
               回复
             </div>
+            {isReply ? <Reply id={id} commentList={commentList} setCommentList={setCommentList} onCancelReply={onCancelReply} commentName={commentName} /> : null}
           </div>
         </div>
         {/* 回复者列表 */}
         {children ? (
-          <ol className={warrperClass(styles, 'comment-children list-unstyled m-l-xxl')}>
+          <ol className={warrperClass(styles, 'comment-children list-unstyled m-l-xxl')} style={{ marginLeft: isIndex ? '50px' : '0px' }}>
             {children.map((comment, index) => (
-              <Comment onCancelReply={onCancelReply} {...comment} key={index} filterCommentList={filterCommentList} />
+              <Comment onCancelReply={onCancelReply} commentList={commentList} setCommentList={setCommentList} {...comment} isIndex={false} key={index} filterCommentList={filterCommentList} />
             ))}
-            {isReply ? <Reply id={id} onCancelReply={onCancelReply} filterCommentList={filterCommentList} /> : null}
           </ol>
         ) : null}
       </li>

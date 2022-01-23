@@ -13,6 +13,11 @@
   .w-computed {
     width: calc(100% - 240px);
   }
+  @media (max-width: 1020px) {
+    .w-computed {
+      width: 100%;
+    }
+  }
 }
 
 .w-full {

@@ -238,6 +238,11 @@
           background-position-y: 105px;
         }
       }
+      @media (max-width: 776px) {
+        textarea.ant-input {
+          background-position: right;
+        }
+      }
     }
   }
 }

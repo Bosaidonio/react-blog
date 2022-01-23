@@ -1,18 +1,21 @@
 import { FC, useState } from 'react'
 import classnames from 'classnames'
 import { ReactSVG } from 'react-svg'
+// import { useMediaQuery } from 'react-responsive'
 import { nanoid } from 'nanoid'
 import { Form, Input, Switch, Row, Col, Button, notification } from 'antd'
-import { Picker, EmojiData } from 'emoji-mart'
+import { Picker, EmojiData, Emoji } from 'emoji-mart'
 import 'emoji-mart/css/emoji-mart.css'
 import styles from '@/views/CommentList/components/Reply/index.module.scss'
 import { warrperClass } from '@/utils/classnames'
 import { getRandom } from '@/utils/math'
 import { isEmpty } from '@/utils/is'
-
+import { reaplceLink } from '@/utils'
+import { parseTime } from '@/utils/date'
+import { CommentProp } from '@/views/CommentList/components/Comment'
 import tootipSvg from '@/views/CommentList/components/Reply/assets/svgs/tootip.svg'
 import emojiSvg from '@/views/CommentList/components/Reply/assets/svgs/emoji.svg'
-
+import googleEmoji from 'emoji-mart/data/google.json'
 interface ReplyForm {
   username: string
   comment: string
@@ -28,18 +31,21 @@ const i18nConfig = {
 }
 interface ReplyProps {
   id: number
-  filterCommentList: (id: number) => void
-  onCancelReply: () => void
+  isComment?: boolean
+  commentList: CommentProp[]
+  setCommentList: (commentList: CommentProp[]) => void
+  commentName?: string
+  onCancelReply?: () => void
 }
-const Reply: FC<ReplyProps> = ({ id, filterCommentList, onCancelReply }) => {
+const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCommentList, onCancelReply }) => {
   const [isEmoji, setIsEmoji] = useState(false)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [emojiList, setEmojiList] = useState<string[]>([])
   const [username, setUsername] = useState<string>()
   const [form] = Form.useForm()
   // 控制筛子抖动
   const [isShake, setIsShake] = useState(false)
-
+  // const isMobile = useMediaQuery({
+  //   query: '(max-width: 767px)',
+  // })
   // 未验证通过提示
   const openNotification = (description: string) => {
     notification.warning({
@@ -47,6 +53,7 @@ const Reply: FC<ReplyProps> = ({ id, filterCommentList, onCancelReply }) => {
       message: '评论通知',
       description,
     })
+    throw new Error('验证未通过')
   }
   // 验证表单
   const validateForm = (form: ReplyForm) => {
@@ -60,10 +67,87 @@ const Reply: FC<ReplyProps> = ({ id, filterCommentList, onCancelReply }) => {
       openNotification('必须填写地址')
     }
   }
+
+  // 渲染表情加文本
+  const renderContent = (commentContent: string) => {
+    commentContent = reaplceLink(commentContent)
+    let html = ''
+    let isReplace = false
+    googleEmoji.categories.forEach((item) => {
+      item.emojis.forEach((subItem) => {
+        if (commentContent.includes(`:${subItem}:`)) {
+          html = commentContent.replace(new RegExp(':' + subItem + ':', 'gi'), (result) => {
+            isReplace = true
+            return `${Emoji({
+              html: true,
+              set: 'google',
+              emoji: result,
+              size: 16,
+            })}`
+          })
+          commentContent = html
+          console.log(html)
+        }
+      })
+    })
+    if (!isReplace) {
+      html = commentContent
+    }
+    return html
+  }
   // 发表评论
   const onFinish = (values: ReplyForm) => {
-    console.log(values)
-    validateForm(values)
+    try {
+      validateForm(values)
+
+      const formBody = {
+        id: new Date().getTime(),
+        parentId: id,
+        commentName: values.username,
+        commentTime: parseTime(new Date())!,
+        atAuthor: commentName ? `@${commentName}` : commentName,
+        isReply: false,
+        commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
+        commentContent: renderContent(values.comment),
+        isIndex: true,
+      }
+      if (!formBody.atAuthor) delete formBody.atAuthor
+      console.log(id)
+
+      if (id === 0) {
+        const list = [...commentList, { ...formBody }]
+        form.resetFields()
+        setUsername('')
+        setCommentList(list)
+      } else {
+        const diff = (commentList: CommentProp[]): CommentProp[] => {
+          return commentList.map((item) => {
+            if (item.id === formBody.parentId) {
+              return {
+                ...item,
+                children: item.children ? [...item.children, formBody] : [formBody],
+              }
+            } else {
+              if (item.children) {
+                return {
+                  ...item,
+                  children: diff(item.children),
+                }
+              } else {
+                return item
+              }
+            }
+          })
+        }
+        const list = diff(commentList)
+        form.resetFields()
+        setUsername('')
+        setCommentList(list)
+        onCancelReply && onCancelReply()
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const onChange = (e: any) => {
@@ -81,23 +165,23 @@ const Reply: FC<ReplyProps> = ({ id, filterCommentList, onCancelReply }) => {
   }
   // 选中表情
   const onSelectEmoji = (emoji: EmojiData) => {
-    setEmojiList((emojiList) => {
-      emojiList = [...emojiList, emoji.id as string]
-      form.setFieldsValue({ comment: emojiList.join(',') + ',' })
-      return emojiList
-    })
+    const currentComent = form.getFieldsValue(['comment']).comment
+    form.setFieldsValue({ comment: `${currentComent ? currentComent : ''}${emoji.colons}` })
   }
 
   return (
+    // style={{ marginLeft: isMobile && !isComment ? '-50px' : '0px' }}
     <div className={warrperClass(styles, 'comment-respond no-borders')}>
       <h4 id="reply-title" className={warrperClass(styles, 'comment-reply-title m-t-lg m-b')}>
         发表评论
         <small data-original-title="使用cookie技术保留您的个人信息以便您下次快速评论，继续评论表示您已同意该条款">
           <ReactSVG src={tootipSvg} />
         </small>
-        <small className={warrperClass(styles, 'cancel-comment-reply')} onClick={() => onCancelReply()}>
-          取消回复
-        </small>
+        {!isComment ? (
+          <small className={warrperClass(styles, 'cancel-comment-reply')} onClick={() => onCancelReply && onCancelReply()}>
+            取消回复
+          </small>
+        ) : null}
       </h4>
       <Form name={nanoid(6)} form={form} layout="vertical" labelCol={{ span: 8 }} wrapperCol={{ span: 24 }} autoComplete="off" onFinish={onFinish}>
         <Form.Item name="comment" label="评论">
@@ -112,7 +196,7 @@ const Reply: FC<ReplyProps> = ({ id, filterCommentList, onCancelReply }) => {
           </div>
           <div className={styles['private-comment']}>
             <span>私密评论</span>
-            <Switch size="small" defaultChecked />
+            <Switch size="small" defaultChecked={false} />
           </div>
           {isEmoji ? (
             <div className={classnames(styles.emoji)}>

@@ -19,6 +19,9 @@ const Content: FC<ContentProps> = ({ initWidth, isCollapse }) => {
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
   })
+  const isDeskbook = useMediaQuery({
+    query: '(max-width: 1020px)',
+  })
   const [isFinished, setIsFinished] = useState(false)
   return (
     <div
@@ -27,7 +30,7 @@ const Content: FC<ContentProps> = ({ initWidth, isCollapse }) => {
       style={{ marginLeft: isMobile ? '0' : initWidth, transform: isMobile && !isCollapse ? `translate3d(${initWidth}px, 0, 0)` : 'unset' }}
     >
       <NProgress loading={isLoading} />
-      <div className={classnames('flex')}>
+      <div className={classnames('flex')} style={{ flexDirection: isDeskbook ? 'column' : 'unset' }}>
         <div className={classnames(styles['flex-1'], styles['w-computed'])}>
           <EmptyRouter isFinished={isFinished} setIsFinished={setIsFinished} />
         </div>
