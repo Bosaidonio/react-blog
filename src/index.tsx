@@ -11,9 +11,7 @@ import '@/style/theme/dark.scss'
 // 全局样式(权限最高)
 import '@/style/global.scss'
 
-window.addEventListener('error', (event) => {
-  console.log(event)
-})
+window.addEventListener('error', (event) => {})
 
 ReactDOM.render(
   <BrowserRouter>

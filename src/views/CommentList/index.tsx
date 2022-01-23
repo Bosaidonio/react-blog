@@ -124,7 +124,6 @@ const CommentList = () => {
       setCommentList(filterList(commentList, id))
     })
   }
-  console.log(commentList)
 
   return (
     <div className={warrperClass(styles, 'comments')}>

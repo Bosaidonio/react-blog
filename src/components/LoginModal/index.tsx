@@ -16,13 +16,10 @@ const LoginModal = () => {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-      console.log('Success:', values)
     }, 3000)
   }
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo)
-  }
+  const onFinishFailed = (errorInfo: any) => {}
 
   return (
     <Form className={styles['login-modal']} name="basic" layout="vertical" wrapperCol={{ span: 24 }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">

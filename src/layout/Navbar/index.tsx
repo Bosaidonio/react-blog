@@ -28,7 +28,6 @@ const Aside: FC<AsideProps> = ({ isCollapse, initWidth, setInitWidth }) => {
         onResize={(e) => {
           const navOffsetLeft = NavRef.current ? NavRef.current.offsetLeft : 0
           const currentWidth = (e as MouseEvent).x - navOffsetLeft
-          console.log(currentWidth)
 
           if (currentWidth < 280 && currentWidth > 200) {
             setInitWidth(currentWidth)

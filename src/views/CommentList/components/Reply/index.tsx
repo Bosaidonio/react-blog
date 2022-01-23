@@ -86,7 +86,6 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
             })}`
           })
           commentContent = html
-          console.log(html)
         }
       })
     })
@@ -112,7 +111,6 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
         isIndex: true,
       }
       if (!formBody.atAuthor) delete formBody.atAuthor
-      console.log(id)
 
       if (id === 0) {
         const list = [...commentList, { ...formBody }]
@@ -145,9 +143,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
         setCommentList(list)
         onCancelReply && onCancelReply()
       }
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }
 
   const onChange = (e: any) => {
