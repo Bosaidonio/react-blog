@@ -32,3 +32,35 @@ export const chunk = <T>(arr: T[], num: number) => {
   }
   return newArr
 }
+/**
+ * @description: 获取最大公约数
+ * @param {number} n
+ * @param {number} m
+ * @return {number}
+ */
+export const gcd = (n: number, m: number): number => {
+  var temp
+  while (m !== 0) {
+    temp = n % m
+    n = m
+    m = temp
+  }
+  return n
+}
+/**
+ * @description: 计算图片宽高比
+ * @param {number}
+ * @return {width: number, height: number}
+ */
+export const computedRate = (src: string) => {
+  const body = document.body
+  const image = document.createElement('img')
+  image.style.display = 'none'
+  image.src = src
+  body.appendChild(image)
+  const width = image.width
+  const height = image.height
+  let photo = { width: width, height: height }
+  body.removeChild(image)
+  return photo
+}

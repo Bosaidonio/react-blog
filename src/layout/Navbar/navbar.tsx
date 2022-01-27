@@ -2,9 +2,10 @@
 import { Menu, Button } from 'antd'
 import { Link, useNavigate } from 'react-router-dom'
 import { HomeOutlined, GithubOutlined, HeartOutlined, PictureOutlined, CoffeeOutlined, LockOutlined, UserOutlined, MessageOutlined, AppstoreOutlined } from '@ant-design/icons'
-import { useState } from 'react'
+import { FC, useState } from 'react'
 import { MenuList } from '@/types'
 import { ReactSVG } from 'react-svg'
+import { useMediaQuery } from 'react-responsive'
 import styles from '@/layout/Navbar/index.module.scss'
 import homeIcon from '@/layout/Navbar/assets/svgs/home.svg'
 import respoIcon from '@/layout/Navbar/assets/svgs/respo.svg'
@@ -82,10 +83,17 @@ const menuList = [
     ],
   },
 ]
-
-const Navbar = ({ width }: { width: number }) => {
+interface NavBarProps {
+  width: number
+  isCollapse: boolean
+  setIsCollapse: (args: boolean) => void
+}
+const Navbar: FC<NavBarProps> = ({ width, isCollapse, setIsCollapse }) => {
   const [collapsed, setCollapsed] = useState(false)
   const [selectedKeys, setSelectedKeys] = useState(['首页'])
+  const isMobile = useMediaQuery({
+    query: '(max-width: 767px)',
+  })
   const toggleCollapsed = () => {
     setCollapsed(!collapsed)
   }
@@ -112,6 +120,10 @@ const Navbar = ({ width }: { width: number }) => {
     navigate(key)
     window.scroll(0, 0)
     setSelectedKeys([key])
+
+    if (isMobile && !isCollapse) {
+      setIsCollapse(!isCollapse)
+    }
   }
   return (
     <div style={{ width }}>

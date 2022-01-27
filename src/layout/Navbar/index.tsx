@@ -12,8 +12,9 @@ interface AsideProps {
   isCollapse: boolean
   initWidth: number
   setInitWidth: (arg: number) => void
+  setIsCollapse: (args: boolean) => void
 }
-const Aside: FC<AsideProps> = ({ isCollapse, initWidth, setInitWidth }) => {
+const Aside: FC<AsideProps> = ({ isCollapse, setIsCollapse, initWidth, setInitWidth }) => {
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
   })
@@ -51,7 +52,7 @@ const Aside: FC<AsideProps> = ({ isCollapse, initWidth, setInitWidth }) => {
               <Divider style={{ borderTop: '1px solid #fff', width: '100%' }} />
             </div>
             <div className={classnames(styles['nav-list'])}>
-              <Navbar width={initWidth} />
+              <Navbar isCollapse={isCollapse} setIsCollapse={setIsCollapse} width={initWidth} />
             </div>
           </div>
           <div className={classnames(styles['footer-left'])}></div>

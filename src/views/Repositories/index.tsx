@@ -5,7 +5,7 @@ import { Row, Col } from 'antd'
 import Project from '@/views/Repositories/components/Project'
 import BlogHeader from '@/components/BlogHeader'
 import CommentList from '@/views/CommentList'
-import WarrperPagination from '@/components/Pagination'
+
 // 工具库
 import { warrperClass } from '@/utils/classnames'
 import { getRandom, chunk } from '@/utils/math'
@@ -124,7 +124,6 @@ const Respositories = () => {
         {!loadingProject ? (
           <>
             <CommentList />
-            <WarrperPagination />
           </>
         ) : null}
       </div>

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-21 14:59:02
- * @LastEditTime: 2022-01-10 11:56:46
+ * @LastEditTime: 2022-01-25 12:47:37
  * @LastEditors: Mario
  * @Description: 渐入动画组件
  */
@@ -16,8 +16,8 @@ const FadeIn: FC<Props> = ({ children, reverse, immediate }) => {
   const styles = useSpring({
     reverse: reverse,
     immediate: immediate,
-    from: { y: 200, opacity: 0 },
-    to: { y: 25, opacity: 1 },
+    from: { y: 25, opacity: 1 },
+    to: { y: 200, opacity: 0 },
   })
 
   return (

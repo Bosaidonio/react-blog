@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 // 自定义组件
 import Comment, { CommentProp } from '@/views/CommentList/components/Comment'
 import Reply from '@/views/CommentList/components/Reply'
+import WarrperPagination from '@/components/Pagination'
 // 工具库
 import { warrperClass } from '@/utils/classnames'
 // 模块样式
@@ -134,6 +135,7 @@ const CommentList = () => {
             <Comment {...comment} key={index} isIndex={comment.isIndex} commentList={commentList} setCommentList={setCommentList} filterCommentList={filterCommentList} onCancelReply={onCancelReply} />
           ))}
         </ol>
+        <WarrperPagination customStyle={{ margin: '50px 0' }} />
         {isComment ? <Reply id={0} isComment={isComment} onCancelReply={onCancelReply} commentList={commentList} setCommentList={setCommentList} /> : null}
       </div>
     </div>

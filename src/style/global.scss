@@ -8,6 +8,7 @@
 @import '~@/style/plugin/aplayer.scss';
 @import '~@/style/plugin/ant-design.scss';
 @import '~@/style/plugin/emoji.scss';
+
 @font-face {
   font-family: 'TheNautigal';
   src: url('~@/assets/fonts/TheNautigal-Regular.ttf');
@@ -20,4 +21,9 @@
   background: #344449 !important;
   color: #fff;
   text-shadow: none;
+}
+.react-images__view {
+  img {
+    margin: 0 auto !important;
+  }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2022-01-21 15:45:18
+ * @LastEditTime: 2022-01-25 12:52:36
  * @LastEditors: Mario
  * @Description: 头部组件
  */
@@ -27,8 +27,8 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
   const [isSearch, setIsSearch] = useState(false)
   const [isFoucs, setIsFocus] = useState(false)
   const [player, setPlayer] = useState()
-  const [reverse, setReverse] = useState(true)
-  const [opacityReverse, setOpacityReverse] = useState(true)
+  const [reverse, setReverse] = useState(false)
+  const [opacityReverse, setOpacityReverse] = useState(false)
   const [immediate, setImmediate] = useState(true)
   const [opacityImmediate, setOpacityImmediate] = useState(true)
 
@@ -37,7 +37,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
   })
   // 流言碎语
   const handleFadeIn = (fadeIn: any) => {
-    if (!opacityReverse) {
+    if (opacityReverse) {
       setOpacityReverse(!opacityReverse)
     }
     setImmediate(false)
@@ -45,7 +45,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
   }
   // 登录
   const handleOpacity = () => {
-    if (!reverse) {
+    if (reverse) {
       setReverse(!reverse)
     }
     setOpacityImmediate(false)

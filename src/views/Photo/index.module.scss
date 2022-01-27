@@ -1,0 +1,125 @@
+.layout {
+  color: #333;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  .albums {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding: 10px;
+    width: 100%;
+    // background-color: #fff;
+    .item {
+      width: 33.33%;
+      height: 132px;
+      padding-right: 10px;
+      margin-bottom: 10px;
+    }
+    @media (max-width: 1200px) {
+      .item {
+        width: 50%;
+      }
+      .item:nth-child(3n) {
+        padding-right: 10px !important;
+      }
+    }
+    @media (max-width: 776px) {
+      .item {
+        width: 100%;
+        height: 178px;
+        margin-bottom: 20px;
+      }
+      .img-wrap {
+        height: 70% !important;
+      }
+    }
+
+    .item:nth-child(3n) {
+      padding-right: 0px;
+    }
+    .album-thumb {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      text-align: center;
+      list-style: none;
+      position: relative;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .album-thumb {
+      background: #fff;
+      figcaption {
+        width: 100%;
+        line-height: 32px;
+        max-height: 32px;
+        overflow: hidden;
+        font-size: 14px;
+        word-wrap: break-word;
+      }
+      .img-wrap {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fdfdfd;
+        overflow: hidden;
+        position: relative;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+        .icon-image {
+          color: #ffffff;
+          display: block;
+          font-family: 'icontfont';
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          font-size: 18px;
+          height: 30px;
+          left: calc(50% - 15px);
+          top: calc(50% - 15px);
+          line-height: 27px;
+          position: absolute;
+          text-align: center;
+          transform: scale(0);
+          opacity: 0;
+          transition: 0.25s;
+          width: 30px;
+          z-index: 1;
+        }
+        &:hover {
+          .icon-image {
+            transform: scale(2);
+            opacity: 1;
+            transition: 0.25s;
+          }
+          &::after {
+            opacity: 1;
+            transition: 0.25s;
+          }
+        }
+        &::after {
+          background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+          content: '';
+          display: block;
+          height: 100%;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          opacity: 0;
+          transition: 0.25s;
+          border-top-left-radius: 6px;
+          border-top-right-radius: 6px;
+        }
+      }
+    }
+  }
+}

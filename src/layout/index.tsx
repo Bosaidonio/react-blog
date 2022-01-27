@@ -18,7 +18,7 @@ const Layout = () => {
     <div className={classnames(styles.layout)}>
       <Header isCollapse={isCollapse} setIsCollapse={setIsCollapse} />
       <div style={{ backgroundColor: '#f9f9f9', height: 'auto' }}>
-        <Navbar isCollapse={isCollapse} initWidth={initWidth} setInitWidth={setInitWidth} />
+        <Navbar isCollapse={isCollapse} setIsCollapse={setIsCollapse} initWidth={initWidth} setInitWidth={setInitWidth} />
         <Content isCollapse={isCollapse} initWidth={initWidth} />
       </div>
     </div>
