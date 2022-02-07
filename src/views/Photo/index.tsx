@@ -6,14 +6,13 @@ import Carousel, { Modal, ModalGateway } from 'react-images'
 import { data } from '@/views/Photo/assets'
 import PhotoItem from '@/views/Photo/components/PhotoItem'
 import styles from '@/views/Photo/index.module.scss'
-import { computedRate } from '@/utils/math'
 import classNames from 'classnames'
+import Breadcrumb from '@/components/Breadcrumb'
 const photos = data.map((photo) => {
-  const { width, height } = computedRate(photo.src)
   return {
     ...photo,
-    width,
-    height,
+    width: Math.round(photo.width / 200),
+    height: Math.round(photo.height / 200),
   }
 })
 
@@ -43,7 +42,7 @@ const Photo = () => {
     },
   }
   const handleClick = () => {
-    setIsShowPhoto(true)
+    setIsShowPhoto(!isShowPhoto)
   }
   const renderAlbums = () => {
     const albumsList = Array(7).fill('')
@@ -67,6 +66,7 @@ const Photo = () => {
     <div className={styles.photo}>
       <BlogHeader {...headerData} />
       <div className="warrper-md">
+        {isShowPhoto ? <Breadcrumb goBack={handleClick} /> : null}
         {!isShowPhoto ? (
           <div className={styles.layout}>
             <div className={styles.albums}>{renderAlbums()}</div>

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-01-18 13:27:58
- * @LastEditTime: 2022-01-23 11:26:24
+ * @LastEditTime: 2022-01-28 10:30:40
  * @LastEditors: Mario
  * @Description: 时间处理
  */
@@ -11,7 +11,7 @@
  * @return {string | number}
  */
 export const add0 = (num: string | number) => {
-  return num > 10 ? num : '0' + num
+  return num >= 10 ? num : '0' + num
 }
 /**
  * @description: 计算时间差

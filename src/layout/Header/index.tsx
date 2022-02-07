@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2022-01-25 12:52:36
+ * @LastEditTime: 2022-01-27 17:17:28
  * @LastEditors: Mario
  * @Description: 头部组件
  */
@@ -193,7 +193,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
               </div>
               {
                 <FadeIn reverse={reverse} immediate={immediate}>
-                  <div className={classnames(styles['dropdown-menu'], reverse ? styles.noclick : styles.click)}>
+                  <div className={classnames(styles['dropdown-menu'], !reverse ? styles.noclick : styles.click)}>
                     <div className={classnames(styles.panel, styles['bg-white'])}>
                       <div className={classnames(styles['panel-heading'], styles['b-light'], styles['bg-light'])}>
                         <strong>闲言碎语 </strong>
@@ -232,7 +232,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                 </svg>
               </div>
               <Opacity reverse={opacityReverse} immediate={opacityImmediate}>
-                <div className={classnames(styles['dropdown-menu'], styles['login-modal'], opacityReverse ? styles.noclick : styles.click)}>
+                <div className={classnames(styles['dropdown-menu'], styles['login-modal'], !opacityReverse ? styles.noclick : styles.click)}>
                   <div className={classnames('p-warrper', 'bg-default')}>
                     <LoginModal />
                   </div>

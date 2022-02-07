@@ -41,7 +41,8 @@ const CommentList = () => {
                   commentName: 'Mario',
                   commentTime: '7 个月前',
                   atAuthor: '@躲闪的大黄',
-                  commentContent: 'https://www.ihewro.com/archives/798/ 可以看下这里，没有试题，当年也是给了一个题库提纲',
+                  commentContent:
+                    'https://www.ihewro.com/archives/798/ :grinning::smiley::smile::grin::laughing::sweat_smile::rolling_on_the_floor_laughing: 可以看下这里，没有试题，当年也是给了一个题库提纲',
                 },
               ],
             },

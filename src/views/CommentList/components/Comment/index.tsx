@@ -5,6 +5,9 @@ import { warrperClass } from '@/utils/classnames'
 import Reply from '@/views/CommentList/components/Reply'
 import bloggerSvg from '@/views/CommentList/components/Comment/assets/svgs/blogger.svg'
 import styles from '@/views/CommentList/components/Comment/index.module.scss'
+import googleEmoji from 'emoji-mart/data/google.json'
+import { reaplceLink } from '@/utils'
+import { Emoji } from 'emoji-mart'
 export interface IComment {
   id: number
   parentID?: number
@@ -45,6 +48,36 @@ const Comment: FC<CommentProps> = ({
   isReply,
   filterCommentList,
 }) => {
+  // 渲染表情加文本
+  const renderContent = (commentContent: string) => {
+    const start = new Date().getTime() //起始时间
+    commentContent = reaplceLink(commentContent)
+    let html = ''
+    let isReplace = false
+    googleEmoji.categories.forEach((item) => {
+      item.emojis.forEach((subItem) => {
+        if (commentContent.includes(`:${subItem}:`)) {
+          html = commentContent.replace(new RegExp(':' + subItem + ':', 'gi'), (result) => {
+            isReplace = true
+            return `${Emoji({
+              html: true,
+              set: 'google',
+              emoji: result,
+              size: 16,
+            })}`
+          })
+          commentContent = html
+        }
+      })
+    })
+    if (!isReplace) {
+      html = commentContent
+    }
+    const end = new Date().getTime() //起始时间
+    console.log(`${end - start}ms`)
+
+    return html
+  }
   return (
     <>
       <li className={warrperClass(styles, 'comment-body comment-parent comment-odd')}>
@@ -74,7 +107,7 @@ const Comment: FC<CommentProps> = ({
               </span>
               <div className={warrperClass(styles, 'comment-content-true')}>
                 <p>
-                  <span dangerouslySetInnerHTML={{ __html: commentContent }}></span>
+                  <span dangerouslySetInnerHTML={{ __html: renderContent(commentContent) }}></span>
                 </p>
               </div>
             </div>

@@ -49,7 +49,7 @@ export const gcd = (n: number, m: number): number => {
 }
 /**
  * @description: 计算图片宽高比
- * @param {number}
+ * @param {string}
  * @return {width: number, height: number}
  */
 export const computedRate = (src: string) => {
