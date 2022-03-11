@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-01-21 12:59:46
- * @LastEditTime: 2022-01-22 16:21:00
+ * @LastEditTime: 2022-03-11 09:42:58
  * @LastEditors: Mario
  * @Description: 判断是否为某种类型
  */
@@ -33,7 +33,7 @@ export function isIP(ip: any) {
   return reg.test(ip)
 }
 /**
- * @description: 判断是否为游戏
+ * @description: 判断是否为邮箱
  * @param {any} str
  * @return {boolean}
  */

@@ -4,18 +4,18 @@ import { ReactSVG } from 'react-svg'
 // import { useMediaQuery } from 'react-responsive'
 import { nanoid } from 'nanoid'
 import { Form, Input, Switch, Row, Col, Button, notification } from 'antd'
-import { Picker, EmojiData, Emoji } from 'emoji-mart'
+import { Picker, EmojiData } from 'emoji-mart'
 import 'emoji-mart/css/emoji-mart.css'
 import styles from '@/views/CommentList/components/Reply/index.module.scss'
 import { warrperClass } from '@/utils/classnames'
 import { getRandom } from '@/utils/math'
 import { isEmpty } from '@/utils/is'
-import { reaplceLink } from '@/utils'
+// import { reaplceLink } from '@/utils'
 import { parseTime } from '@/utils/date'
 import { CommentProp } from '@/views/CommentList/components/Comment'
 import tootipSvg from '@/views/CommentList/components/Reply/assets/svgs/tootip.svg'
 import emojiSvg from '@/views/CommentList/components/Reply/assets/svgs/emoji.svg'
-import googleEmoji from 'emoji-mart/data/google.json'
+// import googleEmoji from 'emoji-mart/data/google.json'
 interface ReplyForm {
   username: string
   comment: string
@@ -69,31 +69,33 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
   }
 
   // 渲染表情加文本
-  const renderContent = (commentContent: string) => {
-    commentContent = reaplceLink(commentContent)
-    let html = ''
-    let isReplace = false
-    googleEmoji.categories.forEach((item) => {
-      item.emojis.forEach((subItem) => {
-        if (commentContent.includes(`:${subItem}:`)) {
-          html = commentContent.replace(new RegExp(':' + subItem + ':', 'gi'), (result) => {
-            isReplace = true
-            return `${Emoji({
-              html: true,
-              set: 'google',
-              emoji: result,
-              size: 16,
-            })}`
-          })
-          commentContent = html
-        }
-      })
-    })
-    if (!isReplace) {
-      html = commentContent
-    }
-    return html
-  }
+  // const renderContent = (commentContent: string) => {
+  //   commentContent = reaplceLink(commentContent)
+  //   let html = ''
+  //   let isReplace = false
+  //   googleEmoji.categories.forEach((item) => {
+  //     item.emojis.forEach((subItem) => {
+  //       if (commentContent.includes(`:${subItem}:`)) {
+  //         html = commentContent.replace(new RegExp(':' + subItem + ':', 'gi'), (result) => {
+  //           isReplace = true
+  //           return `${Emoji({
+  //             html: true,
+  //             set: 'google',
+  //             emoji: result,
+  //             size: 16,
+  //           })}`
+  //         })
+  //         commentContent = html
+  //       }
+  //     })
+  //   })
+  //   if (!isReplace) {
+  //     html = commentContent
+  //   }
+  //   console.log(html)
+
+  //   return html
+  // }
   // 发表评论
   const onFinish = (values: ReplyForm) => {
     try {
@@ -107,7 +109,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
         atAuthor: commentName ? `@${commentName}` : commentName,
         isReply: false,
         commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
-        commentContent: renderContent(values.comment),
+        commentContent: values.comment,
         isIndex: true,
       }
       if (!formBody.atAuthor) delete formBody.atAuthor

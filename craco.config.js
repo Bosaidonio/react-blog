@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-17 16:23:57
- * @LastEditTime: 2022-01-11 22:37:45
+ * @LastEditTime: 2022-03-02 12:08:30
  * @LastEditors: Mario
  * @Description: 配置文件
  */
@@ -30,24 +30,29 @@ module.exports = {
     ],
     configure: (webpackConfig, { env, paths }) => {
       // 加载module.less文件时开启
-      // webpackConfig.module.rules = [
-      //   ...webpackConfig.module.rules,
-      //   {
-      //     test: /\.less$/,
-      //     use: [
-      //       "style-loader",
-      //       {
-      //         loader: "css-loader",
-      //         options: {
-      //           importLoaders: 1,
-      //           modules: true,
-      //         },
-      //       },
-      //       "less-loader",
-      //     ],
-      //     include: /\.module\.less$/,
-      //   },
-      // ];
+      webpackConfig.module.rules = [
+        ...webpackConfig.module.rules,
+        {
+          test: /\.mjs$/,
+          include: /node_modules/,
+          type: 'javascript/auto',
+        },
+        // {
+        //   test: /\.less$/,
+        //   use: [
+        //     'style-loader',
+        //     {
+        //       loader: 'css-loader',
+        //       options: {
+        //         importLoaders: 1,
+        //         modules: true,
+        //       },
+        //     },
+        //     'less-loader',
+        //   ],
+        //   include: /\.module\.less$/,
+        // },
+      ]
       return webpackConfig
     },
   },

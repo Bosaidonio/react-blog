@@ -22,6 +22,13 @@ const routes = [
         },
       },
       {
+        path: '/article/:id',
+        component: lazy(() => import('@/views/ArticleList/components/ArticleDesc')),
+        meta: {
+          title: '文章',
+        },
+      },
+      {
         path: '/respositories',
         component: lazy(() => import('@/views/Repositories')),
         meta: {

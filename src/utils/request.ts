@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-12-25 15:28:27
- * @LastEditTime: 2022-01-21 13:32:59
+ * @LastEditTime: 2022-03-05 14:19:37
  * @LastEditors: Mario
  * @Description: 封装fetch请求
  */
@@ -34,13 +34,16 @@ export const request = ({ url, data, token, ...restConfig }: IRequest) => {
   if (config.method.toUpperCase() === 'GET' && !isExternal(url)) {
     url += `?${qs.stringify(data)}`
   } else if (config.method.toUpperCase() !== 'GET') {
+    // 是Post请求
     config.body = JSON.stringify(data || {})
   }
   requestCount = requestCount + 1
   if (requestCount > 0) {
     store.dispatch({ type: ActionTypes.LOADING, payload: true })
   }
+  // 判断是否请求的是外链，而不是服务器地址
   const requestUrl = isExternal(url) ? url : `${apiUrl}${url}`
+
   return fetch(requestUrl, config).then(async (response) => {
     requestCount = requestCount - 1
     if (requestCount === 0) {

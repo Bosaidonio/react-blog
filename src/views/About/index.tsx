@@ -6,6 +6,7 @@ import { warrperClass } from '@/utils/classnames'
 import zanSvg from '@/views/About/assets/svgs/zan.svg'
 import styles from '@/views/About/index.module.scss'
 import classnames from 'classnames'
+import CommentList from '@/views/CommentList'
 import party from 'party-js'
 
 const About = () => {
@@ -111,6 +112,7 @@ const About = () => {
             </div>
           </div>
         </div>
+        <CommentList />
       </div>
     </div>
   )

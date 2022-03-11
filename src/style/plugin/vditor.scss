@@ -1,0 +1,98 @@
+.vditor-reset {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 6px;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    border: none !important;
+  }
+  img {
+    max-width: 50%;
+    margin: 10px auto;
+    cursor: pointer;
+  }
+  pre {
+    background: #eeeeee !important;
+    border-radius: 5px !important;
+    &::before {
+      content: '';
+      display: block;
+      background-size: 40px;
+      margin-bottom: 8px;
+      margin-left: 8px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: #ff0800 no-repeat 10px 10px;
+      width: 12px;
+      height: 12px;
+      -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+      box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+      z-index: 3;
+    }
+    code {
+      padding: 15px !important;
+      padding-left: 52px !important;
+      background: #f3f3f3 !important;
+      max-height: 285px !important;
+      .vditor-linenumber__rows {
+        top: 15px;
+      }
+    }
+  }
+  blockquote {
+    background-color: #f3f5f7 !important;
+    margin: 1rem 0 !important;
+    border-left: 0.5rem solid #eaecef !important;
+    padding: 0.8rem 1.5rem !important;
+    overflow-x: auto !important;
+    color: #6a737d !important;
+  }
+  .no-external-link {
+    color: #58666e;
+    border-bottom: 1px solid #999;
+  }
+
+  .no-external-link svg {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    vertical-align: -1px;
+    margin-left: 3px;
+  }
+  // 自定义引用
+  .custom-block {
+    border-left-width: 0.5rem;
+    border-left-style: solid;
+    margin: 1rem 0;
+    padding: 0.8rem 1.5rem !important;
+
+    &.success {
+      background-color: #f3f5f7;
+      border-color: #42b983;
+    }
+    &.warning {
+      background-color: rgba(255, 229, 100, 0.3);
+      border-color: #e7c000;
+      color: #6b5900;
+      .custom-block-title {
+        color: #b29400;
+      }
+    }
+    &.danger {
+      background-color: #ffe6e6;
+      border-color: #c00;
+      color: #4d0000;
+      .custom-block-title {
+        color: #900;
+      }
+    }
+    .custom-block-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+  }
+}

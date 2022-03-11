@@ -6,6 +6,7 @@
   margin-bottom: 20px;
   transition: all 0.2s ease;
   background: #fff;
+  cursor: pointer;
   .post-thumbnail {
     position: relative;
     margin: 0 !important;
@@ -41,11 +42,19 @@
     left: 0;
     width: 100%;
     color: #fff;
-    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3));
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
     border-radius: inherit;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     text-align: center;
+    .entry-meta {
+      width: 60%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      word-break: break-all;
+      margin: 0 auto;
+    }
     .index-post-title {
       font-size: 22px;
       padding-bottom: 1px;
