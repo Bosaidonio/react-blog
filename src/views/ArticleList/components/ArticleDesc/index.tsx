@@ -13,11 +13,11 @@ import BlogHeader from '@/components/BlogHeader'
 import VditorPreview from '@/components/VditorPreview'
 import Breadcrumb from '@/components/Breadcrumb'
 import { diffDom, toTree } from '@/utils'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { CategoryTypes } from '@/store/action-types'
-import { actionCreators } from '@/store'
-const { setCategoryState } = actionCreators
+// import { actionCreators } from '@/store'
+// const { setCategoryState } = actionCreators
 // import MarkdownIt from 'markdown-it'
 // import MarkdownContainer from 'markdown-it-container'
 interface IPreviewOptions {

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Tabs, Anchor } from 'antd'
 import { ReactSVG } from 'react-svg'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import likeoutSvg from '@/assets/svgs/likeout.svg'
 import giftSvg from '@/assets/svgs/gift.svg'
 import commentSvg from '@/assets/svgs/comment.svg'
