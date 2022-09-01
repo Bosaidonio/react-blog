@@ -45,7 +45,7 @@ const Aside: FC<AsideProps> = ({ isCollapse, setIsCollapse, initWidth, setInitWi
                 <strong className={classnames(styles.name)}>捡故事的人</strong>
                 <CaretDownOutlined className={classnames(styles.icon)} />
               </div>
-              <span className={classnames(styles.desc, 'text-muted')}>认真生活。</span>
+              <span className={classnames(styles.desc, 'text-muted')}>认真生活</span>
             </div>
             {/* <Divider style={{ borderTop: '1px solid #fff', width: '220px' }} /> */}
             <div className="line" style={{ width: initWidth }}>
