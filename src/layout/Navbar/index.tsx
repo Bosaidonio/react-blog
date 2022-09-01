@@ -42,7 +42,7 @@ const Aside: FC<AsideProps> = ({ isCollapse, setIsCollapse, initWidth, setInitWi
                 <img src="https://cdn.mariowork.com/auth/avatar.jpeg" alt="" />
               </div>
               <div className={styles.username}>
-                <strong className={classnames(styles.name)}>星河万里</strong>
+                <strong className={classnames(styles.name)}>捡故事的人</strong>
                 <CaretDownOutlined className={classnames(styles.icon)} />
               </div>
               <span className={classnames(styles.desc, 'text-muted')}>认真生活</span>
