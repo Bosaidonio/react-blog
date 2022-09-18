@@ -27,6 +27,8 @@
     <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script crossorigin src="https://cdn.jsdelivr.net/npm/redux@4.2.0/dist/redux.min.js"></script>
     <script crossorigin src="https://cdn.jsdelivr.net/npm/react-redux@8.0.2/dist/react-redux.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.8.17/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vditor@3.8.17/src/assets/less/index.less"></script>
   </head>
 
   <body>
@@ -42,5 +44,12 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      fetch('https://cdn.jsdelivr.net/npm/@emoji-mart/data@1.0.6/sets/14/google.json')
+        .then((res) => res.json())
+        .then((result) => {
+          window.googleEmoji = result
+        })
+    </script>
   </body>
 </html>

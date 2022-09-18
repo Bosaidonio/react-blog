@@ -4,7 +4,7 @@ import { ReactSVG } from 'react-svg'
 // import { useMediaQuery } from 'react-responsive'
 import { nanoid } from 'nanoid'
 import { Form, Input, Switch, Row, Col, Button, notification } from 'antd'
-import { Picker, EmojiData } from 'emoji-mart'
+import { Picker, BaseEmoji, Emoji } from 'emoji-mart'
 import 'emoji-mart/css/emoji-mart.css'
 import styles from '@/views/CommentList/components/Reply/index.module.scss'
 import { warrperClass } from '@/utils/classnames'
@@ -39,6 +39,7 @@ interface ReplyProps {
 }
 const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCommentList, onCancelReply }) => {
   const [isEmoji, setIsEmoji] = useState(false)
+  const [co, setCo] = useState('')
   const [username, setUsername] = useState<string>()
   const [form] = Form.useForm()
   // 控制筛子抖动
@@ -100,7 +101,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
   const onFinish = (values: ReplyForm) => {
     try {
       validateForm(values)
-
+      console.log(values)
       const formBody = {
         id: new Date().getTime(),
         parentId: id,
@@ -109,7 +110,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
         atAuthor: commentName ? `@${commentName}` : commentName,
         isReply: false,
         commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
-        commentContent: values.comment,
+        commentContent: co,
         isIndex: true,
       }
       if (!formBody.atAuthor) delete formBody.atAuthor
@@ -162,9 +163,11 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
     }, 500)
   }
   // 选中表情
-  const onSelectEmoji = (emoji: EmojiData) => {
+  const onSelectEmoji = (emoji: BaseEmoji, e: any) => {
     const currentComent = form.getFieldsValue(['comment']).comment
-    form.setFieldsValue({ comment: `${currentComent ? currentComent : ''}${emoji.colons}` })
+    form.setFieldsValue({
+      comment: `${currentComent ? currentComent : ''}${emoji.native}`,
+    })
   }
 
   return (
@@ -183,7 +186,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
       </h4>
       <Form name={nanoid(6)} form={form} layout="vertical" labelCol={{ span: 8 }} wrapperCol={{ span: 24 }} autoComplete="off" onFinish={onFinish}>
         <Form.Item name="comment" label="评论">
-          <Input.TextArea placeholder="这家伙真懒,啥也不说 ~" />
+          <Input.TextArea placeholder="这家伙真懒,啥也不说 ~" className={styles.font} />
         </Form.Item>
         <div className={warrperClass(styles, 'OwO padder-v-sm')}>
           <div className={warrperClass(styles, `OwO-logo ${isEmoji ? 'active' : ''}`)} onClick={() => setIsEmoji(!isEmoji)}>
@@ -198,7 +201,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
           </div>
           {isEmoji ? (
             <div className={classnames(styles.emoji)}>
-              <Picker set="google" emojiTooltip={true} onSelect={onSelectEmoji} i18n={i18nConfig} />
+              <Picker set="google" emoji="" showPreview={false} emojiTooltip={true} onClick={onSelectEmoji} i18n={i18nConfig} />
             </div>
           ) : null}
         </div>

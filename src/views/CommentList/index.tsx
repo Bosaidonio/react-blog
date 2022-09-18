@@ -21,7 +21,7 @@ const CommentList = () => {
           commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
           commentName: '躲闪的大黄',
           commentTime: '7 个月前',
-          commentContent: '好哥哥还有往年北化人工智能试题吗',
+          commentContent: '12f😍😆😜f!@:F21f😀😆😂',
           children: [
             {
               id: 2,

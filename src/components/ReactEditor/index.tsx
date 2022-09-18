@@ -7,7 +7,7 @@
  */
 import { FC, useEffect, useState, forwardRef, useImperativeHandle } from 'react'
 import Vditor from 'vditor'
-import 'vditor/src/assets/scss/index.scss'
+// import 'vditor/src/assets/scss/index.scss'
 interface ReactEditorProps {
   ref?: any
   onChange?: (html: string) => void

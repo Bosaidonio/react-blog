@@ -6,7 +6,15 @@ import { isArray } from '@/utils/is'
  */
 export const reaplceLink = (str: string) => {
   const reg = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi
-  str = str.replace(reg, "<a href='$1' style='text-decoration: underline;' target='_blank'>$1</a>")
+  str = str.replace(reg, (result) => {
+    console.log(result)
+
+    if (/https:\/\/unpkg.com\/emoji-datasource-google/.test(result)) {
+      return result
+    } else {
+      return `<a href=${result} style='text-decoration: underline;' target='_blank'>${result}</a>`
+    }
+  })
   return str
 }
 

@@ -10,7 +10,7 @@ import React, { useRef, FC } from 'react'
 import { useMount } from 'ahooks'
 
 import Preivew from 'vditor'
-import 'vditor/src/assets/scss/index.scss'
+// import 'vditor/src/assets/scss/index.scss'
 
 export interface IVditorPreviewProps {
   markdown: string
