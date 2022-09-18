@@ -9,6 +9,7 @@ const { whenProd } = require('@craco/craco')
 const CracoLessPlugin = require('craco-less')
 const WebpackBar = require('webpackbar')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const path = require('path')
 
 // 防止create-react-app 构建时清空控制台
@@ -26,9 +27,27 @@ module.exports = {
       // webpack构建进度条
       new WebpackBar({ profile: true, color: '#1a9c70' }),
       // webpack依赖包分析器
-      // ...whenProd(() => [new BundleAnalyzerPlugin()], []),
+      ...whenProd(() => [new BundleAnalyzerPlugin()], []),
+      new HardSourceWebpackPlugin(),
     ],
     configure: (webpackConfig, { env, paths }) => {
+      console.log(webpackConfig)
+      webpackConfig.externals = {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+      }
+      webpackConfig.optimization.splitChunks = {
+        ...webpackConfig.optimization.splitChunks,
+        cacheGroups: {
+          commons: {
+            chunks: 'all',
+            // 将两个以上的chunk所共享的模块打包至commons组。
+            minChunks: 2,
+            name: 'commons',
+            priority: 80,
+          },
+        },
+      }
       // 加载module.less文件时开启
       webpackConfig.module.rules = [
         ...webpackConfig.module.rules,
