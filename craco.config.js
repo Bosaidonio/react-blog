@@ -27,7 +27,7 @@ module.exports = {
       // webpack构建进度条
       new WebpackBar({ profile: true, color: '#1a9c70' }),
       // webpack依赖包分析器
-      ...whenProd(() => [new BundleAnalyzerPlugin()], []),
+      // ...whenProd(() => [new BundleAnalyzerPlugin()], []),
       new HardSourceWebpackPlugin(),
     ],
     configure: (webpackConfig, { env, paths }) => {
