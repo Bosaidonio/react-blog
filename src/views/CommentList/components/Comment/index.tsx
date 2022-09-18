@@ -6,7 +6,7 @@ import Reply from '@/views/CommentList/components/Reply'
 import bloggerSvg from '@/views/CommentList/components/Comment/assets/svgs/blogger.svg'
 import styles from '@/views/CommentList/components/Comment/index.module.scss'
 import { reaplceLink } from '@/utils'
-import { Emoji } from 'emoji-mart'
+// import { Emoji } from 'emoji-mart'
 
 export interface IComment {
   id: number
@@ -50,7 +50,7 @@ const Comment: FC<CommentProps> = ({
 }) => {
   // 渲染表情加文本
   const renderContent = (commentContent: string) => {
-    const start = new Date().getTime() //起始时间
+    // const start = new Date().getTime() //起始时间
 
     commentContent = reaplceLink(commentContent)
 
@@ -75,7 +75,7 @@ const Comment: FC<CommentProps> = ({
     // if (!isReplace) {
     //   html = commentContent
     // }
-    const end = new Date().getTime() //起始时间
+    // const end = new Date().getTime() //起始时间
 
     return commentContent
   }

@@ -35,7 +35,7 @@ module.exports = {
       webpackConfig.externals = {
         react: 'React',
         'react-dom': 'ReactDOM',
-        vditor: 'vditor',
+        vditor: 'Vditor',
       }
       // webpackConfig.optimization.splitChunks = {
       //   ...webpackConfig.optimization.splitChunks,

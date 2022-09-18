@@ -4,7 +4,7 @@ import { ReactSVG } from 'react-svg'
 // import { useMediaQuery } from 'react-responsive'
 import { nanoid } from 'nanoid'
 import { Form, Input, Switch, Row, Col, Button, notification } from 'antd'
-import { Picker, BaseEmoji, Emoji } from 'emoji-mart'
+import { Picker, BaseEmoji } from 'emoji-mart'
 import 'emoji-mart/css/emoji-mart.css'
 import styles from '@/views/CommentList/components/Reply/index.module.scss'
 import { warrperClass } from '@/utils/classnames'
@@ -39,7 +39,6 @@ interface ReplyProps {
 }
 const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCommentList, onCancelReply }) => {
   const [isEmoji, setIsEmoji] = useState(false)
-  const [co, setCo] = useState('')
   const [username, setUsername] = useState<string>()
   const [form] = Form.useForm()
   // 控制筛子抖动
@@ -101,7 +100,6 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
   const onFinish = (values: ReplyForm) => {
     try {
       validateForm(values)
-      console.log(values)
       const formBody = {
         id: new Date().getTime(),
         parentId: id,
@@ -110,7 +108,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
         atAuthor: commentName ? `@${commentName}` : commentName,
         isReply: false,
         commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
-        commentContent: co,
+        commentContent: values.comment,
         isIndex: true,
       }
       if (!formBody.atAuthor) delete formBody.atAuthor
