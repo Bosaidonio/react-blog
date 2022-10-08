@@ -1,6 +1,6 @@
 {
   "name": "react-blog",
-  "version": "0.2.5",
+  "version": "0.2.2",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -59,7 +59,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "commit": "git add . && cz-customizable",
-    "release": "standard-version",
+    "release": "standard-version  --preset gitmoji-config",
     "tag-github": "git push --follow-tags github master",
     "tag-gitee": "git push --follow-tags gitee master",
     "push-github": "git push github master",
