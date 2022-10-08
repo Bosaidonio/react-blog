@@ -59,9 +59,6 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "commit": "git add . && cz-customizable",
-    "release": "standard-version",
-    "tag-github": "git push --follow-tags github master",
-    "tag-gitee": "git push --follow-tags gitee master",
     "push-github": "git push github master",
     "push-gitee": "git push gitee master"
   },
