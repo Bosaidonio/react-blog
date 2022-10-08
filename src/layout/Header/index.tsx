@@ -1,8 +1,8 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2022-01-27 17:17:28
- * @LastEditors: Mario
+ * @LastEditTime: 2022-10-08 17:13:42
+ * @LastEditors: mario marioworker@163.com
  * @Description: 头部组件
  */
 
@@ -120,7 +120,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
   }
 
   return (
-    <header className={classnames('flex', styles['bg-header'], 'bg')}>
+    <header className={classnames('flex', styles['bg-header'])}>
       <div className={classnames('w-220', 'header-left', styles.logo, 'flex', isMobile ? styles.isMobile : '')} style={{ paddingLeft: isMobile ? '0' : '20px' }}>
         {isMobile ? <MenuUnfoldOutlined className={styles.BreadCrumbs} onClick={() => setIsCollapse(!isCollapse)} /> : null}
         <div className={classnames('cursor-pointer', styles.img)}>
@@ -131,7 +131,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
       {isMobile ? null : (
         <div className={classnames('flex', 'items-center', 'flex-auto', 'justify-between', styles['header-right'], 'header-right')}>
           <div className="flex h-full">
-            <div className={classnames('flex', 'items-center', 'cursor-pointer', 'md-and-down:hidden', styles.echarts)}>
+            <div className={classnames('flex', 'items-center', 'cursor-pointer', 'md-and-down', styles.echarts)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16px"
@@ -147,17 +147,17 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                 <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                 <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
               </svg>
-              <CaretDownOutlined className={classnames('ml-1', styles['down-arrow'])} />
+              <CaretDownOutlined className={classnames(styles['down-arrow'])} />
             </div>
             <div className={classnames('flex', styles.search, 'items-center', isFoucs ? 'active' : '')}>
               <Input placeholder="输入关键词搜索…" suffix={isSearch ? <LoadingOutlined /> : <SearchOutlined />} onChange={handleSearch} onFocus={onSearchFocus} onBlur={onSearchBlur} />
             </div>
           </div>
           <div className="flex h-full">
-            <div className={classnames('md-and-down:hidden')}>
+            <div className={classnames('md-and-down')}>
               <ReactAplayer {...props} onInit={onInit} onPlay={onPlay} onPause={onPause} />
             </div>
-            <div className={classnames('flex', 'items-center', 'md-and-down:hidden', ' hover:bg-hover', styles['common-icon'])} onClick={onShowMusicList}>
+            <div className={classnames('flex', 'items-center', 'md-and-down', styles['common-icon'])} onClick={onShowMusicList}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16px"
@@ -215,7 +215,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
               }
             </div>
             <div className={classnames('flex', 'items-center', styles.dropdown)}>
-              <div className={classnames('flex', 'items-center', ' hover:bg-hover', styles['common-icon'])} onClick={handleOpacity}>
+              <div className={classnames('flex', 'items-center', styles['common-icon'])} onClick={handleOpacity}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16px"

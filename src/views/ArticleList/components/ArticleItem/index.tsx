@@ -7,9 +7,9 @@ import { Article } from '@/views/ArticleList'
 
 interface ArticleProps extends Article {
   index: number
-  handleClick?: (articleId: number) => void
+  handleClick?: (articleId: string) => void
 }
-const ArticleItem: FC<ArticleProps> = ({ title, simpleDesc, article, author, banner, isLeftRight, time, handleClick, index }) => {
+const ArticleItem: FC<ArticleProps> = ({ title, simpleDesc, article, author, banner, isLeftRight, time, _id, handleClick, index }) => {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,7 +20,7 @@ const ArticleItem: FC<ArticleProps> = ({ title, simpleDesc, article, author, ban
     }
   }, [])
   return (
-    <div className={classnames(styles['article-header'], loading ? styles['warrper-20'] : '')} onClick={() => handleClick && handleClick(index + 1)}>
+    <div className={classnames(styles['article-header'], loading ? styles['warrper-20'] : '')} onClick={() => handleClick && handleClick(_id)}>
       <Card bordered={false}>
         {
           <Skeleton loading={loading} avatar active>

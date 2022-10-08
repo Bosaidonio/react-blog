@@ -27,3 +27,55 @@
   color: #58666e;
   background-color: #edf1f2;
 }
+
+// Language: scss
+.flex {
+  display: flex;
+}
+.flex-full {
+  flex: 1;
+}
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.flex-auto {
+  flex: 1 1 auto;
+}
+.w-220 {
+  width: 220px;
+}
+.h-full {
+  height: 100%;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.p-warrper {
+  padding: 15px;
+}
+.bg-default {
+  background-color: #f9f9f9;
+}
+.text-deafult {
+  color: #777777;
+}
+.text-muted {
+  color: #98a6ad;
+}
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+@media (max-width: 991px) {
+  .md-and-down {
+    display: none;
+  }
+}
+svg {
+  display: block;
+  vertical-align: middle;
+}

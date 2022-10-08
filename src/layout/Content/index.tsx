@@ -22,7 +22,7 @@ const Content: FC<ContentProps> = ({ initWidth, isCollapse }) => {
   const isDeskbook = useMediaQuery({
     query: '(max-width: 1020px)',
   })
-  const [isFinished, setIsFinished] = useState(false)
+  const [isFinished, setIsFinished] = useState(true)
   return (
     <div
       id="content"

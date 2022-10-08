@@ -67,6 +67,9 @@
     .echarts {
       padding: 15px;
       height: 100%;
+      .down-arrow {
+        margin-left: 0.25rem;
+      }
       &:hover {
         background-color: #ececec;
       }

@@ -1,8 +1,8 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-17 16:23:57
- * @LastEditTime: 2022-03-02 12:08:30
- * @LastEditors: Mario
+ * @LastEditTime: 2022-10-08 18:08:27
+ * @LastEditors: mario marioworker@163.com
  * @Description: 配置文件
  */
 const { whenProd } = require('@craco/craco')
@@ -28,27 +28,24 @@ module.exports = {
       new WebpackBar({ profile: true, color: '#1a9c70' }),
       // webpack依赖包分析器
       ...whenProd(() => [new BundleAnalyzerPlugin()], []),
-      new HardSourceWebpackPlugin(),
     ],
     configure: (webpackConfig, { env, paths }) => {
-      console.log(webpackConfig)
       webpackConfig.externals = {
         react: 'React',
         'react-dom': 'ReactDOM',
-        vditor: 'Vditor',
       }
-      // webpackConfig.optimization.splitChunks = {
-      //   ...webpackConfig.optimization.splitChunks,
-      //   cacheGroups: {
-      //     commons: {
-      //       chunks: 'all',
-      //       // 将两个以上的chunk所共享的模块打包至commons组。
-      //       minChunks: 2,
-      //       name: 'commons',
-      //       priority: 80,
-      //     },
-      //   },
-      // }
+      webpackConfig.optimization.splitChunks = {
+        ...webpackConfig.optimization.splitChunks,
+        cacheGroups: {
+          commons: {
+            chunks: 'all',
+            // 将两个以上的chunk所共享的模块打包至commons组。
+            minChunks: 2,
+            name: 'commons',
+            priority: 80,
+          },
+        },
+      }
       // 加载module.less文件时开启
       webpackConfig.module.rules = [
         ...webpackConfig.module.rules,
@@ -92,7 +89,7 @@ module.exports = {
   ],
   style: {
     postcss: {
-      plugins: [require('tailwindcss'), require('autoprefixer')],
+      plugins: [require('autoprefixer')],
     },
   },
   babel: {

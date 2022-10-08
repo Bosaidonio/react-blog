@@ -1,8 +1,8 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 18:27:32
- * @LastEditTime: 2022-03-08 09:39:15
- * @LastEditors: Mario
+ * @LastEditTime: 2022-10-08 16:19:22
+ * @LastEditors: mario marioworker@163.com
  * @Description: 文章详情组件
  */
 import { useEffect, useState } from 'react'
@@ -38,9 +38,7 @@ interface IPreviewOptions {
   renderers?: ILuteRender
   theme?: IPreviewTheme
   icon?: 'ant' | 'material' | undefined
-
   transform?(html: string): string
-
   after?(): void
 }
 const TestVditorEditor = () => {
@@ -50,11 +48,13 @@ const TestVditorEditor = () => {
   const dispatch = useDispatch()
   // const md = MarkdownIt()
   // 获取文章详情
-  const { run } = useRequest(() => getArticleDesc({ id: params.id }), {
+  const { run } = useRequest(getArticleDesc, {
     manual: true,
     onSuccess: async (result) => {
-      if (result.code === 1) {
-        setMarkdown(handleHtml(result.data))
+      if (result.statusCode === 200) {
+        console.log(result.data)
+
+        setMarkdown(handleHtml(result.data.articleContent))
       }
     },
   })
@@ -134,8 +134,8 @@ const TestVditorEditor = () => {
     dispatch({ type: CategoryTypes.SET_CATEGORY, payload: tree })
   }
   useEffect(() => {
-    run()
-  }, [run])
+    run({ id: params.id })
+  }, [params.id])
   return (
     <div className="article-desc">
       <BlogHeader {...headerData} />

@@ -1,14 +1,20 @@
+/*
+ * @Date: 2022-08-28 19:22:28
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2022-10-08 15:35:18
+ * @Description: Do not edit
+ */
 import { FC } from 'react'
 import styles from '@/views/Home/components/PinnedArticle/index.module.scss'
 import { warrperClass } from '@/utils/classnames'
 import { Article } from '@/views/ArticleList'
 interface PinnedArticleProps extends Article {
   index: number
-  handleClick?: (articleId: number) => void
+  handleClick?: (articleId: string) => void
 }
-const PinnedArticle: FC<PinnedArticleProps> = ({ index, title, banner, simpleDesc, handleClick }) => {
+const PinnedArticle: FC<PinnedArticleProps> = ({ index, title, banner, simpleDesc, _id, handleClick }) => {
   return (
-    <div className={warrperClass(styles, 'panel-picture border-radius-6 box-shadow-wrap-normal')} onClick={() => handleClick && handleClick(index + 1)}>
+    <div className={warrperClass(styles, 'panel-picture border-radius-6 box-shadow-wrap-normal')} onClick={() => handleClick && handleClick(_id)}>
       <figure className={warrperClass(styles, 'post-thumbnail border-radius-6')}>
         <span className={warrperClass(styles, 'post-thumbnail-inner index-image lazy')} style={{ backgroundImage: `url(${banner})` }}></span>
       </figure>

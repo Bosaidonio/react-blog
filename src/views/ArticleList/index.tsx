@@ -1,3 +1,9 @@
+/*
+ * @Date: 2022-08-28 19:22:28
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2022-10-08 15:35:08
+ * @Description: Do not edit
+ */
 import { useState } from 'react'
 import WarrperPagination from '@/components/Pagination'
 import ArticleItem from '@/views/ArticleList/components/ArticleItem'
@@ -7,6 +13,7 @@ import { getArticleList } from '@/api/Articles'
 import styles from '@/views/ArticleList/index.module.scss'
 import { useNavigate } from 'react-router-dom'
 export interface Article {
+  _id: string
   title: string
   simpleDesc: string
   article: string
@@ -18,31 +25,36 @@ export interface Article {
 }
 const ArticleList = () => {
   const [articleList, setArticleList] = useState<Article[]>()
-
+  const [params, setParams] = useState({
+    pageNow: 1,
+    pageSize: 10,
+  })
+  const [total, setTotal] = useState(0)
   const navigate = useNavigate()
+
   // 获取文章列表
   const { run } = useRequest(getArticleList, {
     manual: true,
     onSuccess: (result) => {
-      if (result.code === 1) {
-        setArticleList(result.data)
+      if (result.statusCode === 200) {
+        setArticleList(result.data.records)
       }
     },
   })
 
   // 预览文章详情
-  const onPreviewDesc = (articleId: number) => {
+  const onPreviewDesc = (articleId: string) => {
     navigate(`/article/${articleId}`)
   }
   useMount(() => {
-    run()
+    run(params)
   })
   return (
     <div className={styles['article-list']}>
       {articleList?.map((article, index) =>
         article.isPinned ? <PinnedArticle key={index} index={index} {...article} handleClick={onPreviewDesc} /> : <ArticleItem key={index} index={index} {...article} handleClick={onPreviewDesc} />
       )}
-      <WarrperPagination />
+      <WarrperPagination {...params} total={total} />
     </div>
   )
 }

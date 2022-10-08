@@ -1,13 +1,13 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 21:09:54
- * @LastEditTime: 2022-03-02 11:47:08
- * @LastEditors: Mario
+ * @LastEditTime: 2022-10-03 17:44:31
+ * @LastEditors: mario marioworker@163.com
  * @Description: 基于vditor封装
  */
 import { FC, useEffect, useState, forwardRef, useImperativeHandle } from 'react'
 import Vditor from 'vditor'
-// import 'vditor/src/assets/scss/index.scss'
+import 'vditor/src/assets/scss/index.scss'
 interface ReactEditorProps {
   ref?: any
   onChange?: (html: string) => void
