@@ -59,7 +59,9 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "commit": "git add . && cz-customizable",
-    "release": "standard-version  --preset gitmoji-config"
+    "release": "standard-version  --preset gitmoji-config",
+    "tag-github": "git push --follow-tags github master",
+    "tag-gitee": "git push --follow-tags gitee master"
   },
   "eslintConfig": {
     "extends": [
