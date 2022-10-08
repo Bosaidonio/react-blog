@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-07 21:33:44
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-08 18:56:44
+ * @LastEditTime: 2022-10-08 20:14:36
  * @Description: git cz config
  */
 module.exports = {
@@ -76,7 +76,7 @@ module.exports = {
     },
     {
       value: ':building_construction: arch',
-      name: '🏗️ arch:   进行架构更改',
+      name: '🏗️ arch:      进行架构更改',
     },
   ],
   messages: {
