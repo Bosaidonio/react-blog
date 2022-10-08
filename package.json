@@ -1,6 +1,6 @@
 {
   "name": "react-blog",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -25,8 +25,8 @@
     "aplayer": "^1.10.1",
     "classnames": "^2.3.1",
     "craco-less": "^1.20.0",
+    "cz-customizable": "^7.0.0",
     "emoji-mart": "^3.0.1",
-    "hard-source-webpack-plugin": "^0.13.1",
     "nanoid": "^3.2.0",
     "party-js": "^2.1.2",
     "qs": "^6.10.2",
@@ -46,7 +46,6 @@
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "sass": "^1.43.4",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^4.1.2",
     "vditor": "3.8.6",
     "web-vitals": "^1.0.1",
@@ -58,7 +57,9 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "commit": "git add . && cz-customizable",
+    "release": "standard-version"
   },
   "eslintConfig": {
     "extends": [
@@ -89,6 +90,7 @@
     "lint-staged": ">=10",
     "postcss": "^7",
     "prettier": "2.5.1",
+    "standard-version": "^9.5.0",
     "stylelint": "^14.1.0",
     "stylelint-config-standard": "^24.0.0"
   },
