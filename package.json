@@ -1,6 +1,6 @@
 {
   "name": "react-blog",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -61,7 +61,9 @@
     "commit": "git add . && cz-customizable",
     "release": "standard-version  --preset gitmoji-config",
     "tag-github": "git push --follow-tags github master",
-    "tag-gitee": "git push --follow-tags gitee master"
+    "tag-gitee": "git push --follow-tags gitee master",
+    "push-github": "git push github master",
+    "push-gitee": "git push gitee master"
   },
   "eslintConfig": {
     "extends": [
