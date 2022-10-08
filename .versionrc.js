@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-08 18:54:23
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-08 18:56:33
+ * @LastEditTime: 2022-10-08 20:23:06
  * @Description: change log config
  */
 module.exports = {
