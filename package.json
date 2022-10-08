@@ -1,6 +1,6 @@
 {
   "name": "react-blog",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -59,7 +59,7 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "commit": "git add . && cz-customizable",
-    "release": "standard-version --preset gitmoji-config"
+    "release": "standard-version  --preset gitmoji-config"
   },
   "eslintConfig": {
     "extends": [
