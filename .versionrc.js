@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-10-08 18:54:23
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-08 20:23:06
+ * @LastEditTime: 2022-10-08 20:28:09
  * @Description: change log config
  */
 module.exports = {
@@ -23,6 +23,6 @@ module.exports = {
     { type: 'art', section: '🎨 Art | 代码美化' },
     { type: 'remove', section: '🗑️  Remove | 移除代码或文件' },
     { type: 'hotfix', section: '🚑️  Hotfix | 紧急修复' },
-    { type: 'arch', section: '🏗️  Arch | 架构变更' },
+    { type: 'arch', section: '🏗️  Arch | 架构变更 ' },
   ],
 }
