@@ -22,8 +22,18 @@
     font-size: 14px;
   }
 }
-
+em-emoji {
+  display: inline-block;
+}
 .emoji-mart-emoji {
-  vertical-align: middle;
-  margin-right: 3px !important;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    top: unset;
+    width: 100%;
+    height: 100%;
+  }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-17 16:23:57
- * @LastEditTime: 2022-10-08 18:08:27
+ * @LastEditTime: 2022-10-15 13:04:06
  * @LastEditors: mario marioworker@163.com
  * @Description: 配置文件
  */
@@ -9,7 +9,7 @@ const { whenProd } = require('@craco/craco')
 const CracoLessPlugin = require('craco-less')
 const WebpackBar = require('webpackbar')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const path = require('path')
 
 // 防止create-react-app 构建时清空控制台
@@ -54,21 +54,21 @@ module.exports = {
           include: /node_modules/,
           type: 'javascript/auto',
         },
-        // {
-        //   test: /\.less$/,
-        //   use: [
-        //     'style-loader',
-        //     {
-        //       loader: 'css-loader',
-        //       options: {
-        //         importLoaders: 1,
-        //         modules: true,
-        //       },
-        //     },
-        //     'less-loader',
-        //   ],
-        //   include: /\.module\.less$/,
-        // },
+        {
+          test: /\.less$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+                modules: true,
+              },
+            },
+            'less-loader',
+          ],
+          include: /\.module\.less$/,
+        },
       ]
       return webpackConfig
     },

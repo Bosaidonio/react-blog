@@ -1,11 +1,26 @@
 /*
  * @Author: Mario
  * @Date: 2022-01-21 12:59:46
- * @LastEditTime: 2022-03-11 09:42:58
- * @LastEditors: Mario
+ * @LastEditTime: 2022-10-16 17:43:16
+ * @LastEditors: mario marioworker@163.com
  * @Description: 判断是否为某种类型
  */
 const toString = Object.prototype.toString
+
+/**
+ * @description: 判断是否是emoji表情
+ * @param {any} str
+ * @return {boolean}
+ */
+export const isEmoji = (str: string) => {
+  const ranges = [
+    '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+    '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+    '\ud83d[\ude80-\udeff]', // U+1F680 to U+1F6FF
+  ]
+  return str.match(ranges.join('|')) !== null
+}
+
 /**
  * @description: 判断是否为外链
  * @param {any} path

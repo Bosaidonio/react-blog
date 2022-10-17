@@ -1,4 +1,4 @@
-import { isArray } from '@/utils/is'
+import { isArray, isString } from '@/utils/is'
 /**
  * @description: 将字符串中的链接替换为a标签
  * @param {string} str
@@ -134,4 +134,22 @@ export const deleteEmptyKey = (obj: any) => {
     }
   }
   return obj
+}
+/**
+ * @description: 获取字符串中所有的emoji表情
+ * @param {any} obj
+ * @return {*}
+ */
+export const getEmojiList = (str: string) => {
+  // 判断是否为字符串
+  if (!isString(str)) {
+    return []
+  }
+  const ranges = [
+    '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+    '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+    '\ud83d[\ude80-\udeff]', // U+1F680 to U+1F6FF
+  ]
+  const reg = new RegExp(ranges.join('|'), 'g')
+  return str.match(reg) || []
 }

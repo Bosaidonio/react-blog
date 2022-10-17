@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-08 15:35:08
+ * @LastEditTime: 2022-10-15 13:05:25
  * @Description: Do not edit
  */
 import { useState } from 'react'
@@ -25,11 +25,11 @@ export interface Article {
 }
 const ArticleList = () => {
   const [articleList, setArticleList] = useState<Article[]>()
-  const [params, setParams] = useState({
+  const [params] = useState({
     pageNow: 1,
     pageSize: 10,
   })
-  const [total, setTotal] = useState(0)
+  const [total] = useState(0)
   const navigate = useNavigate()
 
   // 获取文章列表

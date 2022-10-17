@@ -135,7 +135,7 @@ const TestVditorEditor = () => {
   }
   useEffect(() => {
     run({ id: params.id })
-  }, [params.id])
+  }, [run, params.id])
   return (
     <div className="article-desc">
       <BlogHeader {...headerData} />

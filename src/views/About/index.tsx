@@ -59,19 +59,19 @@ const About = () => {
             <p></p>
             <div className={styles['flex-column']}>
               <div className={styles['flex-block']} style={{ flex: 'auto' }}>
-                <div className={warrperClass(styles, 'tip inlineBlock share simple small')}>前端/后台开发</div>
+                <div className={warrperClass(styles, 'tip inlineBlock share simple small')}>前端开发</div>
                 <ul>
-                  <li>web站点</li>
-                  <li>后台管理</li>
-                  <li>爬虫</li>
+                  <li>Vue</li>
+                  <li>React</li>
+                  <li>Docker</li>
                 </ul>
               </div>
               <div className={styles['flex-block']} style={{ flex: 'auto' }}>
-                <div className={warrperClass(styles, 'tip inlineBlock share simple small')}>前端/后台开发</div>
+                <div className={warrperClass(styles, 'tip inlineBlock share simple small')}>后端开发</div>
                 <ul>
-                  <li>javascript</li>
-                  <li>shell</li>
-                  <li>Go</li>
+                  <li>Mongodb</li>
+                  <li>Nestjs</li>
+                  <li>自动化部署(K8s+jenkins+harbor)</li>
                 </ul>
               </div>
             </div>

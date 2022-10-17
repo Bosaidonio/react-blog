@@ -1,11 +1,15 @@
-import { FC, useState } from 'react'
+import { FC, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { ReactSVG } from 'react-svg'
 // import { useMediaQuery } from 'react-responsive'
 import { nanoid } from 'nanoid'
 import { Form, Input, Switch, Row, Col, Button, notification } from 'antd'
-import { Picker, BaseEmoji } from 'emoji-mart'
-import 'emoji-mart/css/emoji-mart.css'
+// 导入类型声明
+import { BaseEmoji } from 'emoji-mart'
+// 导入表情主依赖包
+import Picker from '@emoji-mart/react'
+// 导入谷歌表情
+import emojiData from '@emoji-mart/data/sets/14/google.json'
 import styles from '@/views/CommentList/components/Reply/index.module.scss'
 import { warrperClass } from '@/utils/classnames'
 import { getRandom } from '@/utils/math'
@@ -15,7 +19,7 @@ import { parseTime } from '@/utils/date'
 import { CommentProp } from '@/views/CommentList/components/Comment'
 import tootipSvg from '@/views/CommentList/components/Reply/assets/svgs/tootip.svg'
 import emojiSvg from '@/views/CommentList/components/Reply/assets/svgs/emoji.svg'
-// import googleEmoji from 'emoji-mart/data/google.json'
+
 interface ReplyForm {
   username: string
   comment: string
@@ -23,12 +27,7 @@ interface ReplyForm {
   address: string
 }
 const nameLibrary = ['潜心学习的道士', '小有名气的学生', '躲闪的贫僧', '挺胸的女孩', '知名的人士', '知名的男士', '不知名的男孩', '刚下飞机的女孩', '看透一切的道士', '大名鼎鼎的女士', '无名的学生']
-const i18nConfig = {
-  categories: {
-    recent: '历史表情',
-    people: '表情符号',
-  },
-}
+
 interface ReplyProps {
   id: number
   isComment?: boolean
@@ -38,6 +37,7 @@ interface ReplyProps {
   onCancelReply?: () => void
 }
 const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCommentList, onCancelReply }) => {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [isEmoji, setIsEmoji] = useState(false)
   const [username, setUsername] = useState<string>()
   const [form] = Form.useForm()
@@ -68,35 +68,6 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
     }
   }
 
-  // 渲染表情加文本
-  // const renderContent = (commentContent: string) => {
-  //   commentContent = reaplceLink(commentContent)
-  //   let html = ''
-  //   let isReplace = false
-  //   googleEmoji.categories.forEach((item) => {
-  //     item.emojis.forEach((subItem) => {
-  //       if (commentContent.includes(`:${subItem}:`)) {
-  //         html = commentContent.replace(new RegExp(':' + subItem + ':', 'gi'), (result) => {
-  //           isReplace = true
-  //           return `${Emoji({
-  //             html: true,
-  //             set: 'google',
-  //             emoji: result,
-  //             size: 16,
-  //           })}`
-  //         })
-  //         commentContent = html
-  //       }
-  //     })
-  //   })
-  //   if (!isReplace) {
-  //     html = commentContent
-  //   }
-  //   console.log(html)
-
-  //   return html
-  // }
-  // 发表评论
   const onFinish = (values: ReplyForm) => {
     try {
       validateForm(values)
@@ -162,6 +133,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
   }
   // 选中表情
   const onSelectEmoji = (emoji: BaseEmoji, e: any) => {
+    ;(textAreaRef as any).current.focus()
     const currentComent = form.getFieldsValue(['comment']).comment
     form.setFieldsValue({
       comment: `${currentComent ? currentComent : ''}${emoji.native}`,
@@ -184,10 +156,15 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
       </h4>
       <Form name={nanoid(6)} form={form} layout="vertical" labelCol={{ span: 8 }} wrapperCol={{ span: 24 }} autoComplete="off" onFinish={onFinish}>
         <Form.Item name="comment" label="评论">
-          <Input.TextArea placeholder="这家伙真懒,啥也不说 ~" className={styles.font} />
+          <Input.TextArea ref={textAreaRef} placeholder="这家伙真懒,啥也不说 ~" />
         </Form.Item>
         <div className={warrperClass(styles, 'OwO padder-v-sm')}>
-          <div className={warrperClass(styles, `OwO-logo ${isEmoji ? 'active' : ''}`)} onClick={() => setIsEmoji(!isEmoji)}>
+          <div
+            className={warrperClass(styles, `OwO-logo ${isEmoji ? 'active' : ''}`)}
+            onClick={() => {
+              setIsEmoji(!isEmoji)
+            }}
+          >
             <span className={warrperClass(styles, 'smile-icons')}>
               <ReactSVG src={emojiSvg} />
             </span>
@@ -199,7 +176,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
           </div>
           {isEmoji ? (
             <div className={classnames(styles.emoji)}>
-              <Picker set="google" emoji="" showPreview={false} emojiTooltip={true} onClick={onSelectEmoji} i18n={i18nConfig} />
+              <Picker data={emojiData} onEmojiSelect={onSelectEmoji} locale="zh" set="google" icons="outline" />
             </div>
           ) : null}
         </div>

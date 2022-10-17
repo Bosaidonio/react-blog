@@ -234,10 +234,11 @@
         &:hover {
           border-color: #40a9ff !important;
         }
-        &:focus {
+        &:not(:placeholder-shown) {
           background-position-y: 105px;
         }
       }
+
       @media (max-width: 776px) {
         textarea.ant-input {
           background-position: right;
@@ -246,6 +247,6 @@
     }
   }
 }
-.font{
+.font {
   // font-family: "Segoe UI Emoji", "Segoe UI Symbol", "Segoe UI", "Apple Color Emoji", "Twemoji Mozilla", "Noto Color Emoji", "Android Emoji"!important;
 }

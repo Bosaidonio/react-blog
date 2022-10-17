@@ -1,4 +1,7 @@
 .comment-body {
+  li {
+    list-style-type: none;
+  }
   .thumb-sm {
     display: inline-block;
     width: 40px;
@@ -70,6 +73,7 @@
   .m-l-xxl {
     margin-left: 50px;
     color: rgb(119, 119, 119);
+    padding: 0;
     .comment-meta {
       .format_time {
         display: inline;
@@ -95,6 +99,7 @@
       .comment-content-true {
         p {
           margin: 0 0 10px;
+          word-break: break-word;
         }
       }
     }

@@ -71,7 +71,7 @@ const CommentList = () => {
       ]
       list.forEach((item) => (item.isIndex = true))
       setCommentList(list)
-    }, 1000)
+    }, 100)
     return () => {
       clearTimeout(timer)
     }
@@ -89,17 +89,16 @@ const CommentList = () => {
     })
   }
   // 取消回复
-  const onCancelReply = (callback?: (commentList: CommentProp[]) => void) => {
-    if (!callback) {
-      setIsComment(true)
-    }
+  const onCancelReply = () => {
+    // 需要展示最底下的发表评论表单
+    setIsComment(true)
+    // 会把之前isReply的状态改为false
     setCommentList((commentList) => {
       commentList = diffList(commentList)
-      callback && callback(commentList)
-
       return commentList
     })
   }
+  // 把当前回复的这条评论的isReply设置为true
   const filterList = (commentList: CommentProp[], id: number) => {
     return commentList.map((item) => {
       let comment: CommentProp = {
@@ -121,9 +120,10 @@ const CommentList = () => {
   // 处理评论回复
   const filterCommentList = (id: number) => {
     setIsComment(false)
-    onCancelReply((commentList) => {
+    setCommentList((commentList) => {
       // 激活当前点击的回复
       setCommentList(filterList(commentList, id))
+      return commentList
     })
   }
 
@@ -137,7 +137,7 @@ const CommentList = () => {
           ))}
         </ol>
         <WarrperPagination customStyle={{ margin: '50px 0' }} />
-        {isComment ? <Reply id={0} isComment={isComment} onCancelReply={onCancelReply} commentList={commentList} setCommentList={setCommentList} /> : null}
+        {isComment ? <Reply id={0} isComment={isComment} commentList={commentList} setCommentList={setCommentList} /> : null}
       </div>
     </div>
   )
