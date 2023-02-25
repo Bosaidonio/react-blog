@@ -1,143 +1,52 @@
-import { useEffect, useState } from 'react'
+/*
+ * @Date: 2022-08-28 19:22:28
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2022-11-27 12:03:32
+ * @Description: Do not edit
+ */
+import { FC, useState } from 'react'
 
 // 自定义组件
 import Comment, { CommentProp } from '@/views/CommentList/components/Comment'
 import Reply from '@/views/CommentList/components/Reply'
-import WarrperPagination from '@/components/Pagination'
 // 工具库
 import { warrperClass } from '@/utils/classnames'
 // 模块样式
 import styles from '@/views/CommentList/index.module.scss'
+import { useParams } from 'react-router-dom'
+interface CommentListProps {
+  commentList: CommentProp[]
+}
 
-const CommentList = () => {
+const CommentList: FC<CommentListProps> = ({ commentList }) => {
   const [isComment, setIsComment] = useState(true)
-  const [commentList, setCommentList] = useState<CommentProp[]>([])
-  useEffect(() => {
-    let timer = setTimeout(() => {
-      const list: CommentProp[] = [
-        {
-          id: 1,
-          isReply: false,
-          commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
-          commentName: '躲闪的大黄',
-          commentTime: '7 个月前',
-          commentContent: '12f😍😆😜f!@:F21f😀😆😂',
-          children: [
-            {
-              id: 2,
-              isAuthor: true,
-              isReply: false,
-              commentAvatar: 'https://cdn.helingqi.com/wavatar/9e543b9d68c191fdc484c3bbe9f953a4',
-              commentName: 'Mario',
-              commentTime: '7 个月前',
-              atAuthor: '@躲闪的大黄',
-              commentContent: ':https://www.ihewro.com/archives/798/ 可以看下这里，没有试题，当年也是给了一个题库提纲',
-              children: [
-                {
-                  id: 5,
-                  isAuthor: true,
-                  isReply: false,
-                  commentAvatar: 'https://cdn.helingqi.com/wavatar/9e543b9d68c191fdc484c3bbe9f953a4',
-                  commentName: 'Mario',
-                  commentTime: '7 个月前',
-                  atAuthor: '@躲闪的大黄',
-                  commentContent:
-                    'https://www.ihewro.com/archives/798/ :grinning::smiley::smile::grin::laughing::sweat_smile::rolling_on_the_floor_laughing: 可以看下这里，没有试题，当年也是给了一个题库提纲',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 3,
-          isReply: false,
-          commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
-          commentName: '躲闪的大黄',
-          commentTime: '7 个月前',
-          commentContent: '好哥哥还有往年北化人工智能试题吗',
-          children: [
-            {
-              id: 4,
-              isReply: false,
-              isAuthor: true,
-              commentAvatar: 'https://cdn.helingqi.com/wavatar/9e543b9d68c191fdc484c3bbe9f953a4',
-              commentName: 'Mario',
-              commentTime: '7 个月前',
-              atAuthor: '@躲闪的大黄',
-              commentContent: 'https://www.ihewro.com/archives/798/ 可以看下这里，没有试题，当年也是给了一个题库提纲',
-            },
-          ],
-        },
-      ]
-      list.forEach((item) => (item.isIndex = true))
-      setCommentList(list)
-    }, 100)
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [])
-
-  const diffList = (commentList: CommentProp[]) => {
-    return commentList.map((item) => {
-      const comment: CommentProp = {
-        ...item,
-        isReply: false,
-        children: item.children ? diffList(item.children) : [],
-      }
-      if (comment.children && comment.children.length <= 0) delete comment.children
-      return comment
-    })
-  }
+  const [currentReplyId, setCurrentReplyId] = useState<string>('0')
   // 取消回复
   const onCancelReply = () => {
     // 需要展示最底下的发表评论表单
     setIsComment(true)
-    // 会把之前isReply的状态改为false
-    setCommentList((commentList) => {
-      commentList = diffList(commentList)
-      return commentList
-    })
-  }
-  // 把当前回复的这条评论的isReply设置为true
-  const filterList = (commentList: CommentProp[], id: number) => {
-    return commentList.map((item) => {
-      let comment: CommentProp = {
-        ...item,
-      }
-      if (item.children) {
-        comment.children = filterList(item.children, id)
-      }
-      if (item.id === id) {
-        comment = {
-          ...item,
-          isReply: true,
-        }
-      }
-      return comment
-    })
+
+    // 清空当前回复的id
+    setCurrentReplyId('0')
   }
 
   // 处理评论回复
-  const filterCommentList = (id: number) => {
+  const onReplyComment = async (id: string) => {
     setIsComment(false)
-    setCommentList((commentList) => {
-      // 激活当前点击的回复
-      setCommentList(filterList(commentList, id))
-      return commentList
-    })
+    setCurrentReplyId(id)
   }
 
   return (
     <div className={warrperClass(styles, 'comments')}>
       <div className={warrperClass(styles, 'post-comment-list')}>
-        <h4 className={warrperClass(styles, 'comments-title m-t-lg m-b')}>49 条评论</h4>
+        <h4 className={warrperClass(styles, 'comments-title m-t-lg m-b')}>{commentList.length}条评论</h4>
         <ol className={warrperClass(styles, 'comment-list')}>
           {commentList.map((comment, index) => (
-            <Comment {...comment} key={index} isIndex={comment.isIndex} commentList={commentList} setCommentList={setCommentList} filterCommentList={filterCommentList} onCancelReply={onCancelReply} />
+            <Comment {...comment} currentReplyId={currentReplyId} key={index} onReplyComment={onReplyComment} onCancelReply={onCancelReply} />
           ))}
         </ol>
-        <WarrperPagination customStyle={{ margin: '50px 0' }} />
-        {isComment ? <Reply id={0} isComment={isComment} commentList={commentList} setCommentList={setCommentList} /> : null}
+        {/* <WarrperPagination customStyle={{ margin: '50px 0' }} /> */}
+        {isComment ? <Reply currentReplyId={currentReplyId} isComment={isComment} /> : null}
       </div>
     </div>
   )

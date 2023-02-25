@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2022-10-08 17:13:42
+ * @LastEditTime: 2023-02-19 19:05:35
  * @LastEditors: mario marioworker@163.com
  * @Description: 头部组件
  */
@@ -234,7 +234,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
               <Opacity reverse={opacityReverse} immediate={opacityImmediate}>
                 <div className={classnames(styles['dropdown-menu'], styles['login-modal'], !opacityReverse ? styles.noclick : styles.click)}>
                   <div className={classnames('p-warrper', 'bg-default')}>
-                    <LoginModal />
+                    <LoginModal handleOpacity={handleOpacity} />
                   </div>
                 </div>
               </Opacity>

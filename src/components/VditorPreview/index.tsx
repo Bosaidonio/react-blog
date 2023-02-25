@@ -1,17 +1,17 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-02 14:09:47
- * @LastEditTime: 2022-03-04 21:37:09
- * @LastEditors: Mario
+ * @LastEditTime: 2022-11-13 19:23:13
+ * @LastEditors: mario marioworker@163.com
  * @Description:
  */
 
 import React, { useRef, FC } from 'react'
 import { useMount } from 'ahooks'
-
 import Preivew from 'vditor'
-// import 'vditor/src/assets/scss/index.scss'
-
+import 'vditor/src/assets/scss/index.scss'
+//vidtor渲染图片的文件是vditor/src/ts/render/renderImage.ts
+//
 export interface IVditorPreviewProps {
   markdown: string
   options: IPreviewOptions
@@ -41,11 +41,16 @@ const createCustomOptions = () => {
     //     return ['', Lute.WalkContinue]
     //   }
     // },
-    renderLinkText: (node: any, entering: Boolean): [string, number] => {
+
+    // 渲染h1-h6
+    renderHeading(node: any, entering: Boolean): [string, number] {
+      const level = node.__internal_object__.HeadingLevel
+      const text = node.Text()
+
       if (entering) {
-        return ['', Lute.WalkContinue]
+        return [`<h${level} id="${text}" class="custom-h${level === 1 ? ' custom-h1' : ''}">${text}</h${level}>`, 1]
       } else {
-        return ['', Lute.WalkContinue]
+        return [`</h${level}>`, 1]
       }
     },
     renderLinkDest: (node: any, entering: Boolean): [string, number] => {

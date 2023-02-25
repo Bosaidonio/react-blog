@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-08 17:38:31
+ * @LastEditTime: 2022-11-15 10:16:39
  * @Description: Do not edit
  */
 import React, { FC } from 'react'
@@ -11,7 +11,7 @@ import { useLocation } from 'react-router'
 
 import styles from '@/components/BlogHeader/index.module.scss'
 
-interface BlogHeaderProps {
+export interface BlogHeaderProps {
   title: string
   desc: string
   icon?: string
@@ -27,7 +27,7 @@ const BlogHeader: FC<BlogHeaderProps> = ({ title, desc, icon, isCenter, customSt
   }
   return (
     <header className={classnames(styles['header-md'], isHomePage || isCenter ? styles['center'] : '')} style={isHomePage ? homeStyle : {}}>
-      <h1 className={classnames(styles['font-thin'])} style={{ fontWeight: isHomePage ? 300 : 400, justifyContent: isHomePage || isCenter ? 'center' : 'unset', ...customStyle }}>
+      <h1 className={classnames(isHomePage ? styles['font-thin'] : '')} style={{ fontWeight: isHomePage ? 300 : 400, justifyContent: isHomePage || isCenter ? 'center' : 'unset', ...customStyle }}>
         {icon ? (
           <span className={styles['title-icons']}>
             <ReactSVG src={icon} />

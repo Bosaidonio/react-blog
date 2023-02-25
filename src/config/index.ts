@@ -1,4 +1,10 @@
-export default {
+/*
+ * @Date: 2022-10-16 19:54:01
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2022-10-31 15:47:57
+ * @Description: Do not edit
+ */
+const config = {
   /*
    *  emoji表情配置
    */
@@ -7,3 +13,4 @@ export default {
     isGoogleEmoji: true,
   },
 }
+export default config

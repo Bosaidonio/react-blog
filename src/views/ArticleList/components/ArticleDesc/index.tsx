@@ -1,25 +1,22 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 18:27:32
- * @LastEditTime: 2022-10-08 16:19:22
+ * @LastEditTime: 2022-11-27 17:54:05
  * @LastEditors: mario marioworker@163.com
  * @Description: 文章详情组件
  */
-import { useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useRequest } from 'ahooks'
 import { getArticleDesc } from '@/api/Articles'
-import BlogHeader from '@/components/BlogHeader'
+import BlogHeader, { BlogHeaderProps } from '@/components/BlogHeader'
 import VditorPreview from '@/components/VditorPreview'
 import Breadcrumb from '@/components/Breadcrumb'
 import { diffDom, toTree } from '@/utils'
 import { useDispatch } from 'react-redux'
-
 import { CategoryTypes } from '@/store/action-types'
-// import { actionCreators } from '@/store'
-// const { setCategoryState } = actionCreators
-// import MarkdownIt from 'markdown-it'
-// import MarkdownContainer from 'markdown-it-container'
+import CommentList from '@/views/CommentList'
+import { CommentProp } from '@/views/CommentList/components/Comment'
 interface IPreviewOptions {
   mode: 'dark' | 'light'
   customEmoji?: IObject
@@ -41,19 +38,47 @@ interface IPreviewOptions {
   transform?(html: string): string
   after?(): void
 }
-const TestVditorEditor = () => {
+export const ArticleContext = createContext({
+  articleId: '',
+  run: ({ id }: { id: string }) => {},
+})
+const ArticleProvider = ({ children, run }: any) => {
+  const { id } = useParams<{ id: string }>()
+  return <ArticleContext.Provider value={{ articleId: id || '', run }}>{children}</ArticleContext.Provider>
+}
+
+export const ArticleComsumer = () => useContext(ArticleContext)
+const PreviewArticleDesc = () => {
   const [markdown, setMarkdown] = useState('')
+  const [commentList, setCommentList] = useState<CommentProp[]>([])
+  const [headerData, setHeaderData] = useState<BlogHeaderProps>({
+    title: '',
+    desc: '',
+    isCenter: true,
+    customStyle: {
+      fontSize: '24px',
+    },
+  })
   const params = useParams()
 
   const dispatch = useDispatch()
-  // const md = MarkdownIt()
   // 获取文章详情
   const { run } = useRequest(getArticleDesc, {
     manual: true,
-    onSuccess: async (result) => {
+    onSuccess: (result) => {
       if (result.statusCode === 200) {
-        console.log(result.data)
-
+        const comment = result.data.commentList.map((item: any) => {
+          return {
+            ...item,
+            isIndex: true,
+          }
+        })
+        setCommentList(comment)
+        setHeaderData({
+          ...headerData,
+          title: result.data.title,
+          desc: result.data.simpleDesc,
+        })
         setMarkdown(handleHtml(result.data.articleContent))
       }
     },
@@ -73,50 +98,22 @@ const TestVditorEditor = () => {
       }
     })
   }
-  // const resolveMarkdown = () => {
-  //   md.use(MarkdownContainer, 'warning', {
-  //     marker: ':',
-  //     validate: function (params: string) {
-  //       return false
-  //     },
-  //     render: function (tokens: any, idx: any) {
-  //       const m = tokens[idx].info.trim().match(/^(warning|success|danger)\s+(.*)/)
-  //       const replaceResult = tokens[idx].info.trim().replace(/success|warning|danger/, '')
-  //       if (tokens[idx].nesting === 1) {
-  //         let type = ''
-  //         let info = ''
-  //         if (replaceResult) {
-  //           type = md.utils.escapeHtml(m[1])
-  //           info = md.utils.escapeHtml(m[2])
-  //         } else {
-  //           type = tokens[idx].info.trim()
-  //         }
-  //         // opening tag
-  //         return `<div class="custom-block ${type}">${info ? `<p class="custom-block-title">${info}</p>` : ''}\n`
-  //       } else {
-  //         // closing tag
-  //         return '</div>\n'
-  //       }
-  //     },
-  //   })
-  // }
 
-  const headerData = {
-    title: '相册图片',
-    desc: '美好的事情值得纪念呦 ~ ',
-    isCenter: true,
-    customStyle: {
-      fontSize: '24px',
-    },
-  }
   // 文章预览配置
   const options: IPreviewOptions = {
-    mode: 'dark',
+    mode: 'light',
     hljs: {
       enable: true,
       style: 'native',
       lineNumber: true,
     },
+    // 设置代码块主题
+    theme: {
+      current: 'light',
+    },
+    // markdown: {
+    //   linkBase: 'https://www-mariowork-com.oss-cn-beijing.aliyuncs.com/',
+    // },
   }
 
   const asyncRender = () => {
@@ -128,8 +125,8 @@ const TestVditorEditor = () => {
       href: `#${node.id}`,
       title: node.id,
     }))
+
     const tree = toTree(hTags)
-    console.log(tree)
 
     dispatch({ type: CategoryTypes.SET_CATEGORY, payload: tree })
   }
@@ -142,9 +139,10 @@ const TestVditorEditor = () => {
       <div className="warrper-md">
         <Breadcrumb />
         {markdown ? <VditorPreview markdown={markdown} options={options} callback={asyncRender} /> : null}
+        <ArticleProvider run={run}>{markdown ? <CommentList commentList={commentList} /> : null}</ArticleProvider>
       </div>
     </div>
   )
 }
 
-export default TestVditorEditor
+export default PreviewArticleDesc

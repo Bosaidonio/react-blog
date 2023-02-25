@@ -4,7 +4,6 @@ import { Row, Col } from 'antd'
 // 自定义组件
 import Project from '@/views/Repositories/components/Project'
 import BlogHeader from '@/components/BlogHeader'
-import CommentList from '@/views/CommentList'
 
 // 工具库
 import { warrperClass } from '@/utils/classnames'
@@ -121,11 +120,7 @@ const Respositories = () => {
             ))}
           </div>
         </article>
-        {!loadingProject ? (
-          <>
-            <CommentList />
-          </>
-        ) : null}
+        {!loadingProject ? <>{/* <CommentList /> */}</> : null}
       </div>
     </div>
   )

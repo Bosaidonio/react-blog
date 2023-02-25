@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-12-25 15:28:27
- * @LastEditTime: 2022-10-08 18:07:20
+ * @LastEditTime: 2023-02-19 20:43:06
  * @LastEditors: mario marioworker@163.com
  * @Description: 封装fetch请求
  */
@@ -10,10 +10,10 @@ import { notification } from 'antd'
 import qs from 'qs'
 import { store } from '@/store'
 import { ActionTypes } from '@/store/action-types'
-import { isExternal } from '@/utils/is'
-import { deleteEmptyKey } from '.'
+import { isExternal, isObject } from '@/utils/is'
+import { deleteEmptyKey } from '@/utils'
+import { isString } from '@/utils/is'
 const apiUrl = process.env.REACT_APP_API_URL
-console.log(process.env.REACT_APP_API_URL)
 
 interface IRequest extends RequestInit {
   url: string
@@ -57,12 +57,10 @@ export const request = ({ url, data, token, ...restConfig }: IRequest) => {
         }, 500)
       }
 
-      if (response.status === 401) {
-        window.location.reload()
-        return Promise.reject({ message: '请重新登录' })
-      }
       const res = await response.json()
-
+      if (response.status === 401) {
+        return Promise.reject(res)
+      }
       if (response.ok) {
         return Promise.resolve(res)
       } else {
@@ -72,7 +70,7 @@ export const request = ({ url, data, token, ...restConfig }: IRequest) => {
     .catch((error) => {
       notification.error({
         message: error.message,
-        description: error.error || '请求失败，请检查网络或联系管理员！',
+        description: isString(error.error) ? error.error : isObject(error.error) ? Object.values(error.error)[0] : '请求失败，请检查网络或联系管理员！',
       })
       requestCount = requestCount - 1
       if (requestCount === 0) {

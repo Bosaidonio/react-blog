@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-15 13:05:25
+ * @LastEditTime: 2023-02-19 19:02:14
  * @Description: Do not edit
  */
 import { useState } from 'react'
@@ -25,11 +25,11 @@ export interface Article {
 }
 const ArticleList = () => {
   const [articleList, setArticleList] = useState<Article[]>()
-  const [params] = useState({
+  const [params, setParams] = useState({
     pageNow: 1,
     pageSize: 10,
+    total: 0,
   })
-  const [total] = useState(0)
   const navigate = useNavigate()
 
   // 获取文章列表
@@ -38,6 +38,16 @@ const ArticleList = () => {
     onSuccess: (result) => {
       if (result.statusCode === 200) {
         setArticleList(result.data.records)
+        setParams({
+          pageNow: params.pageNow,
+          pageSize: params.pageSize,
+          total: result.data.total,
+        })
+        // 圆滑的回到顶部
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
       }
     },
   })
@@ -45,6 +55,17 @@ const ArticleList = () => {
   // 预览文章详情
   const onPreviewDesc = (articleId: string) => {
     navigate(`/article/${articleId}`)
+  }
+  const handlePageChange = (pageNow: number, pageSize: number) => {
+    setParams({
+      pageNow,
+      pageSize,
+      total: params.total,
+    })
+    run({
+      pageNow,
+      pageSize,
+    })
   }
   useMount(() => {
     run(params)
@@ -54,7 +75,7 @@ const ArticleList = () => {
       {articleList?.map((article, index) =>
         article.isPinned ? <PinnedArticle key={index} index={index} {...article} handleClick={onPreviewDesc} /> : <ArticleItem key={index} index={index} {...article} handleClick={onPreviewDesc} />
       )}
-      <WarrperPagination {...params} total={total} />
+      <WarrperPagination {...params} handlePageChange={handlePageChange} />
     </div>
   )
 }

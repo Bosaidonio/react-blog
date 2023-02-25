@@ -16,7 +16,8 @@
     cursor: pointer;
   }
   pre {
-    background: #eeeeee !important;
+    // background: #eeeeee !important;
+    background-color: #2b2e35 !important;
     border-radius: 5px !important;
     &::before {
       content: '';
@@ -36,7 +37,8 @@
     code {
       padding: 15px !important;
       padding-left: 52px !important;
-      background: #f3f3f3 !important;
+      // background: #f3f3f3 !important;
+      // background-color: #2b2e35 !important;
       max-height: 285px !important;
       .vditor-linenumber__rows {
         top: 15px;

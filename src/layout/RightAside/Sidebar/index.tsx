@@ -118,27 +118,29 @@ const Sidebar = () => {
           </Anchor>
         </div>
       ) : (
-        <Tabs defaultActiveKey={`${currentIndex}`} animated onTabClick={onTabClick}>
-          {tabsList.map((tab, index) => (
-            <TabPane
-              tab={
-                <ReactSVG
-                  className={index === currentIndex ? `${styles.active}` : ''}
-                  src={tab.icon}
-                  beforeInjection={(svg) => {
-                    svg.setAttribute('style', 'color: rgb(119, 119, 119)')
-                  }}
-                />
-              }
-              key={index}
-            >
-              <NewArticle {...tab} currentIndex={index} />
-            </TabPane>
-          ))}
-        </Tabs>
+        <>
+          <Tabs defaultActiveKey={`${currentIndex}`} animated onTabClick={onTabClick}>
+            {tabsList.map((tab, index) => (
+              <TabPane
+                tab={
+                  <ReactSVG
+                    className={index === currentIndex ? `${styles.active}` : ''}
+                    src={tab.icon}
+                    beforeInjection={(svg) => {
+                      svg.setAttribute('style', 'color: rgb(119, 119, 119)')
+                    }}
+                  />
+                }
+                key={index}
+              >
+                <NewArticle {...tab} currentIndex={index} />
+              </TabPane>
+            ))}
+          </Tabs>
+          <BlogInfo />
+          <BabelCloud />
+        </>
       )}
-      <BlogInfo />
-      <BabelCloud />
     </div>
   )
 }

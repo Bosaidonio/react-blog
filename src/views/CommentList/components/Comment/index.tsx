@@ -11,28 +11,26 @@ import { useMount } from 'ahooks'
 import config from '@/config'
 
 export interface CommentProp {
-  id: number
-  parentID?: number
-  commentAvatar: string
-  commentName: string
-  commentTime: string
+  _id: string
+  articleId: string
+  avatar: string
+  username: string
+  commentCreateTime: string
   atAuthor?: string
-  commentContent: string
+  commentDesc: string
   isAuthor?: boolean
-  isReply?: boolean
   isIndex?: boolean
-  // emojiList?: string[]
   children?: CommentProp[]
+  commentUser: any
 }
 
 export interface CommentProps extends CommentProp {
-  filterCommentList: (id: number) => void
+  onReplyComment: (id: string) => void
   onCancelReply: () => void
-  commentList: CommentProp[]
-  setCommentList: (commentList: CommentProp[]) => void
+  currentReplyId?: string
 }
 interface RenderCommentProps {
-  commentContent: string
+  commentDesc: string
 }
 
 /**
@@ -40,14 +38,14 @@ interface RenderCommentProps {
  * @param {RenderCommentProps} param1
  * @return {JSX.Element}
  */
-const RenderComment = ({ commentContent }: RenderCommentProps) => {
-  const [comment, setComment] = useState(commentContent)
+const RenderComment = ({ commentDesc }: RenderCommentProps) => {
+  const [comment, setComment] = useState(commentDesc)
   const replaceEmoji = (content: string): Promise<string> => {
     return new Promise((resolve, reject) => {
       try {
         const { getEmojiDataFromNative } = EmojiMart as any
         // 1、获取字符串中所有的原生表情列表
-        const emojiList = getEmojiList(commentContent)
+        const emojiList = getEmojiList(commentDesc)
         // 2、获取原生表情对应的emojiMart对象信息
         const emojiData = emojiList.map(async (item) => await getEmojiDataFromNative(item))
         Promise.all(emojiData).then((emojiResult) => {
@@ -74,7 +72,7 @@ const RenderComment = ({ commentContent }: RenderCommentProps) => {
     // 1、初始化emojiMart
     init({ data })
     // 2、替换字符串中的链接为a标签
-    let comment = reaplceLink(commentContent)
+    let comment = reaplceLink(commentDesc)
     // 3、替换字符串中的原生表情为google样式的表情
     if (config.emoji.isGoogleEmoji) {
       replaceEmoji(comment).then((result) => {
@@ -85,30 +83,14 @@ const RenderComment = ({ commentContent }: RenderCommentProps) => {
 
   return <span dangerouslySetInnerHTML={{ __html: comment }}></span>
 }
-const Comment: FC<CommentProps> = ({
-  commentList,
-  setCommentList,
-  id,
-  isIndex,
-  onCancelReply,
-  commentAvatar,
-  commentName,
-  commentTime,
-  atAuthor,
-  commentContent,
-  // emojiList,
-  isAuthor,
-  children,
-  isReply,
-  filterCommentList,
-}) => {
+const Comment: FC<CommentProps> = ({ _id, articleId, isIndex, onCancelReply, commentUser, commentCreateTime, atAuthor, commentDesc, isAuthor, children, currentReplyId, onReplyComment }) => {
   return (
     <>
       <li className={warrperClass(styles, 'comment-body comment-parent comment-odd')}>
         {/* 评论者 */}
         <div id="div-comment-9073" className={warrperClass(styles, 'comment-body')}>
           <a href="javascript;" className={warrperClass(styles, 'pull-left thumb-sm comment-avatar')} rel="nofollow">
-            <img alt="" src={commentAvatar} className={warrperClass(styles, 'img-40px photo img-square normal-shadow')} />
+            <img alt="" src={commentUser.avatar} className={warrperClass(styles, 'img-40px photo img-square normal-shadow')} />
             {isAuthor ? (
               <label className={warrperClass(styles, 'label comment-author-logo m-l-xs')} data-original-title="博主">
                 <ReactSVG src={bloggerSvg} />
@@ -118,10 +100,10 @@ const Comment: FC<CommentProps> = ({
           <div className={warrperClass(styles, 'm-b m-l-xxl')}>
             <div className={warrperClass(styles, 'comment-meta')}>
               <span className={warrperClass(styles, 'comment-author vcard')}>
-                <b className="fn">{commentName}</b>
+                <b className="fn">{commentUser.username}</b>
               </span>
               <div className={warrperClass(styles, 'comment-metadata')}>
-                <time className={warrperClass(styles, 'format_time text-muted text-xs block m-t-xs')}>{commentTime}</time>
+                <time className={warrperClass(styles, 'format_time text-muted text-xs block m-t-xs')}>{commentCreateTime}</time>
               </div>
             </div>
 
@@ -131,23 +113,23 @@ const Comment: FC<CommentProps> = ({
               </span>
               <div className={warrperClass(styles, 'comment-content-true')}>
                 <p>
-                  {/* {renderContent(commentContent)} */}
-                  <RenderComment commentContent={commentContent} />
+                  {/* {renderContent(commentDesc)} */}
+                  <RenderComment commentDesc={commentDesc} />
                 </p>
               </div>
             </div>
 
-            <div className={warrperClass(styles, 'comment-reply m-t-sm')} onClick={() => filterCommentList(id)}>
+            <div className={warrperClass(styles, 'comment-reply m-t-sm')} onClick={() => onReplyComment(_id)}>
               回复
             </div>
-            {isReply ? <Reply id={id} commentList={commentList} setCommentList={setCommentList} onCancelReply={onCancelReply} commentName={commentName} /> : null}
+            {currentReplyId === _id ? <Reply currentReplyId={currentReplyId} onCancelReply={onCancelReply} username={commentUser.username} /> : null}
           </div>
         </div>
         {/* 回复者列表 */}
         {children ? (
           <ol className={warrperClass(styles, 'comment-children list-unstyled m-l-xxl')} style={{ marginLeft: isIndex ? '50px' : '0px' }}>
             {children.map((comment, index) => (
-              <Comment onCancelReply={onCancelReply} commentList={commentList} setCommentList={setCommentList} {...comment} isIndex={false} key={index} filterCommentList={filterCommentList} />
+              <Comment onCancelReply={onCancelReply} currentReplyId={currentReplyId} {...comment} isIndex={false} key={index} onReplyComment={onReplyComment} />
             ))}
           </ol>
         ) : null}

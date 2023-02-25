@@ -14,14 +14,15 @@ import styles from '@/views/CommentList/components/Reply/index.module.scss'
 import { warrperClass } from '@/utils/classnames'
 import { getRandom } from '@/utils/math'
 import { isEmpty } from '@/utils/is'
-// import { reaplceLink } from '@/utils'
-import { parseTime } from '@/utils/date'
-import { CommentProp } from '@/views/CommentList/components/Comment'
 import tootipSvg from '@/views/CommentList/components/Reply/assets/svgs/tootip.svg'
 import emojiSvg from '@/views/CommentList/components/Reply/assets/svgs/emoji.svg'
+import { ArticleComsumer } from '@/views/ArticleList/components/ArticleDesc'
+import { useRequest } from 'ahooks'
+import { replyComment } from '@/api/Articles'
+import { getStorage } from '@/utils/storage'
 
 interface ReplyForm {
-  username: string
+  commentUserName: string
   comment: string
   email: string
   address: string
@@ -29,18 +30,25 @@ interface ReplyForm {
 const nameLibrary = ['潜心学习的道士', '小有名气的学生', '躲闪的贫僧', '挺胸的女孩', '知名的人士', '知名的男士', '不知名的男孩', '刚下飞机的女孩', '看透一切的道士', '大名鼎鼎的女士', '无名的学生']
 
 interface ReplyProps {
-  id: number
+  currentReplyId: string
   isComment?: boolean
-  commentList: CommentProp[]
-  setCommentList: (commentList: CommentProp[]) => void
-  commentName?: string
+  username?: string
   onCancelReply?: () => void
 }
-const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCommentList, onCancelReply }) => {
+interface ReplyCommentProps {
+  commentDesc: string
+  userId: string
+  articleId: string
+  replyCommentId: string
+  commentStatus: 0
+}
+const Reply: FC<ReplyProps> = ({ currentReplyId, isComment, username, onCancelReply }) => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
   const [isEmoji, setIsEmoji] = useState(false)
-  const [username, setUsername] = useState<string>()
+  const [randomUserName, setRandomUserName] = useState<string>()
   const [form] = Form.useForm()
+  const { articleId, run: refreshArticle } = ArticleComsumer()
+
   // 控制筛子抖动
   const [isShake, setIsShake] = useState(false)
   // const isMobile = useMediaQuery({
@@ -59,7 +67,7 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
   const validateForm = (form: ReplyForm) => {
     if (isEmpty(form.comment)) {
       openNotification('必须填写评论')
-    } else if (isEmpty(form.username)) {
+    } else if (isEmpty(form.commentUserName)) {
       openNotification('必须填写昵称或用户名')
     } else if (isEmpty(form.email)) {
       openNotification('必须填写邮箱')
@@ -67,66 +75,51 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
       openNotification('必须填写地址')
     }
   }
+  const { run } = useRequest(replyComment, {
+    manual: true,
+    onSuccess: (result) => {
+      console.log(result)
+
+      if (result.statusCode === 201) {
+        form.resetFields()
+        setRandomUserName('')
+        onCancelReply && onCancelReply()
+        refreshArticle({ id: articleId })
+      }
+    },
+  })
 
   const onFinish = (values: ReplyForm) => {
+    const userInfo = getStorage('userInfo')
+    if (!userInfo) {
+      return notification.warning({
+        duration: 3,
+        message: '评论通知',
+        description: '请先登录',
+      })
+    }
     try {
       validateForm(values)
-      const formBody = {
-        id: new Date().getTime(),
-        parentId: id,
-        commentName: values.username,
-        commentTime: parseTime(new Date())!,
-        atAuthor: commentName ? `@${commentName}` : commentName,
-        isReply: false,
-        commentAvatar: 'https://gravatar.helingqi.com/wavatar/b8a18bc7cd59cea7c301868a7f9cfaa1',
-        commentContent: values.comment,
-        isIndex: true,
+      const replyParams: ReplyCommentProps = {
+        commentDesc: values.comment,
+        userId: userInfo._id,
+        articleId: articleId,
+        replyCommentId: currentReplyId,
+        commentStatus: 0,
       }
-      if (!formBody.atAuthor) delete formBody.atAuthor
-
-      if (id === 0) {
-        const list = [...commentList, { ...formBody }]
-        form.resetFields()
-        setUsername('')
-        setCommentList(list)
-      } else {
-        const diff = (commentList: CommentProp[]): CommentProp[] => {
-          return commentList.map((item) => {
-            if (item.id === formBody.parentId) {
-              return {
-                ...item,
-                children: item.children ? [...item.children, formBody] : [formBody],
-              }
-            } else {
-              if (item.children) {
-                return {
-                  ...item,
-                  children: diff(item.children),
-                }
-              } else {
-                return item
-              }
-            }
-          })
-        }
-        const list = diff(commentList)
-        form.resetFields()
-        setUsername('')
-        setCommentList(list)
-        onCancelReply && onCancelReply()
-      }
+      run(replyParams)
     } catch (error) {}
   }
 
   const onChange = (e: any) => {
-    setUsername(e.target.value)
+    setRandomUserName(e.target.value)
   }
   // 生成随机姓名
   const onRandomName = () => {
     setIsShake(true)
     const username = nameLibrary[getRandom(0, nameLibrary.length - 1)]
-    setUsername(username)
-    form.setFieldsValue({ username })
+    setRandomUserName(username)
+    form.setFieldsValue({ commentUserName: username })
     setTimeout(() => {
       setIsShake(false)
     }, 500)
@@ -183,10 +176,10 @@ const Reply: FC<ReplyProps> = ({ id, isComment, commentName, commentList, setCom
         <div className={styles['form-model']}>
           <Row gutter={20}>
             <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-              <Form.Item label="名称" name="username">
+              <Form.Item label="名称" name="commentUserName">
                 <div className={styles.username}>
                   <img className={styles['author-avatar']} alt="" src="https://gravatar.helingqi.com/wavatar/d41d8cd98f00b204e9800998ecf8427e" />
-                  <Input className={warrperClass(styles, 'form-control author')} placeholder="姓名或昵称" value={username} onChange={onChange} />
+                  <Input className={warrperClass(styles, 'form-control author')} placeholder="姓名或昵称" value={randomUserName} onChange={onChange} />
                   <div className={classnames(styles['random_user_name'], isShake ? 'shake shake-constant' : '')} onClick={onRandomName}>
                     🎲
                   </div>

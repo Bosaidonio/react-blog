@@ -11,6 +11,7 @@ interface ArticleProps extends Article {
 }
 const ArticleItem: FC<ArticleProps> = ({ title, simpleDesc, article, author, banner, isLeftRight, time, _id, handleClick, index }) => {
   const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false)

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-08 17:54:03
+ * @LastEditTime: 2022-10-22 23:13:52
  * @Description: Do not edit
  */
 import React from 'react'
@@ -15,14 +15,17 @@ import { store } from '@/store'
 import '@/style/theme/dark.scss'
 // 全局样式(权限最高)
 import '@/style/global.scss'
+import { AuthProvider } from './views/auth'
 
 window.addEventListener('error', (event) => {})
 
 ReactDOM.render(
   <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </AuthProvider>
   </BrowserRouter>,
   document.getElementById('root')
 )

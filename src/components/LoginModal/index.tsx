@@ -1,28 +1,52 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-21 16:33:13
- * @LastEditTime: 2021-11-26 17:03:16
- * @LastEditors: Mario
+ * @LastEditTime: 2023-02-19 20:35:54
+ * @LastEditors: mario marioworker@163.com
  * @Description: 登录框组件
  */
-import { useState } from 'react'
+import { useState, FC } from 'react'
 import { Form, Input, Button } from 'antd'
 import classNames from 'classnames'
 import styles from '@/components/LoginModal/index.module.scss'
+import { login } from '@/api/User'
+import { useRequest } from 'ahooks'
+import { setStorage } from '@/utils/storage'
 
-const LoginModal = () => {
+interface LoginModalProps {
+  handleOpacity: () => void
+}
+const LoginModal: FC<LoginModalProps> = ({ handleOpacity }) => {
   const [loading, setLoading] = useState(false)
+  const [form] = Form.useForm()
+  const { run } = useRequest(login, {
+    manual: true,
+    onSuccess: (res) => {
+      setLoading(false)
+      if (res.statusCode === 200) {
+        setStorage('acessToken', res.data.acessToken)
+        setStorage('userInfo', res.data.userInfo)
+        handleOpacity()
+        // 清空表单
+        form.resetFields()
+      }
+    },
+    onError: (err) => {
+      setLoading(false)
+      // handleOpacity()
+      // 清空表单
+      // form.resetFields()
+    },
+  })
   const onFinish = (values: any) => {
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 3000)
+    run(values)
   }
 
   const onFinishFailed = (errorInfo: any) => {}
 
   return (
-    <Form className={styles['login-modal']} name="basic" layout="vertical" wrapperCol={{ span: 24 }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+    <Form className={styles['login-modal']} form={form} name="basic" layout="vertical" wrapperCol={{ span: 24 }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
       <Form.Item label="用户名" name="username">
         <Input className="text-deafult" />
       </Form.Item>

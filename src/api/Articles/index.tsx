@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-08 15:37:25
+ * @LastEditTime: 2022-11-16 18:43:15
  * @Description: Do not edit
  */
 import { request } from '@/utils/request'
@@ -26,5 +26,16 @@ export const getArticleDesc = (data: any = {}) => {
   return request({
     url: `/article/detail/${data.id}`,
     method: 'GET',
+  })
+}
+/**
+ * @description: 回复评论
+ * @return {Promise<any>}
+ */
+export const replyComment = (data: any) => {
+  return request({
+    url: '/comment/create',
+    method: 'POST',
+    data,
   })
 }

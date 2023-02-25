@@ -1,3 +1,9 @@
+/*
+ * @Date: 2022-08-28 19:22:28
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2022-10-31 15:44:05
+ * @Description: Do not edit
+ */
 import { lazy, LazyExoticComponent } from 'react'
 interface Meta {
   title: string
@@ -9,10 +15,32 @@ export interface RouteRule {
   children?: RouteRule[]
   meta?: Meta
 }
+// 异步等待
+export const asyncWait = (time: number) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true)
+    }, time)
+  })
+}
+const lazyLoadComponent = (
+  component: () => Promise<{
+    default: () => JSX.Element
+  }>
+) => {
+  return lazy(async () => {
+    // 检测爬虫
+    // const isSpiders = await detectAuto()
+    // return isSpiders ? import('@/views/404') : component()
+    return component()
+  })
+}
+
 const routes = [
   {
     path: '/',
-    component: lazy(() => import('@/layout')),
+    component: lazyLoadComponent(() => import('@/layout')),
+    // component: lazy(() => import('@/layout')),
     children: [
       {
         index: true,
