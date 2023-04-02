@@ -1,14 +1,22 @@
 import { isArray, isString } from '@/utils/is'
 /**
- * @description: 将字符串中的链接替换为a标签
- * @param {string} str
- * @return {string}
+ * @function
+ * @name replaceLink
+ *
+ * @description 将字符串中的 URL 链接替换为可点击的 HTML 超链接，并对其中一个链接进行特殊处理。
+ * @param {string} str - 包含 URL 链接的字符串。
+ * @returns {string} 返回替换后的字符串，其中 URL 链接已经被替换为 HTML 超链接。
+ *
+ * @example
+ * // 将字符串中的 URL 链接替换为可点击的 HTML 超链接
+ * const text = '这是一个包含链接的文本，其中包含了一个网址 https://www.example.com 和一个 FTP 链接 ftp://ftp.example.com'
+ * const result = replaceLink(text);
+ * console.log(result);
+ * 输出： '这是一个包含链接的文本，其中包含了一个网址 <a href="https://www.example.com" style="text-decoration: underline;" target="_blank">https://www.example.com</a> 和一个 FTP 链接 <a href="ftp://ftp.example.com" style="text-decoration: underline;" target="_blank">ftp://ftp.example.com</a>'
  */
 export const reaplceLink = (str: string) => {
   const reg = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gi
   str = str.replace(reg, (result) => {
-    console.log(result)
-
     if (/https:\/\/unpkg.com\/emoji-datasource-google/.test(result)) {
       return result
     } else {
@@ -53,11 +61,14 @@ const getChildrenByLevel = (currentLevelItem: NodeElement, arr: NodeElement[], l
   return children
 }
 /**
- * @description: 递归遍历当前传入数组
- * @param {Array} result
- * @param {Array} arr
- * @param {number} level
- * @return {*}
+ * @function
+ * @name getTree
+ * @description 根据节点级别构建树形结构，将数组中的所有节点按照级别逐级添加到树形结构中。
+ *
+ * @param {NodeElement[]} result - 树形结构的结果集，初始为空数组。
+ * @param {NodeElement[]} arr - 包含所有节点的数组。
+ * @param {number} level - 当前节点所在的级别
+ * @returns {void} 该函数没有返回值，结果存储在 `result` 参数中。
  */
 const getTree = function (result: NodeElement[], arr: NodeElement[], level: number) {
   if (!isArray(arr) || arr.length <= 0) {
@@ -90,9 +101,12 @@ const getTree = function (result: NodeElement[], arr: NodeElement[], level: numb
   }
 }
 /**
- * @description: 根据页面已有h标签并生成树结构
- * @param {Array} flatArr
- * @return {Array}
+ * @function
+ * @name toTree
+ * @description 根据页面已有的 h 标签生成节点树形结构。
+ *
+ * @param {NodeElement[]} flatArr - 包含所有节点的数组。
+ * @returns {NodeElement[]} 构建好的节点树形结构。
  */
 export const toTree = (flatArr: NodeElement[]) => {
   const tree: NodeElement[] = []
@@ -104,11 +118,21 @@ export const toTree = (flatArr: NodeElement[]) => {
 }
 
 /**
- * @description: 根据已知根元素节点遍历并筛选其指定节点
- * @param {any} root
- * @param {Element} nodes
- * @param {string[]} tags
- * @return {Element[]}
+ * @function
+ * @name diffDom
+ * @description 递归遍历 DOM 树，根据标签名（tagName）获取节点列表。
+ *
+ * @param {Node} root - 需要遍历的根节点。
+ * @param {Element[]} nodes - 存储匹配到的节点列表，初始为空数组。
+ * @param {string[]} tags - 需要匹配的标签名，初始值为空数组。
+ * @returns {Element[]} 匹配到的节点列表。
+ *
+ * @example
+ * // 查找页面中所有的 H1 和 H2 标签
+ * const root = document.querySelector('body');
+ * const nodes = diffDom(root, [], ['H1', 'H2']);
+ * console.log(nodes);
+ * // 输出为匹配到的节点列表
  */
 export const diffDom = (root: any, nodes: Element[] = [], tags: string[] = []) => {
   if (!root) return []
@@ -123,9 +147,20 @@ export const diffDom = (root: any, nodes: Element[] = [], tags: string[] = []) =
   return nodes
 }
 /**
- * @description: 删除对象中的空值
- * @param {any} obj
- * @return {*}
+ * @function
+ * @name deleteEmptyKey
+ * @description 删除对象中值为空的键。
+ *
+ * @param {Object} obj - 需要删除空键的对象。
+ * @returns {Object} 删除空键后的对象。
+ *
+ * @example
+ * // 删除对象中值为空的键
+ * const obj = { name: 'Alice', age: null, gender: 'female', address: '', phone: undefined };
+ * const newObj = deleteEmptyKey(obj);
+ * console.log(newObj);
+ * // 输出为：
+ * // { name: 'Alice', gender: 'female' }
  */
 export const deleteEmptyKey = (obj: any) => {
   for (const key in obj) {
@@ -136,9 +171,20 @@ export const deleteEmptyKey = (obj: any) => {
   return obj
 }
 /**
- * @description: 获取字符串中所有的emoji表情
- * @param {any} obj
- * @return {*}
+ * @function
+ * @name getEmojiList
+ * @description 查找字符串中所有的 emoji 表情。
+ *
+ * @param {string} str - 需要查找的字符串。
+ * @returns {string[]} 查找到的 emoji 表情列表，如果未找到则返回空数组。
+ *
+ * @example
+ * // 查找字符串中所有的 emoji 表情
+ * const str = 'This is a string with some emojis 😀🙌🏻👍🏽';
+ * const emojis = getEmojiList(str);
+ * console.log(emojis);
+ * // 输出为：
+ * // ['😀', '🙌🏻', '👍🏽']
  */
 export const getEmojiList = (str: string) => {
   // 判断是否为字符串
@@ -152,4 +198,23 @@ export const getEmojiList = (str: string) => {
   ]
   const reg = new RegExp(ranges.join('|'), 'g')
   return str.match(reg) || []
+}
+
+/**
+ * @function
+ * @name debounce
+ * @description 节流函数，返回一个新函数，在规定时间内多次调用只会执行一次。
+ *
+ * @param {Function} fn - 需要节流的函数。
+ * @param {number} delay - 规定的时间，单位为毫秒。
+ * @returns {Function} 节流后的函数。
+ */
+export const debounce = <T extends (...args: any[]) => any>(fn: T, delay: number) => {
+  let timer: any
+  return (...args: any[]) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      fn(...args)
+    }, delay)
+  }
 }

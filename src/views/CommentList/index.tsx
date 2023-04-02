@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-11-27 12:03:32
+ * @LastEditTime: 2023-03-12 14:19:33
  * @Description: Do not edit
  */
 import { FC, useState } from 'react'
@@ -13,7 +13,6 @@ import Reply from '@/views/CommentList/components/Reply'
 import { warrperClass } from '@/utils/classnames'
 // 模块样式
 import styles from '@/views/CommentList/index.module.scss'
-import { useParams } from 'react-router-dom'
 interface CommentListProps {
   commentList: CommentProp[]
 }

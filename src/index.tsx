@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-22 23:13:52
+ * @LastEditTime: 2023-04-02 17:19:42
  * @Description: Do not edit
  */
 import React from 'react'
@@ -16,8 +16,6 @@ import '@/style/theme/dark.scss'
 // 全局样式(权限最高)
 import '@/style/global.scss'
 import { AuthProvider } from './views/auth'
-
-window.addEventListener('error', (event) => {})
 
 ReactDOM.render(
   <BrowserRouter>

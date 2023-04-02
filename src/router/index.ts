@@ -78,6 +78,13 @@ const routes = [
         },
       },
       {
+        path: '/ai',
+        component: lazy(() => import('@/views/Ai')),
+        meta: {
+          title: 'Ai',
+        },
+      },
+      {
         path: '/about',
         children: [
           {

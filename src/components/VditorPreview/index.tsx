@@ -1,13 +1,12 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-02 14:09:47
- * @LastEditTime: 2022-11-13 19:23:13
+ * @LastEditTime: 2023-04-02 19:10:37
  * @LastEditors: mario marioworker@163.com
  * @Description:
  */
 
-import React, { useRef, FC } from 'react'
-import { useMount } from 'ahooks'
+import React, { useRef, FC, useEffect } from 'react'
 import Preivew from 'vditor'
 import 'vditor/src/assets/scss/index.scss'
 //vidtor渲染图片的文件是vditor/src/ts/render/renderImage.ts
@@ -76,14 +75,15 @@ const createCustomOptions = () => {
 const VditorPreview: FC<IVditorPreviewProps> = ({ markdown, options, customClass, callback }) => {
   const previewRef = useRef<HTMLDivElement>(null)
 
-  useMount(() => {
+  useEffect(() => {
     Preivew.preview(previewRef.current as HTMLDivElement, markdown, { renderers: createCustomOptions(), ...options }).then(() => {
       if (!!customClass) {
         previewRef.current?.classList.add(customClass)
       }
       callback && callback()
     })
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [markdown])
 
   return <div ref={previewRef}></div>
 }

@@ -1,0 +1,97 @@
+.gpt {
+  width: 100%;
+  height: 100%;
+  // background-color: pink;
+  .panel {
+    background-color: #f1f3f4;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    text-align: center;
+    padding: 20px;
+    height: 90%;
+    max-height: 90%;
+
+    .chat {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 650px;
+      background-color: #fff;
+      border-radius: 5px;
+      overflow: auto;
+      .item {
+        display: flex;
+        align-items: flex-end;
+        padding: 15px 20px;
+        .txt {
+          // background: rgba(28, 23, 240, 0.1);
+          padding: 10px 15px;
+          line-height: 24px;
+          max-width: 750px;
+          color: #394150;
+          background-image: linear-gradient(92deg, #f1f3f4 0%, #f1f3f4 100%);
+          border-radius: 10px;
+        }
+      }
+      .user {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .txt {
+          margin-right: 15px;
+          background-image: linear-gradient(92deg, #f1f3f4 0%, #f1f3f4 100%);
+          border-radius: 10px;
+        }
+        .ico {
+          width: 30px;
+          height: 30px;
+          background-color: #765cbb;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          border-radius: 15px;
+        }
+      }
+      .ai {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        .txt {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+  .prompt-input {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px 1px rgb(0 0 0 / 5%);
+    transition: all 0.2s ease;
+    text-align: center;
+    margin: 20px;
+    overflow: hidden;
+    :global {
+      .ant-input-affix-wrapper {
+        border: none;
+        box-shadow: unset;
+      }
+      // 修改placeholder字体大小
+      .ant-input::placeholder {
+        font-size: 12px;
+        letter-spacing: 1px;
+      }
+      .ant-input-group-addon {
+        .ant-btn {
+          border: none;
+        }
+        [ant-click-animating-without-extra-node='true']::after {
+          box-shadow: unset;
+          animation: unset;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

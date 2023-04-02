@@ -12,6 +12,7 @@ import respoIcon from '@/layout/Navbar/assets/svgs/respo.svg'
 import photoIcon from '@/layout/Navbar/assets/svgs/photo.svg'
 import lockIcon from '@/layout/Navbar/assets/svgs/lock.svg'
 import coffeIcon from '@/layout/Navbar/assets/svgs/coffe.svg'
+import aiIcon from '@/layout/Navbar/assets/svgs/ai.svg'
 const { SubMenu } = Menu
 const menuList = [
   {
@@ -37,6 +38,7 @@ const menuList = [
         icon: <ReactSVG src={lockIcon} />,
         path: '/diary',
       },
+
       {
         label: '关于',
         icon: <ReactSVG src={coffeIcon} />,
@@ -52,6 +54,11 @@ const menuList = [
             path: '/about/message',
           },
         ],
+      },
+      {
+        label: 'GPT',
+        icon: <ReactSVG src={aiIcon} />,
+        path: '/ai',
       },
     ],
   },

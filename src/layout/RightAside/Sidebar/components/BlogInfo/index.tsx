@@ -1,3 +1,9 @@
+/*
+ * @Date: 2022-08-28 19:22:28
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2023-04-02 17:24:33
+ * @Description: Do not edit
+ */
 import { useEffect, useState } from 'react'
 import { ReactSVG } from 'react-svg'
 import { warrperClass } from '@/utils/classnames'
@@ -71,7 +77,6 @@ const BlogInfo = () => {
   }
   useEffect(() => {
     initBlogInfo()
-    setInterval(initBlogInfo, 1000)
   }, [])
 
   return (

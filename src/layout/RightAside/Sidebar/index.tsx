@@ -1,121 +1,60 @@
-import { useState } from 'react'
-import { Tabs, Anchor } from 'antd'
+/*
+ * @Date: 2022-08-28 19:22:28
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2023-04-02 20:00:48
+ * @Description: Do not edite
+ */
+import { FC, useState } from 'react'
+import { Tabs } from 'antd'
 import { ReactSVG } from 'react-svg'
 import { useLocation } from 'react-router-dom'
-import likeoutSvg from '@/assets/svgs/likeout.svg'
-import giftSvg from '@/assets/svgs/gift.svg'
-import commentSvg from '@/assets/svgs/comment.svg'
+
 import NewArticle from '@/layout/RightAside/Sidebar/components/NewArticle'
 import BlogInfo from '@/layout/RightAside/Sidebar/components/BlogInfo'
 import BabelCloud from '@/layout/RightAside/Sidebar/components/BabelCloud'
 import styles from '@/layout/RightAside/Sidebar/index.module.scss'
 import { useSelector } from 'react-redux'
 import { State } from '@/store'
+import Category from './components/Category'
+
+import { TabsList } from '@/layout/RightAside'
 const { TabPane } = Tabs
-const { Link } = Anchor
-interface Tab {
-  title: string
-  icon: string
+
+interface SidebarProps {
+  tabsList: TabsList[]
 }
-interface Comment extends Tab {
-  imgSrc: string
-  content: string | number
-}
-export interface TabsList extends Tab {
-  children: Comment[]
-}
-const Sidebar = () => {
+const Sidebar: FC<SidebarProps> = ({ tabsList }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const location = useLocation()
   const category = useSelector((state: State) => state.category)
   const isDirectory = location.pathname.indexOf('/article') > -1
-  const tabsList: TabsList[] = [
-    {
-      title: '热门文章',
-      icon: likeoutSvg,
-      children: [
-        {
-          title: 'handsome —— 一款typecho主题',
-          content: 1772,
-          imgSrc: 'https://cdn.mariowork.com/auth/1.jpg',
-          icon: require('@/layout/RightAside/Sidebar/components/NewArticle/assets/svgs/icon-one.svg').default,
-        },
-        {
-          title: 'handsome —— 一款typecho主题',
-          content: 1772,
-          imgSrc: 'https://cdn.mariowork.com/auth/2.jpg',
-          icon: require('@/layout/RightAside/Sidebar/components/NewArticle/assets/svgs/icon-one.svg').default,
-        },
-        {
-          title: 'handsome —— 一款typecho主题',
-          content: 1772,
-          imgSrc: 'https://cdn.mariowork.com/auth/3.jpg',
-          icon: require('@/layout/RightAside/Sidebar/components/NewArticle/assets/svgs/icon-one.svg').default,
-        },
-        {
-          title: 'handsome —— 一款typecho主题',
-          content: 1772,
-          imgSrc: 'https://cdn.mariowork.com/auth/4.jpg',
-          icon: require('@/layout/RightAside/Sidebar/components/NewArticle/assets/svgs/icon-one.svg').default,
-        },
-        {
-          title: 'handsome —— 一款typecho主题',
-          content: 1772,
-          imgSrc: 'https://cdn.mariowork.com/auth/5.jpg',
-          icon: require('@/layout/RightAside/Sidebar/components/NewArticle/assets/svgs/icon-one.svg').default,
-        },
-      ],
-    },
-    {
-      title: '最新评论',
-      icon: commentSvg,
-      children: [
-        {
-          title: '潜心学习的打工人',
-          content: '感谢学长分享',
-          imgSrc: 'https://cdn.mariowork.com/auth/5.jpg',
-          icon: require('@/layout/RightAside/Sidebar/components/NewArticle/assets/svgs/icon-one.svg').default,
-        },
-      ],
-    },
-    {
-      title: '随机文章',
-      icon: giftSvg,
-      children: [
-        {
-          title: '为你的项目添加开源许可协议',
-          content: 1772,
-          imgSrc: 'https://cdn.mariowork.com/auth/5.jpg',
-          icon: require('@/layout/RightAside/Sidebar/components/NewArticle/assets/svgs/icon-one.svg').default,
-        },
-      ],
-    },
-  ]
 
   const onTabClick = (key: string) => {
     setCurrentIndex(Number(key))
   }
-  const diffNodes = (arr: any) => {
-    return arr.map((link: any) => {
-      if (!link.children) {
-        return <Link key={link.href} href={link.href} title={link.title} />
-      } else {
-        return (
-          <Link key={link.href} href={link.href} title={link.title}>
-            {diffNodes(link.children)}
-          </Link>
-        )
-      }
-    })
-  }
+
+  // const diffNodes = (arr: any) => {
+  //   return arr.map((link: any) => {
+  //     if (!link.children) {
+  //       return <Link key={link.href} href={link.href} title={link.title} />
+  //     } else {
+  //       return (
+  //         <Link key={link.href} href={link.href} title={link.title}>
+  //           {diffNodes(link.children)}
+  //         </Link>
+  //       )
+  //     }
+  //   })
+  // }
   return (
-    <div className={styles.sidebar}>
+    <div className={styles.sidebar} style={{ position: location.pathname.indexOf('article') > -1 ? 'fixed' : 'unset' }}>
       {isDirectory ? (
         <div className={styles.directory}>
           <h5 style={{ fontSize: '16px', marginBottom: '15px', color: 'inherit' }}>文章目录</h5>
-          <Anchor offsetTop={80} targetOffset={80} showInkInFixed>
+          {/* <Anchor offsetTop={80} targetOffset={80} showInkInFixed>
             {diffNodes(category)}
-          </Anchor>
+          </Anchor> */}
+          <Category category={category} />
         </div>
       ) : (
         <>

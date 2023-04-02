@@ -1,9 +1,11 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-11-16 18:43:15
+ * @LastEditTime: 2023-04-02 18:50:52
  * @Description: Do not edit
  */
+import { ArticleResponse } from '@/types/article'
+import { CommentResponse } from '@/types/comment'
 import { request } from '@/utils/request'
 
 /**
@@ -36,6 +38,39 @@ export const replyComment = (data: any) => {
   return request({
     url: '/comment/create',
     method: 'POST',
+    data,
+  })
+}
+/**
+ * @description: 获取热门文章
+ * @return {Promise<any>}
+ */
+export const getHotArticle = (data: any) => {
+  return request<ArticleResponse>({
+    url: '/article/hot',
+    method: 'GET',
+    data,
+  })
+}
+/**
+ * @description: 获取热门文章
+ * @return {Promise<any>}
+ */
+export const getRandomArticle = (data: any) => {
+  return request<ArticleResponse>({
+    url: '/article/random',
+    method: 'GET',
+    data,
+  })
+}
+/**
+ * @description: 获取热门评论
+ * @return {Promise<any>}
+ */
+export const getHotComment = (data: any) => {
+  return request<CommentResponse>({
+    url: '/comment/hot',
+    method: 'GET',
     data,
   })
 }

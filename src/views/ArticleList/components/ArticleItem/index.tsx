@@ -2,26 +2,17 @@ import classnames from 'classnames'
 import styles from '@/views/ArticleList/components/ArticleItem/index.module.scss'
 import { warrperClass } from '@/utils/classnames'
 import { Card, Skeleton } from 'antd'
-import { useState, useEffect, FC } from 'react'
+import { FC } from 'react'
 import { Article } from '@/views/ArticleList'
 
 interface ArticleProps extends Article {
   index: number
-  handleClick?: (articleId: string) => void
+  loading: boolean
+  handleClick?: (articleId: string, isComment: boolean) => void
 }
-const ArticleItem: FC<ArticleProps> = ({ title, simpleDesc, article, author, banner, isLeftRight, time, _id, handleClick, index }) => {
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 300)
-    return () => {
-      clearTimeout(timer)
-    }
-  }, [])
+const ArticleItem: FC<ArticleProps> = ({ title, loading, simpleDesc, isComment, author, banner, isLeftRight, createTime, _id, handleClick, index }) => {
   return (
-    <div className={classnames(styles['article-header'], loading ? styles['warrper-20'] : '')} onClick={() => handleClick && handleClick(_id)}>
+    <div className={classnames(styles['article-header'], loading ? styles['warrper-20'] : '')} onClick={() => handleClick && handleClick(_id, isComment)}>
       <Card bordered={false}>
         {
           <Skeleton loading={loading} avatar active>
@@ -78,7 +69,7 @@ const ArticleItem: FC<ArticleProps> = ({ title, simpleDesc, article, author, ban
                         <polyline points="12 6 12 12 16 14"></polyline>
                       </svg>
                     </span>
-                    {time}
+                    {createTime}
                   </li>
                   <li>
                     <span className={warrperClass(styles, 'right-small-icons m-r-sm')}>
@@ -97,7 +88,7 @@ const ArticleItem: FC<ArticleProps> = ({ title, simpleDesc, article, author, ban
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                       </svg>
                     </span>
-                    <span>关闭评论</span>
+                    <span>{isComment ? '评论已开启' : '评论已关闭'}</span>
                   </li>
                 </div>
               </div>

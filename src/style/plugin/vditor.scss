@@ -10,6 +10,12 @@
   h6 {
     border: none !important;
   }
+  li {
+    text-align: left;
+  }
+  p {
+    text-align: left;
+  }
   img {
     max-width: 50%;
     margin: 10px auto;
@@ -39,7 +45,9 @@
       padding-left: 52px !important;
       // background: #f3f3f3 !important;
       // background-color: #2b2e35 !important;
-      max-height: 285px !important;
+      // max-height: 285px !important;
+      max-height: fit-content;
+      text-align: left;
       .vditor-linenumber__rows {
         top: 15px;
       }

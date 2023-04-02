@@ -1,4 +1,18 @@
 /**
+ * @file math.ts
+ * 本文件提供了一些实用函数，用于处理数组、数值计算和图片宽高比的计算。
+ * @author Your Name <your.email@example.com>
+ * @created 2023-03-31
+ * @lastModified 2023-04-05
+ *
+ * @exports randomArr - 随机变化数组顺序的函数。
+ * @exports getRandom - 生成指定范围内的随机数的函数。
+ * @exports chunk - 将一维数组分割成二维数组的函数。
+ * @exports gcd - 计算最大公约数的函数。
+ * @exports computedRate - 计算图片宽高比的函数。
+ */
+
+/**
  * @description: 随机变化数组顺序
  * @param {T[]} arr
  * @return {T[]}

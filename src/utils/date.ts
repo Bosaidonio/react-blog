@@ -1,22 +1,47 @@
 /*
  * @Author: Mario
  * @Date: 2022-01-18 13:27:58
- * @LastEditTime: 2022-11-14 18:08:47
+ * @LastEditTime: 2023-04-01 13:09:49
  * @LastEditors: mario marioworker@163.com
  * @Description: 时间处理
  */
 /**
- * @description: 补0函数
- * @param {string | number} num
- * @return {string | number}
+ * @function
+ * @name add0
+ * @description 为小于 10 的数字添加前导零（0），以确保数字始终为两位数。对于大于等于 10 的数字，保持原样不变。
+ *
+ * @param {string | number} num - 需要添加前导零的数字，可以是字符串或数字。
+ * @returns {string} 两位数的字符串，前导零（如果需要）已添加。
+ *
+ * @example
+ * 1: 使用数字类型参数
+ * add0(5);  => "05"
+ * 2: 使用字符串类型参数
+ * add0("9"); => "09"
+ * 3: 对于大于等于 10 的数字
+ * add0(12); => "12"
  */
 export const add0 = (num: string | number) => {
   return num >= 10 ? num : '0' + num
 }
 /**
- * @description: 计算时间差
- * @param {string} startTime
- * @return {[key: string]: number}
+ * @function
+ * @name diffTime
+ * @description 计算当前时间与给定的起始时间之间的时间差，并将其以秒、分钟、小时、天和年的形式表示为对象。
+ *
+ * @param startTime 起始时间，格式为字符串，例如 "2022-03-31T12:00:00.000Z"。
+ * @returns 返回一个对象，包含以下属性：
+ * - `sm`：时间差的秒数。
+ * - `ss`：时间差的分钟数。
+ * - `hh`：时间差的小时数。
+ * - `dd`：时间差的天数。
+ * - `yy`：时间差的年数。
+ *
+ * @example
+ * 计算距离当前时间 30 分钟前的时间差
+ * const startTime = new Date(Date.now() - 30 * 60 * 1000).toISOString();
+ * const diff = diffTime(startTime);
+ * console.log(diff); => { sm: 1800, ss: 30, hh: 0, dd: 0, yy: 0 }
  */
 export const diffTime = (startTime: string) => {
   const currentTime = new Date().getTime()
@@ -35,10 +60,18 @@ export const diffTime = (startTime: string) => {
   }
 }
 /**
- * @description: 根据指定格式解析时间
- * @param {string | number | Date} time
- * @param {string?} cFormat
- * @return {string}
+ * @function
+ * @name parseTime
+ * @description 将输入的时间值转换为指定格式的字符串。
+ *
+ * @param {string | number | Date} time - 要转换的时间值。可以是日期对象、时间戳或包含日期的字符串。
+ * @param {string} [cFormat] - 可选的日期格式字符串，其中 y 表示年，m 表示月，d 表示日，h 表示小时，i 表示分钟，s 表示秒，a 表示星期几，e 表示月份的英文缩写。默认为 '{y}-{m}-{d} {h}:{i}:{s}'。
+ * @returns {string | null} 返回指定格式的日期字符串。如果输入的时间值无效或不存在，返回 null。
+ *
+ * @example
+ * parseTime(1629786312000); => "2021-08-24 16:45:12"
+ * parseTime('2021-08-24 16:45:12', '{y}-{m}-{d}'); => "2021-08-24"
+ * parseTime(new Date(), '{h}:{i}:{s}'); => "16:45:12"
  */
 export function parseTime(time: string | number | Date, cFormat?: string) {
   if (arguments.length === 0 || !time) {

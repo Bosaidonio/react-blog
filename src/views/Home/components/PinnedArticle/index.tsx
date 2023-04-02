@@ -10,11 +10,11 @@ import { warrperClass } from '@/utils/classnames'
 import { Article } from '@/views/ArticleList'
 interface PinnedArticleProps extends Article {
   index: number
-  handleClick?: (articleId: string) => void
+  handleClick?: (articleId: string, isComment: boolean) => void
 }
-const PinnedArticle: FC<PinnedArticleProps> = ({ index, title, banner, simpleDesc, _id, handleClick }) => {
+const PinnedArticle: FC<PinnedArticleProps> = ({ index, title, banner, simpleDesc, _id, isComment, handleClick }) => {
   return (
-    <div className={warrperClass(styles, 'panel-picture border-radius-6 box-shadow-wrap-normal')} onClick={() => handleClick && handleClick(_id)}>
+    <div className={warrperClass(styles, 'panel-picture border-radius-6 box-shadow-wrap-normal')} onClick={() => handleClick && handleClick(_id, isComment)}>
       <figure className={warrperClass(styles, 'post-thumbnail border-radius-6')}>
         <span className={warrperClass(styles, 'post-thumbnail-inner index-image lazy')} style={{ backgroundImage: `url(${banner})` }}></span>
       </figure>

@@ -1,9 +1,26 @@
-/*
- * @Author: Mario
- * @Date: 2022-01-21 12:59:46
- * @LastEditTime: 2022-10-16 17:43:16
- * @LastEditors: mario marioworker@163.com
- * @Description: 判断是否为某种类型
+/**
+ * @file is.ts
+ * 本文件提供了一些实用函数，用于处理字符串、数值、对象类型判断和格式验证。
+ * @author Mario <marioworker@163.com>
+ * @created 2023-03-31
+ * @lastModified 2023-04-05
+ *
+ * @exports isEmoji - 判断是否是emoji表情的函数。
+ * @exports isExternal - 判断是否为外链的函数。
+ * @exports isName - 判断是否为中文名的函数。
+ * @exports isIP - 判断是否为IP的函数。
+ * @exports isEmail - 判断是否为邮箱的函数。
+ * @exports isTel - 判断是否为固定电话的函数。
+ * @exports isNumber - 判断是否为数字类型的函数。
+ * @exports isString - 判断是否为字符串类型的函数。
+ * @exports isPhone - 判断是否为手机号的函数。
+ * @exports isUndefined - 判断是否为Undefined的函数。
+ * @exports isArray - 判断是否为数组的函数。
+ * @exports isObject - 判断是否为对象类型的函数。
+ * @exports isPlainObject - 判断是否为纯对象的函数。
+ * @exports isEmptyObject - 判断是否为空对象的函数。
+ * @exports isDate - 判断是否为日期对象的函数。
+ * @exports isEmpty - 判断是否为空的函数。
  */
 const toString = Object.prototype.toString
 

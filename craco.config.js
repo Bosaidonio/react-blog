@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-17 16:23:57
- * @LastEditTime: 2022-10-15 13:04:06
+ * @LastEditTime: 2023-04-02 17:21:43
  * @LastEditors: mario marioworker@163.com
  * @Description: 配置文件
  */
@@ -30,10 +30,10 @@ module.exports = {
       ...whenProd(() => [new BundleAnalyzerPlugin()], []),
     ],
     configure: (webpackConfig, { env, paths }) => {
-      webpackConfig.externals = {
-        react: 'React',
-        'react-dom': 'ReactDOM',
-      }
+      // webpackConfig.externals = {
+      //   react: 'React',
+      //   'react-dom': 'ReactDOM',
+      // }
       webpackConfig.optimization.splitChunks = {
         ...webpackConfig.optimization.splitChunks,
         cacheGroups: {

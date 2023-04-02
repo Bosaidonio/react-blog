@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 18:27:32
- * @LastEditTime: 2022-11-27 17:54:05
+ * @LastEditTime: 2023-03-12 14:19:13
  * @LastEditors: mario marioworker@163.com
  * @Description: 文章详情组件
  */
@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux'
 import { CategoryTypes } from '@/store/action-types'
 import CommentList from '@/views/CommentList'
 import { CommentProp } from '@/views/CommentList/components/Comment'
+import styles from '@/views/ArticleList/components/ArticleDesc/index.module.scss'
 interface IPreviewOptions {
   mode: 'dark' | 'light'
   customEmoji?: IObject
@@ -60,6 +61,7 @@ const PreviewArticleDesc = () => {
     },
   })
   const params = useParams()
+  const [isComment, setIsComment] = useState(false)
 
   const dispatch = useDispatch()
   // 获取文章详情
@@ -73,6 +75,7 @@ const PreviewArticleDesc = () => {
             isIndex: true,
           }
         })
+        setIsComment(result.data.isComment)
         setCommentList(comment)
         setHeaderData({
           ...headerData,
@@ -139,7 +142,7 @@ const PreviewArticleDesc = () => {
       <div className="warrper-md">
         <Breadcrumb />
         {markdown ? <VditorPreview markdown={markdown} options={options} callback={asyncRender} /> : null}
-        <ArticleProvider run={run}>{markdown ? <CommentList commentList={commentList} /> : null}</ArticleProvider>
+        <ArticleProvider run={run}>{isComment ? <CommentList commentList={commentList} /> : <p className={styles.commentClose}>此处评论已关闭</p>}</ArticleProvider>
       </div>
     </div>
   )
