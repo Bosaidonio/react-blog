@@ -1,13 +1,15 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-02 14:09:47
- * @LastEditTime: 2023-04-09 23:12:39
+ * @LastEditTime: 2023-04-09 23:21:42
  * @LastEditors: mario marioworker@163.com
  * @Description:
  */
 
 import React, { useRef, FC, useEffect } from 'react'
-import Preivew from 'vditor'
+import Vditor from 'vditor'
+// 引入css
+import 'vditor/src/assets/less/index.less'
 //vidtor渲染图片的文件是vditor/src/ts/render/renderImage.ts
 
 export interface IVditorPreviewProps {
@@ -69,7 +71,7 @@ const VditorPreview: FC<IVditorPreviewProps> = ({ markdown, options, customClass
   const previewRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    Preivew.preview(previewRef.current as HTMLDivElement, markdown, { renderers: createCustomOptions(), ...options }).then(() => {
+    Vditor.preview(previewRef.current as HTMLDivElement, markdown, { renderers: createCustomOptions(), ...options }).then(() => {
       if (!!customClass) {
         previewRef.current?.classList.add(customClass)
       }
