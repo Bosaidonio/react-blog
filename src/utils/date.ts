@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-01-18 13:27:58
- * @LastEditTime: 2023-04-01 13:09:49
+ * @LastEditTime: 2023-04-08 15:52:47
  * @LastEditors: mario marioworker@163.com
  * @Description: 时间处理
  */
@@ -22,6 +22,9 @@
  * add0(12); => "12"
  */
 export const add0 = (num: string | number) => {
+  if (typeof num === 'string') {
+    num = isNaN(parseInt(num)) ? 0 : parseInt(num)
+  }
   return num >= 10 ? num : '0' + num
 }
 /**

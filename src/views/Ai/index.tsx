@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-03-26 14:18:29
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-02 19:11:26
+ * @LastEditTime: 2023-04-08 16:34:20
  * @Description: Do not edi
  */
 import { UserOutlined } from '@ant-design/icons'
@@ -14,6 +14,8 @@ import VditorPreview from '@/components/VditorPreview'
 import { useState } from 'react'
 import { useRequest } from 'ahooks'
 import { conversationApi } from '@/api/ChatGpt'
+import { isValidJsonString } from '@/utils/is'
+import { handleErrors } from '@/utils/request'
 const { Search } = Input
 const Ai = () => {
   // const headerData = {
@@ -44,22 +46,31 @@ const Ai = () => {
       const decoder = new TextDecoder('utf-8')
       const reader = stream.getReader()
       function readStream() {
-        reader.read().then((res: any) => {
-          const { done, value } = res
-          if (done) {
-            return
-          }
+        reader
+          .read()
+          .then((res: any) => {
+            const { done, value } = res
+            if (done) {
+              return
+            }
 
-          const data = decoder.decode(value)
-          stackStr += data
-          setMarkdown(stackStr)
-          // 更新完后，让滚动条滚动到最底部
-          const chat: any = document.querySelector(`.${styles.chat}`)
-          chat.scrollTop = chat.scrollHeight
-          setTimeout(() => {
-            readStream()
-          }, 60)
-        })
+            const data = decoder.decode(value)
+            const isValid: any = isValidJsonString(data)
+            if (isValid && isValid.statusCode) {
+              throw new Error(isValid.message)
+            }
+            stackStr += data
+            setMarkdown(stackStr)
+            // 更新完后，让滚动条滚动到最底部
+            const chat: any = document.querySelector(`.${styles.chat}`)
+            chat.scrollTop = chat.scrollHeight
+            setTimeout(() => {
+              readStream()
+            }, 60)
+          })
+          .catch((e: any) => {
+            handleErrors(e)
+          })
       }
       readStream()
     },

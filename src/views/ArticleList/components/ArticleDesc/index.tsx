@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 18:27:32
- * @LastEditTime: 2023-03-12 14:19:13
+ * @LastEditTime: 2023-04-09 15:00:45
  * @LastEditors: mario marioworker@163.com
  * @Description: 文章详情组件
  */
@@ -114,6 +114,12 @@ const PreviewArticleDesc = () => {
     theme: {
       current: 'light',
     },
+    // media: {
+    //   audio: true,
+    //   video: true,
+    //   iframe: true,
+    //   externalLink: true,
+    // },
     // markdown: {
     //   linkBase: 'https://www-mariowork-com.oss-cn-beijing.aliyuncs.com/',
     // },

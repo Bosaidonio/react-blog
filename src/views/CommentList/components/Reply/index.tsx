@@ -2,7 +2,6 @@ import { FC, useRef, useState } from 'react'
 import classnames from 'classnames'
 import { ReactSVG } from 'react-svg'
 // import { useMediaQuery } from 'react-responsive'
-import { nanoid } from 'nanoid'
 import { Form, Input, Switch, Row, Col, Button, notification } from 'antd'
 // 导入类型声明
 import { BaseEmoji } from 'emoji-mart'
@@ -90,6 +89,8 @@ const Reply: FC<ReplyProps> = ({ currentReplyId, isComment, username, onCancelRe
   })
 
   const onFinish = (values: ReplyForm) => {
+    console.log('values', values)
+
     const userInfo = getStorage('userInfo')
     if (!userInfo) {
       return notification.warning({
@@ -147,7 +148,7 @@ const Reply: FC<ReplyProps> = ({ currentReplyId, isComment, username, onCancelRe
           </small>
         ) : null}
       </h4>
-      <Form name={nanoid(6)} form={form} layout="vertical" labelCol={{ span: 8 }} wrapperCol={{ span: 24 }} autoComplete="off" onFinish={onFinish}>
+      <Form name="base" form={form} layout="vertical" labelCol={{ span: 8 }} wrapperCol={{ span: 24 }} autoComplete="off" onFinish={onFinish}>
         <Form.Item name="comment" label="评论">
           <Input.TextArea ref={textAreaRef} placeholder="这家伙真懒,啥也不说 ~" />
         </Form.Item>

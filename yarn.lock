@@ -7098,13 +7098,6 @@ history@^5.2.0:
   dependencies:
     "@babel/runtime" "^7.7.6"
 
-history@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.npmmirror.com/history/-/history-5.3.0.tgz#1548abaa245ba47992f063a0783db91ef201c73b"
-  integrity sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==
-  dependencies:
-    "@babel/runtime" "^7.7.6"
-
 hmac-drbg@^1.0.1:
   version "1.0.1"
   resolved "https://mirrors.tencent.com/npm/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -9474,11 +9467,6 @@ nanoid@^3.1.30:
   version "3.1.30"
   resolved "https://mirrors.cloud.tencent.com/npm/nanoid/-/nanoid-3.1.30.tgz#63f93cc548d2a113dc5dfbc63bfa09e2b9b64362"
   integrity sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==
-
-nanoid@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.npmmirror.com/nanoid/download/nanoid-3.2.0.tgz#62667522da6673971cca916a6d3eff3f415ff80c"
-  integrity sha512-fmsZYa9lpn69Ad5eDn7FMcnnSR+8R34W9qJEijxYhTbfOWzr22n1QxCMzXLK+ODyW2973V3Fux959iQoUxzUIA==
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -11962,11 +11950,6 @@ react-transition-group@^4.4.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-vditor@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmmirror.com/react-vditor/-/react-vditor-0.2.1.tgz#37794659bacca9baf2a6a7bd3870b1cd722f1103"
-  integrity sha512-7Qh76Dy9KLZ/3Vr9ZEHXN2ByLC26GQN47fqeQbYITd3WWDp/uI6NodAIIY+wOjDoViVM2phSb861CLiYmh3cvQ==
-
 react-view-pager@^0.6.0:
   version "0.6.0"
   resolved "https://registry.npmmirror.com/react-view-pager/download/react-view-pager-0.6.0.tgz#6c6be04b0cc3b907b5ceafec7b2ab6e7228df650"
@@ -14228,10 +14211,10 @@ vary@~1.1.2:
   resolved "https://mirrors.tencent.com/npm/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
-vditor@3.8.6:
-  version "3.8.6"
-  resolved "https://registry.npmmirror.com/vditor/-/vditor-3.8.6.tgz#95a89c4865efa740bf55f2a7e3f968b395987a60"
-  integrity sha512-KZSmg593dTx/BmX9HdXcZCLi5stkJvW3AHVq4gOVvA00JnZngT7sjlX8WlfWbLe0A80UzelNSVXff3yoyljRAA==
+vditor@^3.9.1:
+  version "3.9.1"
+  resolved "https://registry.npmmirror.com/vditor/-/vditor-3.9.1.tgz#cdb8ef5a381b65788b54cce8d566a6e5a300d4b9"
+  integrity sha512-pu9+4duq/RPftiGas9QCxy8FwwFx2jPEZd2/xKIsI8BMUzwKL5M65LH0cAkmrSUwZSXACLBWGM3RYahK5n1CUA==
   dependencies:
     diff-match-patch "^1.0.5"
 

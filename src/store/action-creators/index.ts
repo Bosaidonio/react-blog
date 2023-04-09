@@ -1,3 +1,9 @@
+/*
+ * @Date: 2022-08-28 19:22:28
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2023-04-09 13:53:33
+ * @Description: Do not edit
+ */
 import { Dispatch } from 'redux'
 import { LoadingAction, CategoryAction } from '@/store/action-types'
 
@@ -9,7 +15,7 @@ import { LoadingAction, CategoryAction } from '@/store/action-types'
 export const editLoadingState = (loadingState: boolean) => {
   return (dispatch: Dispatch<LoadingAction>) => {
     dispatch({
-      type: 'loading',
+      type: 'LOADING',
       payload: loadingState,
     })
   }

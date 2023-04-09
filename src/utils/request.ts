@@ -18,7 +18,8 @@ import { isEmptyObject, isExternal, isObject } from '@/utils/is'
 import { deleteEmptyKey } from '@/utils'
 import { isString } from '@/utils/is'
 const apiUrl = process.env.REACT_APP_API_URL
-
+// 请求熔断时间
+const meltdownTime = 60 * 1000
 export interface IRequest extends RequestInit {
   url: string
   data?: any
@@ -33,25 +34,25 @@ const timeout = <T = any>(ms: number, controller: AbortController): Promise<T> =
   })
 }
 
+let requestCount = 0
 /**
  * @description 处理错误
  * @param {any} error 错误信息
  * @param {number} requestCount 请求次数
  * @returns {void}
  */
-const handleErrors = (error: any, requestCount: number) => {
+export const handleErrors = (error: any, count: number = requestCount) => {
   notification.error({
     message: error.message,
     description: isString(error.error) ? error.error : isObject(error.error) ? Object.values(error.error)[0] : '请求失败，请检查网络或联系管理员！',
   })
-  requestCount = requestCount - 1
+  requestCount = count - 1
   if (requestCount === 0) {
     setTimeout(() => {
       store.dispatch({ type: ActionTypes.LOADING, payload: false })
     }, 500)
   }
 }
-let requestCount = 0
 export const request = <T = any>({ url, data, token, ...restConfig }: IRequest): Promise<T> => {
   const controller = new AbortController()
   const { signal } = controller
@@ -102,8 +103,10 @@ export const request = <T = any>({ url, data, token, ...restConfig }: IRequest):
       return Promise.reject(res)
     }
   })
-  const fetchTimeout: Promise<T> = timeout(60 * 1000, controller)
+  const fetchTimeout: Promise<T> = timeout(meltdownTime, controller)
   return Promise.race<T>([fetchRequest, fetchTimeout]).catch((error) => {
+    console.log(error)
+
     handleErrors(error, requestCount)
     return Promise.reject(error)
   })

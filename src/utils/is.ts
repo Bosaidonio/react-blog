@@ -174,3 +174,17 @@ export const isDate = (val: any) => {
 export const isEmpty = (val: any) => {
   return val === null || val === '' || val === undefined || val === 'null' || val === 'undefined'
 }
+
+/**
+ * @description: 判断是否为有效的JSON字符串
+ * @param {any} val
+ * @return {boolean|object}
+ */
+export const isValidJsonString = (str: string): boolean | object => {
+  try {
+    JSON.parse(str)
+    return JSON.parse(str)
+  } catch (error) {
+    return false
+  }
+}

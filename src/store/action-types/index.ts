@@ -3,7 +3,7 @@ export interface LoadingAction {
   payload: boolean
 }
 export enum ActionTypes {
-  LOADING = 'loading',
+  LOADING = 'LOADING',
 }
 export interface CategoryAction {
   type: string
