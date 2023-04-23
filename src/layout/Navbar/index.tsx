@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-03-11 15:44:28
+ * @LastEditTime: 2023-04-22 18:34:31
  * @Description: Do not edit
  */
 import classnames from 'classnames'
@@ -13,6 +13,7 @@ import Navbar from '@/layout/Navbar/navbar'
 import { CaretDownOutlined } from '@ant-design/icons'
 import styles from '@/layout/Navbar/index.module.scss'
 import { FC, useRef } from 'react'
+import ThemeButton from '@/components/ThemeButton'
 
 interface AsideProps {
   isCollapse: boolean
@@ -31,7 +32,7 @@ const Aside: FC<AsideProps> = ({ isCollapse, setIsCollapse, initWidth, setInitWi
         handleWrapperClass={styles['move-resizable']}
         maxWidth={280}
         minWidth={200}
-        size={{ width: initWidth, height: '100vh' }}
+        size={{ width: initWidth, height: '100%' }}
         onResize={(e) => {
           const navOffsetLeft = NavRef.current ? NavRef.current.offsetLeft : 0
           const currentWidth = (e as MouseEvent).x - navOffsetLeft

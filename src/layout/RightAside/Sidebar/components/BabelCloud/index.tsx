@@ -5,7 +5,7 @@
  * @Description: Do not edit
  */
 import { Tooltip } from 'antd'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import styles from '@/layout/RightAside/Sidebar/components/BabelCloud/index.module.scss'
 import { getTagList } from '@/api/Statistics'
 import { useState } from 'react'

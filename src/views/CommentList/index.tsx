@@ -10,7 +10,7 @@ import { FC, useState } from 'react'
 import Comment, { CommentProp } from '@/views/CommentList/components/Comment'
 import Reply from '@/views/CommentList/components/Reply'
 // 工具库
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 // 模块样式
 import styles from '@/views/CommentList/index.module.scss'
 interface CommentListProps {

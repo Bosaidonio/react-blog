@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import BlogHeader from '@/components/BlogHeader'
 import Breadcrumb from '@/components/Breadcrumb'
 import { ReactSVG } from 'react-svg'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import zanSvg from '@/views/About/assets/svgs/zan.svg'
 import styles from '@/views/About/index.module.scss'
 import classnames from 'classnames'
@@ -33,7 +33,7 @@ const About = () => {
       <div className="warrper-md">
         <Breadcrumb />
         <div className={classnames(styles['entry-thumbnail'])} aria-hidden="true">
-          <div className={warrperClass(styles, 'item-thumb lazy')} style={{ backgroundImage: 'url(https://www.ihewro.com/usr/uploads/2017/04/3655500315.png)' }}></div>
+          <div className={warrperClass(styles, 'item-thumb lazy')} style={{ backgroundImage: 'url(https://www.notion.so/images/page-cover/met_vincent_van_gogh_irises.jpg)' }}></div>
         </div>
         <div className={classnames(styles['post-message'])} style={{ fontSize: '14px' }}>
           <div className={styles['entry-content']}>

@@ -2,7 +2,7 @@ import { ReactSVG } from 'react-svg'
 import styles from '@/components/Breadcrumb/index.module.scss'
 import backSvg from '@/assets/svgs/back.svg'
 import homeSvg from '@/assets/svgs/home.svg'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import { useNavigate } from 'react-router-dom'
 import { FC } from 'react'
 interface BreadcrumbProps {

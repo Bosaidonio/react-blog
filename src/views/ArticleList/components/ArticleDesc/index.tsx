@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 18:27:32
- * @LastEditTime: 2023-04-09 15:00:45
+ * @LastEditTime: 2023-04-16 23:30:41
  * @LastEditors: mario marioworker@163.com
  * @Description: 文章详情组件
  */
@@ -18,6 +18,7 @@ import { CategoryTypes } from '@/store/action-types'
 import CommentList from '@/views/CommentList'
 import { CommentProp } from '@/views/CommentList/components/Comment'
 import styles from '@/views/ArticleList/components/ArticleDesc/index.module.scss'
+
 interface IPreviewOptions {
   mode: 'dark' | 'light'
   customEmoji?: IObject
@@ -52,6 +53,7 @@ export const ArticleComsumer = () => useContext(ArticleContext)
 const PreviewArticleDesc = () => {
   const [markdown, setMarkdown] = useState('')
   const [commentList, setCommentList] = useState<CommentProp[]>([])
+  const [isRenderFinsish, setRenderFinsish] = useState(false)
   const [headerData, setHeaderData] = useState<BlogHeaderProps>({
     title: '',
     desc: '',
@@ -126,6 +128,8 @@ const PreviewArticleDesc = () => {
   }
 
   const asyncRender = () => {
+    window.scrollTo(0, 0)
+    setRenderFinsish(true)
     const root = document.querySelector('.vditor-reset')
     const tags = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
 
@@ -148,7 +152,8 @@ const PreviewArticleDesc = () => {
       <div className="warrper-md">
         <Breadcrumb />
         {markdown ? <VditorPreview markdown={markdown} options={options} callback={asyncRender} /> : null}
-        <ArticleProvider run={run}>{isComment ? <CommentList commentList={commentList} /> : <p className={styles.commentClose}>此处评论已关闭</p>}</ArticleProvider>
+
+        <ArticleProvider run={run}>{isComment && isRenderFinsish ? <CommentList commentList={commentList} /> : <p className={styles.commentClose}>此处评论已关闭</p>}</ArticleProvider>
       </div>
     </div>
   )

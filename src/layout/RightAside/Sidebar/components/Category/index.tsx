@@ -1,7 +1,8 @@
-import { warrperClass } from '@/utils/classnames'
+import { getTextWidth, warrperClass } from '@/utils/dom'
 import styles from '@/layout/RightAside/Sidebar/components/Category/index.module.scss'
 import { useEffect } from 'react'
 import { debounce } from '@/utils'
+import { Tooltip } from 'antd'
 
 type CacheDom = {
   id: string
@@ -10,6 +11,7 @@ type CacheDom = {
 type MapPosistion = {
   [key: string]: string | number
 }
+
 const Category = ({ category }: any) => {
   // 点击目录滚动到指定位置
   const onScrollViewer = (title: string) => {
@@ -78,22 +80,35 @@ const Category = ({ category }: any) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category])
 
+  // 根据dom宽度觉得是否要渲染tootip
+  const renderTooltip = (title: string) => {
+    const width = getTextWidth(title)
+    return width > 180 ? (
+      <Tooltip title={title}>
+        <span>{title}</span>
+      </Tooltip>
+    ) : (
+      <span>{title}</span>
+    )
+  }
   const renderCategory = (category: any) => {
     return category.map((item: any) => {
       return item.children && item.children.length > 0 ? (
         <div key={item.title}>
           <li className={warrperClass(styles, 'tocify-item')} onClick={() => onScrollViewer(item.title)}>
-            <span>{item.title}</span>
+            {renderTooltip(item.title)}
           </li>
           <ul className={warrperClass(styles, 'tocify-subheader nav nav-list')}>{renderCategory(item.children)}</ul>
         </div>
       ) : (
         <li className={warrperClass(styles, 'tocify-item ')} key={item.title} onClick={() => onScrollViewer(item.title)}>
-          <span>{item.title}</span>
+          {renderTooltip(item.title)}
         </li>
       )
     })
   }
+  console.log('category', category)
+
   return category.length > 0 ? (
     <div className={warrperClass(styles, 'tags l-h-2x box-shadow-wrap-normal')}>
       <div id={warrperClass(styles, 'toc')} className={warrperClass(styles, 'small-scroll-bar overflow-y-auto tocify')}>

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { ReactSVG } from 'react-svg'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import * as EmojiMart from 'emoji-mart'
 import data from '@emoji-mart/data/sets/14/google.json'
 import Reply from '@/views/CommentList/components/Reply'
@@ -9,6 +9,7 @@ import styles from '@/views/CommentList/components/Comment/index.module.scss'
 import { getEmojiList, reaplceLink } from '@/utils'
 import { useMount } from 'ahooks'
 import config from '@/config'
+import { useLocation } from 'react-router-dom'
 
 export interface CommentProp {
   _id: string
@@ -83,12 +84,25 @@ const RenderComment = ({ commentDesc }: RenderCommentProps) => {
 
   return <span dangerouslySetInnerHTML={{ __html: comment }}></span>
 }
+
 const Comment: FC<CommentProps> = ({ _id, articleId, isIndex, onCancelReply, commentUser, commentCreateTime, atAuthor, commentDesc, isAuthor, children, currentReplyId, onReplyComment }) => {
+  const location = useLocation()
+  useMount(() => {
+    if ((location.state as any).isJustComment) {
+      const comment = document.getElementById(`div-comment-${_id}`)
+      if (comment) {
+        // 平滑滚动
+        window.scroll({
+          top: comment.offsetTop - 80,
+        })
+      }
+    }
+  })
   return (
     <>
       <li className={warrperClass(styles, 'comment-body comment-parent comment-odd')}>
         {/* 评论者 */}
-        <div id="div-comment-9073" className={warrperClass(styles, 'comment-body')}>
+        <div id={`div-comment-${_id}`} className={warrperClass(styles, 'comment-body')}>
           <a href="javascript;" className={warrperClass(styles, 'pull-left thumb-sm comment-avatar')} rel="nofollow">
             <img alt="" src={commentUser.avatar} className={warrperClass(styles, 'img-40px photo img-square normal-shadow')} />
             {isAuthor ? (

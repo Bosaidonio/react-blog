@@ -7,7 +7,7 @@
 import { UserOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import styles from '@/views/Ai/index.module.scss'
 import gptIcon from './assets/svgs/gpt.svg'
 import VditorPreview from '@/components/VditorPreview'

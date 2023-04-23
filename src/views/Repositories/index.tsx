@@ -6,7 +6,7 @@ import Project from '@/views/Repositories/components/Project'
 import BlogHeader from '@/components/BlogHeader'
 
 // 工具库
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import { getRandom, chunk } from '@/utils/math'
 // 请求
 import { useRequest } from 'ahooks'

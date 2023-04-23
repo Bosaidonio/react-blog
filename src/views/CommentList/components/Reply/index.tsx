@@ -10,7 +10,7 @@ import Picker from '@emoji-mart/react'
 // 导入谷歌表情
 import emojiData from '@emoji-mart/data/sets/14/google.json'
 import styles from '@/views/CommentList/components/Reply/index.module.scss'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import { getRandom } from '@/utils/math'
 import { isEmpty } from '@/utils/is'
 import tootipSvg from '@/views/CommentList/components/Reply/assets/svgs/tootip.svg'

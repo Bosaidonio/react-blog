@@ -6,7 +6,7 @@
  */
 import { FC } from 'react'
 import styles from '@/views/Home/components/PinnedArticle/index.module.scss'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import { Article } from '@/views/ArticleList'
 interface PinnedArticleProps extends Article {
   index: number

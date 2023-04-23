@@ -6,7 +6,7 @@
  */
 import styles from '@/layout/Footer/index.module.scss'
 // import { useMediaQuery } from 'react-responsive'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 const Footer = () => {
   // const isDeskbook = useMediaQuery({
   //   query: '(max-width: 1020px)',

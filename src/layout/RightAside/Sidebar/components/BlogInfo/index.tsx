@@ -6,7 +6,7 @@
  */
 import { useState } from 'react'
 import { ReactSVG } from 'react-svg'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import styles from '@/layout/RightAside/Sidebar/components/BlogInfo/index.module.scss'
 import articleCountSvg from '@/layout/RightAside/Sidebar/components/BlogInfo/assets/svgs/article-count.svg'
 import commentCountSvg from '@/layout/RightAside/Sidebar/components/BlogInfo/assets/svgs/comment-count.svg'

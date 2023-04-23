@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2023-02-19 19:05:35
+ * @LastEditTime: 2023-04-22 17:57:11
  * @LastEditors: mario marioworker@163.com
  * @Description: 头部组件
  */
@@ -18,6 +18,7 @@ import { SearchOutlined, LoadingOutlined, CaretDownOutlined, MenuUnfoldOutlined 
 
 import styles from '@/layout/Header/index.module.scss'
 import classnames from 'classnames'
+import ThemeButton from '@/components/ThemeButton'
 
 interface HeaderProps {
   isCollapse: boolean
@@ -128,8 +129,9 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
           <h2>Mario's Blog</h2>
         </div>
       </div>
-      {isMobile ? null : (
-        <div className={classnames('flex', 'items-center', 'flex-auto', 'justify-between', styles['header-right'], 'header-right')}>
+
+      <div className={classnames('flex', 'items-center', 'flex-auto', 'justify-between', styles['header-right'], 'header-right')}>
+        {isMobile ? null : (
           <div className="flex h-full">
             <div className={classnames('flex', 'items-center', 'cursor-pointer', 'md-and-down', styles.echarts)}>
               <svg
@@ -153,29 +155,15 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
               <Input placeholder="输入关键词搜索…" suffix={isSearch ? <LoadingOutlined /> : <SearchOutlined />} onChange={handleSearch} onFocus={onSearchFocus} onBlur={onSearchBlur} />
             </div>
           </div>
-          <div className="flex h-full">
-            <div className={classnames('md-and-down')}>
-              <ReactAplayer {...props} onInit={onInit} onPlay={onPlay} onPause={onPause} />
-            </div>
-            <div className={classnames('flex', 'items-center', 'md-and-down', styles['common-icon'])} onClick={onShowMusicList}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16px"
-                height="16px"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-disc"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </div>
-            <div className={classnames('flex', 'items-center', styles.dropdown)}>
-              <div className={classnames('flex', styles['common-icon'], styles.mt)} onClick={handleFadeIn}>
+        )}
+
+        <div className="flex h-full">
+          {isMobile ? null : (
+            <>
+              <div className={classnames('md-and-down')}>
+                <ReactAplayer {...props} onInit={onInit} onPlay={onPlay} onPause={onPause} />
+              </div>
+              <div className={classnames('flex', 'items-center', 'md-and-down', styles['common-icon'])} onClick={onShowMusicList}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16px"
@@ -186,62 +174,84 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="feather feather-twitch"
+                  className="feather feather-disc"
                 >
-                  <path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"></path>
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="3"></circle>
                 </svg>
               </div>
-              {
-                <FadeIn reverse={reverse} immediate={immediate}>
-                  <div className={classnames(styles['dropdown-menu'], !reverse ? styles.noclick : styles.click)}>
-                    <div className={classnames(styles.panel, styles['bg-white'])}>
-                      <div className={classnames(styles['panel-heading'], styles['b-light'], styles['bg-light'])}>
-                        <strong>闲言碎语 </strong>
-                      </div>
-                      <div className={classnames(styles['list-group'])} id="smallRecording">
-                        {[1, 2, 3].map((item) => (
-                          <a href="https://www.ihewro.com/cross.html" key={item} className={classnames(styles['list-group-item'])}>
-                            <span className={classnames(styles.clear)}>
-                              又要做根管了…………
-                              <br />
-                              <small className={styles['text-muted']}>昨天 19: 05</small>
-                            </span>
-                          </a>
-                        ))}
+              <div className={classnames('flex', 'items-center', styles.dropdown)}>
+                <div className={classnames('flex', styles['common-icon'], styles.mt)} onClick={handleFadeIn}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16px"
+                    height="16px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="feather feather-twitch"
+                  >
+                    <path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"></path>
+                  </svg>
+                </div>
+                {
+                  <FadeIn reverse={reverse} immediate={immediate}>
+                    <div className={classnames(styles['dropdown-menu'], !reverse ? styles.noclick : styles.click)}>
+                      <div className={classnames(styles.panel, styles['bg-white'])}>
+                        <div className={classnames(styles['panel-heading'], styles['b-light'], styles['bg-light'])}>
+                          <strong>闲言碎语 </strong>
+                        </div>
+                        <div className={classnames(styles['list-group'])} id="smallRecording">
+                          {[1, 2, 3].map((item) => (
+                            <a href="https://www.ihewro.com/cross.html" key={item} className={classnames(styles['list-group-item'])}>
+                              <span className={classnames(styles.clear)}>
+                                又要做根管了…………
+                                <br />
+                                <small className={styles['text-muted']}>昨天 19: 05</small>
+                              </span>
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </FadeIn>
-              }
-            </div>
-            <div className={classnames('flex', 'items-center', styles.dropdown)}>
-              <div className={classnames('flex', 'items-center', styles['common-icon'])} onClick={handleOpacity}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16px"
-                  height="16px"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="feather feather-key"
-                >
-                  <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
-                </svg>
+                  </FadeIn>
+                }
               </div>
-              <Opacity reverse={opacityReverse} immediate={opacityImmediate}>
-                <div className={classnames(styles['dropdown-menu'], styles['login-modal'], !opacityReverse ? styles.noclick : styles.click)}>
-                  <div className={classnames('p-warrper', 'bg-default')}>
-                    <LoginModal handleOpacity={handleOpacity} />
-                  </div>
+              <div className={classnames('flex', 'items-center', styles.dropdown)}>
+                <div className={classnames('flex', 'items-center', styles['common-icon'])} onClick={handleOpacity}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16px"
+                    height="16px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="feather feather-key"
+                  >
+                    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                  </svg>
                 </div>
-              </Opacity>
-            </div>
+                <Opacity reverse={opacityReverse} immediate={opacityImmediate}>
+                  <div className={classnames(styles['dropdown-menu'], styles['login-modal'], !opacityReverse ? styles.noclick : styles.click)}>
+                    <div className={classnames('p-warrper', 'bg-default')}>
+                      <LoginModal handleOpacity={handleOpacity} />
+                    </div>
+                  </div>
+                </Opacity>
+              </div>
+            </>
+          )}
+          <div className={styles.theme}>
+            <ThemeButton />
           </div>
         </div>
-      )}
+      </div>
     </header>
   )
 }

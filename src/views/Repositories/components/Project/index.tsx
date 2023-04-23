@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import { StarOutlined, ForkOutlined, LinkOutlined } from '@ant-design/icons'
 import styles from '@/views/Repositories/components/Project/index.module.scss'
 import { Skeleton } from 'antd'

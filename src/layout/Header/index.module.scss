@@ -208,6 +208,10 @@
       }
     }
   }
+  .theme {
+    display: flex;
+    align-items: center;
+  }
 }
 @keyframes movingbar {
   0% {

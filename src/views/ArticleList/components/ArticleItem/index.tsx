@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import styles from '@/views/ArticleList/components/ArticleItem/index.module.scss'
-import { warrperClass } from '@/utils/classnames'
+import { warrperClass } from '@/utils/dom'
 import { Card, Skeleton } from 'antd'
 import { FC } from 'react'
 import { Article } from '@/views/ArticleList'
