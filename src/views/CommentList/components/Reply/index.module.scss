@@ -33,7 +33,7 @@
       font-weight: 700;
       text-shadow: 0 1px 0 rgb(0 0 0 / 20%);
       display: inline;
-      padding: 0.3em 0.6em 0.3em;
+      padding: 0.3em 0.6em;
       font-size: 75%;
       line-height: 1;
       text-align: center;
@@ -129,7 +129,6 @@
     .form-control {
       border-color: rgba(135, 150, 165, 0.15);
       border-width: 1px;
-      color: inherit;
       border-radius: 6px;
       color: rgb(119, 119, 119);
       &:hover {
