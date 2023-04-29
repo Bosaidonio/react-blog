@@ -60,9 +60,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "commit": "git add . && cz-customizable",
-    "push-github": "git push github master",
-    "push-gitee": "git push gitee master"
+    "commit": "git add . && cz-customizable"
   },
   "eslintConfig": {
     "extends": [
