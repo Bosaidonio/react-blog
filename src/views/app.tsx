@@ -1,15 +1,16 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-22 19:25:48
+ * @LastEditTime: 2023-04-29 13:43:31
  * @Description: Do not edit
  */
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import routes, { RouteRule } from '@/router'
 import classnames from 'classnames'
 import EmptyRouter from '@/views/EmptyRouter'
 import SearchLoading from '@/components/SearchLoading'
+import { ThemeProvider } from '@/context'
 
 const renderRoutes = (routes: RouteRule[]) => {
   return routes.map((route) =>
@@ -22,11 +23,14 @@ const renderRoutes = (routes: RouteRule[]) => {
     )
   )
 }
+
 function App() {
   return (
-    <div className={classnames('App')} style={{ backgroundColor: '#efefef' }}>
-      <Routes>{renderRoutes(routes)}</Routes>
-    </div>
+    <ThemeProvider>
+      <div className={classnames('App')} style={{ backgroundColor: '#efefef' }}>
+        <Routes>{renderRoutes(routes)}</Routes>
+      </div>
+    </ThemeProvider>
   )
 }
 

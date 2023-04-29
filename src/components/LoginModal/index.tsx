@@ -1,4 +1,10 @@
 /*
+ * @Date: 2022-08-28 19:22:28
+ * @LastEditors: mario marioworker@163.com
+ * @LastEditTime: 2023-04-29 16:19:39
+ * @Description: Do not edit
+ */
+/*
  * @Author: Mario
  * @Date: 2021-11-21 16:33:13
  * @LastEditTime: 2023-03-31 23:49:24
@@ -7,12 +13,12 @@
  */
 import { useState, FC } from 'react'
 import { Form, Input, Button } from 'antd'
-import classNames from 'classnames'
-import styles from '@/components/LoginModal/index.module.scss'
 import { login } from '@/api/User'
 import { useRequest } from 'ahooks'
 import { setStorage } from '@/utils/storage'
 import { LoginRequest } from '@/types/user'
+import { FormItemLastChild, LoginButtonStyle, LoginModalStyle } from '@/components/LoginModal/loginModal'
+import { useMode } from '@/hooks'
 
 interface LoginModalProps {
   handleOpacity: () => void
@@ -45,9 +51,9 @@ const LoginModal: FC<LoginModalProps> = ({ handleOpacity }) => {
   }
 
   const onFinishFailed = (errorInfo: any) => {}
-
+  const { theme } = useMode()
   return (
-    <Form className={styles['login-modal']} form={form} name="basic" layout="vertical" wrapperCol={{ span: 24 }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
+    <Form css={LoginModalStyle(theme)} form={form} name="basic" layout="vertical" wrapperCol={{ span: 24 }} onFinish={onFinish} onFinishFailed={onFinishFailed} autoComplete="off">
       <Form.Item label="用户名" name="username">
         <Input className="text-deafult" />
       </Form.Item>
@@ -56,8 +62,8 @@ const LoginModal: FC<LoginModalProps> = ({ handleOpacity }) => {
         <Input.Password className="text-deafult" />
       </Form.Item>
 
-      <Form.Item wrapperCol={{ span: 24 }} className={styles['margin-b']}>
-        <Button type="primary" loading={loading} htmlType="submit" className={classNames('w-full', styles['login-btn'])}>
+      <Form.Item wrapperCol={{ span: 24 }} css={FormItemLastChild()}>
+        <Button type="primary" loading={loading} htmlType="submit" css={LoginButtonStyle(theme)}>
           登录
         </Button>
       </Form.Item>

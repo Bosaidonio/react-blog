@@ -1,13 +1,15 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-21 19:02:56
- * @LastEditTime: 2021-11-21 19:28:13
- * @LastEditors: Mario
+ * @LastEditTime: 2023-04-26 02:01:19
+ * @LastEditors: mario marioworker@163.com
  * @Description: 音乐播放器
  */
 import APlayer from 'aplayer'
 import 'aplayer/dist/APlayer.min.css'
 import { useEffect, FC } from 'react'
+import { AplayerStyle } from './aplayer'
+import { useMode } from '@/hooks'
 
 interface AplayerProps {
   onInit: (ap: any) => void
@@ -26,6 +28,8 @@ const ReactAplayer: FC<AplayerProps> = ({ onInit, onPlay, onPause, ...rest }) =>
     iconForward.innerHTML =
       '<svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className="css-i6dzq1"><polygon points="11 19 2 12 11 5 11 19"></polygon><polygon points="22 19 13 12 22 5 22 19"></polygon></svg>'
   }
+  const { theme } = useMode()
+
   useEffect(() => {
     const ap = new APlayer({
       container: document.getElementById('aplayer'),
@@ -34,9 +38,8 @@ const ReactAplayer: FC<AplayerProps> = ({ onInit, onPlay, onPause, ...rest }) =>
     onInit(ap)
     removeOldSvg()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return <div id="aplayer"></div>
+  }, [theme.mode])
+  return <div id="aplayer" css={AplayerStyle(theme)}></div>
 }
 
 export default ReactAplayer
