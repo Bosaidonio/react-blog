@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2022-10-31 15:44:05
+ * @LastEditTime: 2023-04-29 23:53:14
  * @Description: Do not edit
  */
 import { lazy, LazyExoticComponent } from 'react'
@@ -29,6 +29,7 @@ const lazyLoadComponent = (
   }>
 ) => {
   return lazy(async () => {
+    await asyncWait(1000)
     // 检测爬虫
     // const isSpiders = await detectAuto()
     // return isSpiders ? import('@/views/404') : component()

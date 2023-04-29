@@ -1,12 +1,13 @@
 /*
  * @Date: 2023-04-22 17:59:54
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-22 18:28:38
+ * @LastEditTime: 2023-04-29 23:44:01
  * @Description: Do not edit
  */
-import styles from '@/components/Loading/index.module.scss'
+import styles from '@/components/SpinLoading/index.module.scss'
 import { Spin, SpinProps } from 'antd'
 import { FC } from 'react'
+import { SpingLoadingStyle } from './spinLoadingStyle'
 interface SpinLoadingProps extends SpinProps {
   children?: React.ReactNode
 }
@@ -23,20 +24,20 @@ const LoadingIndicator = () => {
       <svg height="0" width="0" viewBox="0 0 64 64" className={styles.absolute}>
         <defs className="s-xJBuHA073rTt" xmlns="http://www.w3.org/2000/svg">
           <linearGradient className="s-xJBuHA073rTt" gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="b">
-            <stop className="s-xJBuHA073rTt" stop-color="#973BED"></stop>
-            <stop className="s-xJBuHA073rTt" stop-color="#007CFF" offset="1"></stop>
+            <stop className="s-xJBuHA073rTt" stopColor="#973BED"></stop>
+            <stop className="s-xJBuHA073rTt" stopColor="#007CFF" offset="1"></stop>
           </linearGradient>
           <linearGradient className="s-xJBuHA073rTt" gradientUnits="userSpaceOnUse" y2="0" x2="0" y1="64" x1="0" id="c">
-            <stop className="s-xJBuHA073rTt" stop-color="#FFC800"></stop>
-            <stop className="s-xJBuHA073rTt" stop-color="#F0F" offset="1"></stop>
+            <stop className="s-xJBuHA073rTt" stopColor="#FFC800"></stop>
+            <stop className="s-xJBuHA073rTt" stopColor="#F0F" offset="1"></stop>
           </linearGradient>
           <linearGradient className="s-xJBuHA073rTt" gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="d">
-            <stop className="s-xJBuHA073rTt" stop-color="#00E0ED"></stop>
-            <stop className="s-xJBuHA073rTt" stop-color="#00DA72" offset="1"></stop>
+            <stop className="s-xJBuHA073rTt" stopColor="#00E0ED"></stop>
+            <stop className="s-xJBuHA073rTt" stopColor="#00DA72" offset="1"></stop>
           </linearGradient>
           <linearGradient className="s-xJBuHA073rTt" gradientUnits="userSpaceOnUse" y2="2" x2="0" y1="62" x1="0" id="e">
-            <stop className="s-xJBuHA073rTt" stop-color="#de689c"></stop>
-            <stop className="s-xJBuHA073rTt" stop-color="#de689c" offset="1"></stop>
+            <stop className="s-xJBuHA073rTt" stopColor="#de689c"></stop>
+            <stop className="s-xJBuHA073rTt" stopColor="#de689c" offset="1"></stop>
           </linearGradient>
         </defs>
       </svg>
@@ -87,7 +88,7 @@ const LoadingIndicator = () => {
 }
 const SpinLoading: FC<SpinLoadingProps> = ({ children, ...props }) => {
   return (
-    <Spin indicator={<LoadingIndicator />} {...props}>
+    <Spin css={SpingLoadingStyle} indicator={<LoadingIndicator />} {...props}>
       {children}
     </Spin>
   )

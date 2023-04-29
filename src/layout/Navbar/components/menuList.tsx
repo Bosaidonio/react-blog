@@ -1,18 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Menu, Button } from 'antd'
-import { Link, useNavigate } from 'react-router-dom'
-import { HomeOutlined, GithubOutlined, HeartOutlined, PictureOutlined, CoffeeOutlined, LockOutlined, UserOutlined, MessageOutlined, AppstoreOutlined } from '@ant-design/icons'
+import { Menu } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { MessageOutlined, AppstoreOutlined } from '@ant-design/icons'
 import { FC, useState } from 'react'
-import { MenuList } from '@/types'
+import { MenuListType } from '@/types'
 import { ReactSVG } from 'react-svg'
 import { useMediaQuery } from 'react-responsive'
-import styles from '@/layout/Navbar/index.module.scss'
 import homeIcon from '@/layout/Navbar/assets/svgs/home.svg'
 import respoIcon from '@/layout/Navbar/assets/svgs/respo.svg'
 import photoIcon from '@/layout/Navbar/assets/svgs/photo.svg'
 import lockIcon from '@/layout/Navbar/assets/svgs/lock.svg'
 import coffeIcon from '@/layout/Navbar/assets/svgs/coffe.svg'
 import aiIcon from '@/layout/Navbar/assets/svgs/ai.svg'
+import { useMode } from '@/hooks'
+import { MenuLabelStyle } from './menuListStyle'
+import { AntMenuStyle } from '@/style/plugin/ant-design'
 const { SubMenu } = Menu
 const menuList = [
   {
@@ -90,12 +92,12 @@ const menuList = [
     ],
   },
 ]
-interface NavBarProps {
+interface MenuListProps {
   width: number
   isCollapse: boolean
   setIsCollapse: (args: boolean) => void
 }
-const Navbar: FC<NavBarProps> = ({ width, isCollapse, setIsCollapse }) => {
+const MenuList: FC<MenuListProps> = ({ width, isCollapse, setIsCollapse }) => {
   const [collapsed, setCollapsed] = useState(false)
   const [selectedKeys, setSelectedKeys] = useState(['首页'])
   const isMobile = useMediaQuery({
@@ -105,7 +107,7 @@ const Navbar: FC<NavBarProps> = ({ width, isCollapse, setIsCollapse }) => {
     setCollapsed(!collapsed)
   }
   const navigate = useNavigate()
-  const renderMenuList = (menuList: MenuList[]) => {
+  const renderMenuList = (menuList: MenuListType[]) => {
     return menuList.map((item, index) => {
       return item.children ? (
         <SubMenu key={item.label} icon={item.icon} title={item.label}>
@@ -132,15 +134,16 @@ const Navbar: FC<NavBarProps> = ({ width, isCollapse, setIsCollapse }) => {
       setIsCollapse(!isCollapse)
     }
   }
+  const { theme } = useMode()
   return (
     <div style={{ width }}>
       {menuList.map((menu) => {
         return (
           <span key={menu.title}>
-            <div className={styles.label}>
+            <div css={MenuLabelStyle(theme)}>
               <span>{menu.title}</span>
             </div>
-            <Menu selectedKeys={selectedKeys} mode="inline" theme="dark" inlineCollapsed={collapsed} onClick={onClickMenu}>
+            <Menu id="custom-ant-menu" css={AntMenuStyle(theme)} selectedKeys={selectedKeys} mode="inline" theme="dark" inlineCollapsed={collapsed} onClick={onClickMenu}>
               {renderMenuList(menu.list)}
             </Menu>
           </span>
@@ -149,4 +152,4 @@ const Navbar: FC<NavBarProps> = ({ width, isCollapse, setIsCollapse }) => {
     </div>
   )
 }
-export default Navbar
+export default MenuList
