@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-24 22:19:07
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-29 12:46:07
+ * @LastEditTime: 2023-04-29 22:21:13
  * @Description: Do not edit
  */
 export const fonts = {}
@@ -27,7 +27,7 @@ interface MediaQueryMap {
 export const breakpoints: MediaQueryMap = {
   xs: '480px',
   sm: '768px',
-  md: '991px',
+  md: '992px',
   lg: '1200px',
 }
 type MediaQueryBreakpoints = 'xs' | 'sm' | 'md' | 'lg'

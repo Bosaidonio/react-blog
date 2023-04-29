@@ -1,39 +1,35 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-24 19:16:27
+ * @LastEditTime: 2023-04-29 19:17:29
  * @Description: Do not edit
  */
 import { useState } from 'react'
-// import { useMediaQuery } from 'react-responsive'
 import Header from '@/layout/Header'
 import Navbar from '@/layout/Navbar'
 import Content from '@/layout/Content'
 import Footer from '@/layout/Footer'
 
-import classnames from 'classnames'
 import styles from '@/layout/index.module.scss'
 import { useMediaQuery } from 'react-responsive'
 import { useLocation } from 'react-router-dom'
+import { BoxModeStyle, LayoutStyle, LayoutWarrperStyle } from './layoutStyle'
+import { useMode } from '@/hooks'
 const Layout = () => {
   const [isCollapse, setIsCollapse] = useState(true)
   const [initWidth, setInitWidth] = useState(220)
-  // const isLayout = useMediaQuery({
-  //   query: '(max-width: 1300px)',
-  // })
-  // 'header-fixed', isLayout ? '' : 'layout-box'
-  // const isDeskbook = useMediaQuery({
-  //   query: '(max-width: 1020px)',
-  // })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isBoxMode, setIsBoxMode] = useState(true)
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
   })
   // 判断当前路由是否是/ai
   const isAi = useLocation().pathname === '/ai'
+  const { theme } = useMode()
   return (
-    <div className={classnames(styles.layout)}>
-      <Header isCollapse={isCollapse} setIsCollapse={setIsCollapse} />
-      <div style={{ backgroundColor: '#f9f9f9', height: 'auto', position: 'relative' }}>
+    <div css={LayoutStyle(theme, isBoxMode)}>
+      <Header BoxModeStyle={BoxModeStyle(theme, isBoxMode)} isCollapse={isCollapse} setIsCollapse={setIsCollapse} />
+      <div css={LayoutWarrperStyle(theme)}>
         <Navbar isCollapse={isCollapse} setIsCollapse={setIsCollapse} initWidth={initWidth} setInitWidth={setInitWidth} />
         <Content isCollapse={isCollapse} initWidth={initWidth} customStyle={{ paddingBottom: isAi ? '0px' : '60px' }}></Content>
         {isAi ? null : (

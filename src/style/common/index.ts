@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-25 22:49:37
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-26 02:02:05
+ * @LastEditTime: 2023-04-29 18:25:23
  * @Description: 公共css样式
  */
 import { ThemeType } from '@/theme'
@@ -30,5 +30,17 @@ export const FlexCenter = () => ({
 export const HideOnMaxMediaMd = (theme: ThemeType) => ({
   [theme.mediaQueries('max').md]: {
     display: 'none',
+  },
+})
+/* 响应式的最大宽度样式 (盒子模式)*/
+export const ResponsiveMaxWidth = (theme: ThemeType) => ({
+  [theme.mediaQueries('min').sm]: {
+    maxWidth: '750px',
+  },
+  [theme.mediaQueries('min').md]: {
+    maxWidth: '970px',
+  },
+  [theme.mediaQueries('min').lg]: {
+    maxWidth: '1170px',
   },
 })

@@ -1,46 +1,94 @@
-# Getting Started with Create React App
+简体中文
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center"><img  src="./assets/header.png"/>
+<h1>React Blog</h1>
 
-## Available Scripts
+<p>一个使用 React 和 TypeScript 构建的个人博客项目。</p>
+</div>
 
-In the project directory, you can run:
+[![stars](https://img.shields.io/github/stars/RedsMario/react-blog?style=flat-square&logo=GitHub)](https://github.com/RedsMario/react-blog)
+[![license](https://img.shields.io/github/license/chuzhixin/vue-admin-beautiful?style=flat-square)](https://en.wikipedia.org/wiki/MIT_License)
 
-### `yarn start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 🏠 预览地址:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **[https://www.mariowork.com](https://www.mariowork.com)**
 
-### `yarn test`
+## 安装与运行
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 安装依赖
 
-### `yarn build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 开发模式运行
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm run start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 构建生产环境代码
 
-### `yarn eject`
+```bash
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🏗️ 技术栈
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<code><img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/></code>
+<code><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"/></code>
+<code><img src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white"/></code>
+<code><img src="https://img.shields.io/badge/react_router-%2320232a.svg?style=for-the-badge&logo=react-router&logoColor=%2361DAFB"/></code><br/><br/>
+<code><img src="https://img.shields.io/badge/ant_design-%230170FE.svg?style=for-the-badge&logo=ant-design&logoColor=white"/></code>
+<code><img src="https://img.shields.io/badge/axios-%23007396.svg?style=for-the-badge&logo=axios&logoColor=white"/></code>
+<code><img src="https://img.shields.io/badge/sass-%23CC6699.svg?style=for-the-badge&logo=sass&logoColor=white"/></code>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 特性
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- [x] 💪 发表、编辑、删除博客文章
+- [x] 💅 文章预览
+- [x] 🌍 用户注册与登录
+- [x] 👏 个人资料管理
+- [x] 🥳 评论功能
+- [ ] 🚀 搜索功能
+- [x] 📦️ 响应式布局
 
-## Learn More
+## 目录结构
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+|----src
+    |____types
+    |____context
+    |____config
+    |____plugins
+    |____layout
+    |____utils
+    |____style
+    |____components
+    |____theme
+    |____hooks
+    |____api
+    |____views
+    |____assets
+    |____store
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 👷 贡献者
+
+<a href="https://github.com/RedsMario" target="_blank">
+<img width="50px" style="border-radius:999px" src="https://avatars.githubusercontent.com/u/76934904?v=4"/>
+</a>
+
+### 📈 项目活跃度图:
+
+<p align="center">
+  <a href="https://star-history.com/#RedsMario/react-blog&Date">
+    <img src="https://api.star-history.com/svg?repos=RedsMario/react-blog&type=Date" alt="Star History Chart">
+  </a>
+</p>
+
+## 📄 许可证
+
+MIT License

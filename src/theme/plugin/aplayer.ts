@@ -2,7 +2,7 @@
  * @Date: 2023-04-29 15:27:36
  * @LastEditors: mario marioworker@163.com
  * @LastEditTime: 2023-04-29 15:27:43
- * @Description: Do not edit
+ * @Description: aplayer组件主题
  */
 export const AplayerLight = {
   aplayerListHover: '#efefef',

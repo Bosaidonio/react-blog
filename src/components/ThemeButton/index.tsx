@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-22 16:49:55
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-24 01:32:36
+ * @LastEditTime: 2023-04-30 00:08:20
  * @Description: Do not edit
  */
 
@@ -11,6 +11,7 @@ import { useMode } from '@/hooks'
 
 const ThemeButton = () => {
   const { toggleTheme } = useMode()
+
   return (
     <>
       <div className={warrperClass(styles, 'toggleWrapper')}>

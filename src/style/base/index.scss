@@ -3,8 +3,16 @@ html {
   font-family: 'Source Sans Pro', 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Helvetica, Arial, Sans-serif, monospace !important;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
+  overflow: hidden;
 }
-img{
+#root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: auto;
+}
+img {
   max-width: 100%;
   height: auto;
 }

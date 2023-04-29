@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-29 16:19:39
+ * @LastEditTime: 2023-04-29 19:15:02
  * @Description: Do not edit
  */
 /*
@@ -17,7 +17,7 @@ import { login } from '@/api/User'
 import { useRequest } from 'ahooks'
 import { setStorage } from '@/utils/storage'
 import { LoginRequest } from '@/types/user'
-import { FormItemLastChild, LoginButtonStyle, LoginModalStyle } from '@/components/LoginModal/loginModal'
+import { FormItemLastChild, LoginButtonStyle, LoginModalStyle } from '@/components/LoginModal/loginModalStyle'
 import { useMode } from '@/hooks'
 
 interface LoginModalProps {
@@ -62,8 +62,8 @@ const LoginModal: FC<LoginModalProps> = ({ handleOpacity }) => {
         <Input.Password className="text-deafult" />
       </Form.Item>
 
-      <Form.Item wrapperCol={{ span: 24 }} css={FormItemLastChild()}>
-        <Button type="primary" loading={loading} htmlType="submit" css={LoginButtonStyle(theme)}>
+      <Form.Item wrapperCol={{ span: 24 }} css={FormItemLastChild()} className="custom-form-item">
+        <Button type="primary" loading={loading} htmlType="submit" css={LoginButtonStyle(theme)} className="custom-login-button">
           登录
         </Button>
       </Form.Item>

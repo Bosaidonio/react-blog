@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2023-04-29 16:48:10
+ * @LastEditTime: 2023-04-30 00:10:49
  * @LastEditors: mario marioworker@163.com
  * @Description: 头部组件
  */
@@ -39,15 +39,18 @@ import {
   RecordMessageStyle,
   SearchStyle,
   ThemeButtonStyle,
-} from '@/layout/Header/header'
+} from '@/layout/Header/headerStyle'
 import { HideOnMaxMediaMd } from '@/style/common'
+import { SerializedStyles } from '@emotion/react'
 
 interface HeaderProps {
   isCollapse: boolean
+  BoxModeStyle: SerializedStyles
   setIsCollapse: (arg: boolean) => void
 }
-const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
+const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse, BoxModeStyle }) => {
   const [isSearch, setIsSearch] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isFoucs, setIsFocus] = useState(false)
   const [player, setPlayer] = useState()
   const [reverse, setReverse] = useState(false)
@@ -143,7 +146,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
   }
   const { theme } = useMode()
   return (
-    <header css={HeaderStyle(theme)}>
+    <header css={[HeaderStyle(theme), BoxModeStyle]}>
       <div css={HeaderLeftStyle(isMobile)}>
         {isMobile ? <MenuUnfoldOutlined css={BreadCrumbsStyle()} onClick={() => setIsCollapse(!isCollapse)} /> : null}
         <div css={LogoStyle(theme, isMobile)}>
@@ -261,8 +264,8 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                   </FadeIn>
                 }
               </div>
-              <div css={DropDownStyle(theme)} onClick={handleOpacity}>
-                <div>
+              <div css={DropDownStyle(theme)}>
+                <div onClick={handleOpacity}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16px"

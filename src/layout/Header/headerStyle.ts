@@ -1,12 +1,12 @@
 /*
  * @Date: 2023-04-24 21:43:15
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-29 16:46:23
+ * @LastEditTime: 2023-04-29 22:22:50
  * @Description: Do not edit
  */
 import { FlexCenter, HideOnMaxMediaMd } from '@/style/common'
 import { ThemeType } from '@/theme'
-import { AntInput, AntInputAffixWarrper, AntInputSuffix } from '@/theme/plugin/ant-design'
+import { AntInput, AntInputAffixWarrper, AntInputSuffix } from '@/style/plugin/ant-design'
 import { css } from '@emotion/react'
 
 export const HeaderStyle = (theme: ThemeType) =>
@@ -18,7 +18,7 @@ export const HeaderStyle = (theme: ThemeType) =>
     height: '50px',
     backgroundColor: theme.colors.backgroundHeader,
     color: theme.colors.text,
-    boxShadow: theme.boxShadow.primary,
+    boxShadow: `0 1px 1px 1px ${theme.colors.backgroundPrimary}`,
     zIndex: 1020,
   })
 export const HeaderLeftStyle = (isMobile: boolean) =>
@@ -258,11 +258,11 @@ export const DropDownStyle = (theme: ThemeType) =>
     alignItems: 'center',
     position: 'relative',
     height: '100%',
-    padding: '15px 18px',
     cursor: 'pointer',
-    '&>div': {
-      display: 'flex',
-      alignItems: 'center',
+    '&>div:first-of-type': {
+      ...FlexCenter(),
+      height: '50px',
+      width: '52px',
     },
   })
 export const LoginModalWarrperStyle = (theme: ThemeType) =>
