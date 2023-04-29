@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-22 17:08:11
+ * @LastEditTime: 2023-04-26 02:00:36
  * @Description: Do not edit
  */
 import { getTextWidth, warrperClass } from '@/utils/dom'
@@ -42,7 +42,7 @@ const NewArticle: FC<NewArticleProps> = ({ title, children, currentIndex }) => {
     <div id="widget-tabs-4-hots" className={warrperClass(styles, 'tab-pane wrapper-md active')} role="tabpanel">
       <h5 className={warrperClass(styles, 'widget-title m-t-none text-md')}>{title}</h5>
       <ul className={warrperClass(styles, 'list-group no-bg no-borders pull-in m-b-none')}>
-        {children.map((comment, index) => {
+        {(children as Array<ArticleRecord | CommentRecord>).map((comment, index) => {
           return (
             <li className={styles['list-group-item']} key={index} onClick={() => onNavigate(comment)}>
               <span className={warrperClass(styles, 'pull-left thumb-sm m-r')}>

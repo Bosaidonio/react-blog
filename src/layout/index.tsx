@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-02 22:17:17
+ * @LastEditTime: 2023-04-24 19:16:27
  * @Description: Do not edit
  */
 import { useState } from 'react'
@@ -30,7 +30,6 @@ const Layout = () => {
   })
   // 判断当前路由是否是/ai
   const isAi = useLocation().pathname === '/ai'
-
   return (
     <div className={classnames(styles.layout)}>
       <Header isCollapse={isCollapse} setIsCollapse={setIsCollapse} />

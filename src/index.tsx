@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-22 19:09:11
+ * @LastEditTime: 2023-04-23 23:28:17
  * @Description: Do not edit
  */
 import React from 'react'
@@ -11,6 +11,7 @@ import '@/plugins'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
+
 // 深色主题样式
 import '@/style/theme/dark.scss'
 // 全局样式(权限最高)

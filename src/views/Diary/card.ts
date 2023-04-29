@@ -1,10 +1,10 @@
 /*
  * @Date: 2023-04-22 20:07:55
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-22 20:07:58
+ * @LastEditTime: 2023-04-24 19:17:06
  * @Description: Do not edit
  */
-export default [
+const cards = [
   {
     url: 'https://images.pexels.com/photos/1823734/pexels-photo-1823734.jpeg',
     title: 'Lorem ipsum dolor sit amet',
@@ -46,3 +46,4 @@ export default [
     text: 'Mauris ornare mattis eros vitae iaculis. Fusce blandit eget enim eu tempor. Donec in risus nec augue pharetra ornare. Phasellus dignissim mi eu nulla malesuada bibendum.',
   },
 ]
+export default cards

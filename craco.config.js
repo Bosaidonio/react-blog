@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-17 16:23:57
- * @LastEditTime: 2023-04-22 19:00:03
+ * @LastEditTime: 2023-04-24 20:38:37
  * @LastEditors: mario marioworker@163.com
  * @Description: 配置文件
  */
@@ -93,7 +93,9 @@ module.exports = {
     },
   },
   babel: {
+    presets: [['@babel/preset-react', { runtime: 'automatic', importSource: '@emotion/react' }]],
     plugins: [
+      '@emotion/babel-plugin',
       [
         'import',
         {

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2023-04-22 17:57:11
+ * @LastEditTime: 2023-04-29 16:48:10
  * @LastEditors: mario marioworker@163.com
  * @Description: 头部组件
  */
@@ -15,10 +15,32 @@ import Opacity from '@/components/animation/Opacity'
 import LoginModal from '@/components/LoginModal'
 import logo from '@/assets/svgs/logo.svg'
 import { SearchOutlined, LoadingOutlined, CaretDownOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-
-import styles from '@/layout/Header/index.module.scss'
-import classnames from 'classnames'
 import ThemeButton from '@/components/ThemeButton'
+import { useMode } from '@/hooks'
+import {
+  BreadCrumbsStyle,
+  CaretDownStyle,
+  DropDownMenuStyle,
+  DropDownStyle,
+  EchartsStyle,
+  FlexAndHeightStyle,
+  HeaderLeftStyle,
+  HeaderRightStyle,
+  HeaderStyle,
+  ListGroupItemStyle,
+  ListGroupStyle,
+  LoginModalWarrperStyle,
+  LogoStyle,
+  MusicIconStyle,
+  NavIconStyle,
+  PanelHeadingStyle,
+  PanelStyle,
+  RecordMessageIconStyle,
+  RecordMessageStyle,
+  SearchStyle,
+  ThemeButtonStyle,
+} from '@/layout/Header/header'
+import { HideOnMaxMediaMd } from '@/style/common'
 
 interface HeaderProps {
   isCollapse: boolean
@@ -119,21 +141,21 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
       },
     ],
   }
-
+  const { theme } = useMode()
   return (
-    <header className={classnames('flex', styles['bg-header'])}>
-      <div className={classnames('w-220', 'header-left', styles.logo, 'flex', isMobile ? styles.isMobile : '')} style={{ paddingLeft: isMobile ? '0' : '20px' }}>
-        {isMobile ? <MenuUnfoldOutlined className={styles.BreadCrumbs} onClick={() => setIsCollapse(!isCollapse)} /> : null}
-        <div className={classnames('cursor-pointer', styles.img)}>
+    <header css={HeaderStyle(theme)}>
+      <div css={HeaderLeftStyle(isMobile)}>
+        {isMobile ? <MenuUnfoldOutlined css={BreadCrumbsStyle()} onClick={() => setIsCollapse(!isCollapse)} /> : null}
+        <div css={LogoStyle(theme, isMobile)}>
           <img src={logo} alt="" />
           <h2>Mario's Blog</h2>
         </div>
       </div>
 
-      <div className={classnames('flex', 'items-center', 'flex-auto', 'justify-between', styles['header-right'], 'header-right')}>
+      <div css={HeaderRightStyle()}>
         {isMobile ? null : (
-          <div className="flex h-full">
-            <div className={classnames('flex', 'items-center', 'cursor-pointer', 'md-and-down', styles.echarts)}>
+          <div css={FlexAndHeightStyle()}>
+            <div css={EchartsStyle(theme)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16px"
@@ -149,21 +171,21 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                 <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
                 <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
               </svg>
-              <CaretDownOutlined className={classnames(styles['down-arrow'])} />
+              <CaretDownOutlined css={CaretDownStyle()} />
             </div>
-            <div className={classnames('flex', styles.search, 'items-center', isFoucs ? 'active' : '')}>
+            <div css={SearchStyle(theme)}>
               <Input placeholder="输入关键词搜索…" suffix={isSearch ? <LoadingOutlined /> : <SearchOutlined />} onChange={handleSearch} onFocus={onSearchFocus} onBlur={onSearchBlur} />
             </div>
           </div>
         )}
 
-        <div className="flex h-full">
+        <div css={FlexAndHeightStyle()}>
           {isMobile ? null : (
             <>
-              <div className={classnames('md-and-down')}>
+              <div css={HideOnMaxMediaMd(theme)}>
                 <ReactAplayer {...props} onInit={onInit} onPlay={onPlay} onPause={onPause} />
               </div>
-              <div className={classnames('flex', 'items-center', 'md-and-down', styles['common-icon'])} onClick={onShowMusicList}>
+              <div css={MusicIconStyle(theme)} onClick={onShowMusicList}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16px"
@@ -180,8 +202,8 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                   <circle cx="12" cy="12" r="3"></circle>
                 </svg>
               </div>
-              <div className={classnames('flex', 'items-center', styles.dropdown)}>
-                <div className={classnames('flex', styles['common-icon'], styles.mt)} onClick={handleFadeIn}>
+              <div css={RecordMessageStyle(theme)} onClick={handleFadeIn}>
+                <div css={RecordMessageIconStyle()}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16px"
@@ -199,18 +221,37 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                 </div>
                 {
                   <FadeIn reverse={reverse} immediate={immediate}>
-                    <div className={classnames(styles['dropdown-menu'], !reverse ? styles.noclick : styles.click)}>
-                      <div className={classnames(styles.panel, styles['bg-white'])}>
-                        <div className={classnames(styles['panel-heading'], styles['b-light'], styles['bg-light'])}>
-                          <strong>闲言碎语 </strong>
+                    <div css={DropDownMenuStyle(theme, reverse)}>
+                      <div css={PanelStyle()}>
+                        <div css={PanelHeadingStyle(theme)}>
+                          <strong>
+                            <span css={NavIconStyle()}>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16px"
+                                height="16px"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                              </svg>
+                            </span>
+                            时光机{' '}
+                          </strong>
                         </div>
-                        <div className={classnames(styles['list-group'])} id="smallRecording">
+                        <div css={ListGroupStyle(theme)} id="smallRecording">
                           {[1, 2, 3].map((item) => (
-                            <a href="https://www.ihewro.com/cross.html" key={item} className={classnames(styles['list-group-item'])}>
-                              <span className={classnames(styles.clear)}>
+                            <a href="https://www.ihewro.com/cross.html" key={item} css={ListGroupItemStyle(theme)}>
+                              <span>
                                 又要做根管了…………
                                 <br />
-                                <small className={styles['text-muted']}>昨天 19: 05</small>
+                                <small>昨天 19: 05</small>
                               </span>
                             </a>
                           ))}
@@ -220,8 +261,8 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                   </FadeIn>
                 }
               </div>
-              <div className={classnames('flex', 'items-center', styles.dropdown)}>
-                <div className={classnames('flex', 'items-center', styles['common-icon'])} onClick={handleOpacity}>
+              <div css={DropDownStyle(theme)} onClick={handleOpacity}>
+                <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16px"
@@ -238,8 +279,8 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
                   </svg>
                 </div>
                 <Opacity reverse={opacityReverse} immediate={opacityImmediate}>
-                  <div className={classnames(styles['dropdown-menu'], styles['login-modal'], !opacityReverse ? styles.noclick : styles.click)}>
-                    <div className={classnames('p-warrper', 'bg-default')}>
+                  <div css={DropDownMenuStyle(theme, opacityReverse)}>
+                    <div css={LoginModalWarrperStyle(theme)}>
                       <LoginModal handleOpacity={handleOpacity} />
                     </div>
                   </div>
@@ -247,7 +288,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse }) => {
               </div>
             </>
           )}
-          <div className={styles.theme}>
+          <div css={ThemeButtonStyle()}>
             <ThemeButton />
           </div>
         </div>
