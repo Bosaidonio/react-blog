@@ -1,25 +1,28 @@
 /*
  * @Date: 2023-04-25 22:49:37
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-29 18:25:23
+ * @LastEditTime: 2023-04-30 15:14:26
  * @Description: 公共css样式
  */
 import { ThemeType } from '@/theme'
+import { css } from '@emotion/react'
 
 /* 单行省略   */
-export const SingleLineEllipsis = () => ({
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-})
+export const SingleLineEllipsis = () =>
+  css({
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  })
 /* 多行省略 */
-export const MultiLineEllipsis = (lines: number) => ({
-  display: '-webkit-box',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  WebkitBoxOrient: 'vertical',
-  WebkitLineClamp: lines,
-})
+export const MultiLineEllipsis = (lines: number) =>
+  css({
+    display: '-webkit-box',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    WebkitBoxOrient: 'vertical',
+    WebkitLineClamp: lines,
+  })
 /* flex水平垂直居中布局 */
 export const FlexCenter = () => ({
   display: 'flex',

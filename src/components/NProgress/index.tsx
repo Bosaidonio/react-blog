@@ -1,20 +1,21 @@
 /*
  * @Author: Mario
  * @Date: 2021-12-25 12:51:08
- * @LastEditTime: 2022-01-05 16:58:49
- * @LastEditors: Mario
+ * @LastEditTime: 2023-04-30 11:09:05
+ * @LastEditors: mario marioworker@163.com
  * @Description: 进度条组件
  */
-import styles from '@/components/NProgress/index.module.scss'
-import classnames from 'classnames'
+import { useMode } from '@/hooks'
+import { BarStyle, ButterBarStyle } from './nprogress-style'
 
 interface INProgress {
-  loading: Boolean
+  loading: boolean
 }
 const NProgress = ({ loading }: INProgress) => {
+  const { theme } = useMode()
   return loading ? (
-    <div id="loading" className={classnames(styles.butterbar, loading ? styles.active : '')}>
-      <span className={classnames(styles.bar)}></span>
+    <div id="loading" css={ButterBarStyle(theme, true)}>
+      <span css={BarStyle(theme, true)}></span>
     </div>
   ) : null
 }

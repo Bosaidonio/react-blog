@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-30 00:10:57
+ * @LastEditTime: 2023-05-01 14:44:30
  * @Description: Do not edit
  */
 import { useMediaQuery } from 'react-responsive'
@@ -11,7 +11,7 @@ import { Resizable } from 're-resizable'
 import MenuList from '@/layout/Navbar/components/menuList'
 import { CaretDownOutlined } from '@ant-design/icons'
 import { FC, useRef } from 'react'
-import { AsideUserStyle, AsideWarpperStyle, AvatarStyle, DividerStyle, MoveResizableStyle, NavBarStyle, NavListStyle, NavWarpperStyle, UserDescStyle, UserNameStyle } from './navbarStyle'
+import { AsideUserStyle, AsideWarpperStyle, AvatarStyle, DividerStyle, MoveResizableStyle, NavBarStyle, NavListStyle, NavWarpperStyle, UserDescStyle, UserNameStyle } from './navbar-style'
 import { useMode } from '@/hooks'
 
 interface AsideProps {
@@ -27,8 +27,9 @@ const Aside: FC<AsideProps> = ({ isCollapse, setIsCollapse, initWidth, setInitWi
   const NavRef = useRef<HTMLElement>(null)
   const { theme } = useMode()
   return (
-    <nav ref={NavRef} css={NavBarStyle(theme, isMobile)} style={{ width: initWidth }}>
+    <nav ref={NavRef} css={NavBarStyle(theme, isMobile, isCollapse)} style={{ width: initWidth }}>
       <Resizable
+        handleWrapperClass="resizable-navbar"
         css={MoveResizableStyle(theme)}
         maxWidth={380}
         minWidth={200}

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-29 19:17:29
+ * @LastEditTime: 2023-04-30 22:44:27
  * @Description: Do not edit
  */
 import { useState } from 'react'
@@ -10,10 +10,9 @@ import Navbar from '@/layout/Navbar'
 import Content from '@/layout/Content'
 import Footer from '@/layout/Footer'
 
-import styles from '@/layout/index.module.scss'
 import { useMediaQuery } from 'react-responsive'
 import { useLocation } from 'react-router-dom'
-import { BoxModeStyle, LayoutStyle, LayoutWarrperStyle } from './layoutStyle'
+import { BoxModeStyle, FotterBoxStyle, LayoutStyle, LayoutWarrperStyle } from './layout-style'
 import { useMode } from '@/hooks'
 const Layout = () => {
   const [isCollapse, setIsCollapse] = useState(true)
@@ -33,7 +32,7 @@ const Layout = () => {
         <Navbar isCollapse={isCollapse} setIsCollapse={setIsCollapse} initWidth={initWidth} setInitWidth={setInitWidth} />
         <Content isCollapse={isCollapse} initWidth={initWidth} customStyle={{ paddingBottom: isAi ? '0px' : '60px' }}></Content>
         {isAi ? null : (
-          <div className={styles.footerBox} style={{ marginLeft: isMobile ? 0 : `${initWidth + 10}px`, marginRight: isMobile ? 0 : '250px' }}>
+          <div css={FotterBoxStyle(theme)} style={{ marginLeft: isMobile ? 0 : `${initWidth + 10}px`, marginRight: isMobile ? 0 : '250px' }}>
             <Footer />
           </div>
         )}
