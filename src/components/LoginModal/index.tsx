@@ -17,7 +17,7 @@ import { login } from '@/api/User'
 import { useRequest } from 'ahooks'
 import { setStorage } from '@/utils/storage'
 import { LoginRequest } from '@/types/user'
-import { FormItemLastChild, LoginButtonStyle, LoginModalStyle } from '@/components/LoginModal/loginModalStyle'
+import { FormItemLastChild, LoginButtonStyle, LoginModalStyle } from '@/components/LoginModal/login-modal-style'
 import { useMode } from '@/hooks'
 
 interface LoginModalProps {

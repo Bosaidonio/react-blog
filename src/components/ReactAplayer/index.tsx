@@ -8,7 +8,7 @@
 import APlayer from 'aplayer'
 import 'aplayer/dist/APlayer.min.css'
 import { useEffect, FC } from 'react'
-import { AplayerStyle } from './aplayerStyle'
+import { AplayerStyle } from './aplayer-style'
 import { useMode } from '@/hooks'
 
 interface AplayerProps {

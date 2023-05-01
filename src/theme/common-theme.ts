@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-24 22:19:07
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-29 22:21:13
+ * @LastEditTime: 2023-04-30 10:16:09
  * @Description: Do not edit
  */
 export const fonts = {}
@@ -28,15 +28,17 @@ export const breakpoints: MediaQueryMap = {
   xs: '480px',
   sm: '768px',
   md: '992px',
+  xl: '1020px',
   lg: '1200px',
 }
-type MediaQueryBreakpoints = 'xs' | 'sm' | 'md' | 'lg'
+type MediaQueryBreakpoints = 'xs' | 'sm' | 'md' | 'xl' | 'lg'
 
 export const mediaQueries = (critical: 'min' | 'max' = 'min'): Record<MediaQueryBreakpoints, string> => {
   return {
     xs: `@media (${critical}-width: ${breakpoints.xs})`,
     sm: `@media (${critical}-width: ${breakpoints.sm})`,
     md: `@media (${critical}-width: ${breakpoints.md})`,
+    xl: `@media (${critical}-width: ${breakpoints.xl})`,
     lg: `@media (${critical}-width: ${breakpoints.lg})`,
   }
 }

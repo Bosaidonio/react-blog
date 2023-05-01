@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 18:27:32
- * @LastEditTime: 2023-04-16 23:30:41
+ * @LastEditTime: 2023-04-30 21:32:32
  * @LastEditors: mario marioworker@163.com
  * @Description: 文章详情组件
  */
@@ -17,7 +17,8 @@ import { useDispatch } from 'react-redux'
 import { CategoryTypes } from '@/store/action-types'
 import CommentList from '@/views/CommentList'
 import { CommentProp } from '@/views/CommentList/components/Comment'
-import styles from '@/views/ArticleList/components/ArticleDesc/index.module.scss'
+import { ArticleWarrperStyle, CommentCloseStyle } from './article-desc-style'
+import { useMode } from '@/hooks'
 
 interface IPreviewOptions {
   mode: 'dark' | 'light'
@@ -143,17 +144,17 @@ const PreviewArticleDesc = () => {
 
     dispatch({ type: CategoryTypes.SET_CATEGORY, payload: tree })
   }
+  const { theme } = useMode()
   useEffect(() => {
     run({ id: params.id })
   }, [run, params.id])
   return (
     <div className="article-desc">
       <BlogHeader {...headerData} />
-      <div className="warrper-md">
+      <div css={ArticleWarrperStyle()}>
         <Breadcrumb />
         {markdown ? <VditorPreview markdown={markdown} options={options} callback={asyncRender} /> : null}
-
-        <ArticleProvider run={run}>{isComment && isRenderFinsish ? <CommentList commentList={commentList} /> : <p className={styles.commentClose}>此处评论已关闭</p>}</ArticleProvider>
+        <ArticleProvider run={run}>{isComment && isRenderFinsish ? <CommentList commentList={commentList} /> : <p css={CommentCloseStyle(theme)}>此处评论已关闭</p>}</ArticleProvider>
       </div>
     </div>
   )

@@ -1,9 +1,21 @@
-import classnames from 'classnames'
-import styles from '@/views/ArticleList/components/ArticleItem/index.module.scss'
-import { warrperClass } from '@/utils/dom'
 import { Card, Skeleton } from 'antd'
 import { FC } from 'react'
 import { Article } from '@/views/ArticleList'
+import {
+  AntCardStyle,
+  ArticleHeaderStyle,
+  BannerImgStyle,
+  BannerStyle,
+  ItemMetaIcoStyle,
+  ItemMetaTitleStyle,
+  LineStyle,
+  PanelSmallStyle,
+  PostItemFootStyle,
+  SimpleDescStyle,
+  UserIconStyle,
+} from './article-Item-style'
+import { useMode } from '@/hooks'
+import { SingleLineEllipsis } from '@/style/common'
 
 interface ArticleProps extends Article {
   index: number
@@ -11,27 +23,28 @@ interface ArticleProps extends Article {
   handleClick?: (articleId: string, isComment: boolean) => void
 }
 const ArticleItem: FC<ArticleProps> = ({ title, loading, simpleDesc, isComment, author, banner, isLeftRight, createTime, _id, handleClick, index }) => {
+  const { theme } = useMode()
   return (
-    <div className={classnames(styles['article-header'], loading ? styles['warrper-20'] : '')} onClick={() => handleClick && handleClick(_id, isComment)}>
-      <Card bordered={false}>
+    <div css={ArticleHeaderStyle(theme)} onClick={() => handleClick && handleClick(_id, isComment)}>
+      <Card css={AntCardStyle(theme, loading)} className="custom-ant-card" bordered={false}>
         {
           <Skeleton loading={loading} avatar active>
-            <div className={isLeftRight ? styles['is-left-right'] : ''}>
+            <>
               {banner ? (
-                <div className={classnames(styles['index-post-img'], styles['index-img-small'])}>
-                  <div className={classnames(styles['item-thumb'], styles['item-thumb-small'])} style={{ backgroundImage: `url(${banner})` }}></div>
+                <div css={BannerStyle(theme, isLeftRight)}>
+                  <div css={BannerImgStyle(theme, banner, isLeftRight)}></div>
                 </div>
               ) : null}
-              <div className={classnames(styles['post-meta'], styles['panel-small'], 'padding-20', styles['wrapper-lg'])}>
-                {banner ? null : <div className={classnames(styles['item-meta-ico'], styles['bg-ico-emoji'])}>📮</div>}
-                <h2 className={warrperClass(styles, 'm-t-none text-ellipsis index-post-title text-title')}>
-                  <span className={styles['text-ellipsis']}>{title}</span>
+              <div css={PanelSmallStyle(theme, isLeftRight, banner)}>
+                {banner ? null : <div css={ItemMetaIcoStyle(theme)}>📮</div>}
+                <h2 css={ItemMetaTitleStyle(theme)}>
+                  <span css={SingleLineEllipsis()}>{title}</span>
                 </h2>
-                <p className={warrperClass(styles, 'summary l-h-2x text-muted')}>{simpleDesc}</p>
-                <div className={warrperClass(styles, 'line line-lg b-b b-light')}></div>
-                <div className={warrperClass(styles, 'text-muted post-item-foot-icon text-ellipsis list-inline')}>
+                <p css={SimpleDescStyle(theme, isLeftRight)}>{simpleDesc}</p>
+                <div css={LineStyle(theme)}></div>
+                <div css={PostItemFootStyle(theme)}>
                   <li>
-                    <span className={warrperClass(styles, 'm-r-sm right-small-icons')}>
+                    <span css={UserIconStyle(theme)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16px"
@@ -52,7 +65,7 @@ const ArticleItem: FC<ArticleProps> = ({ title, loading, simpleDesc, isComment, 
                   </li>
 
                   <li>
-                    <span className={warrperClass(styles, 'right-small-icons m-r-sm')}>
+                    <span css={UserIconStyle(theme)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16px"
@@ -72,7 +85,7 @@ const ArticleItem: FC<ArticleProps> = ({ title, loading, simpleDesc, isComment, 
                     {createTime}
                   </li>
                   <li>
-                    <span className={warrperClass(styles, 'right-small-icons m-r-sm')}>
+                    <span css={UserIconStyle(theme)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16px"
@@ -92,7 +105,7 @@ const ArticleItem: FC<ArticleProps> = ({ title, loading, simpleDesc, isComment, 
                   </li>
                 </div>
               </div>
-            </div>
+            </>
           </Skeleton>
         }
       </Card>

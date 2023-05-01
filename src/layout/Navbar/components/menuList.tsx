@@ -13,7 +13,7 @@ import lockIcon from '@/layout/Navbar/assets/svgs/lock.svg'
 import coffeIcon from '@/layout/Navbar/assets/svgs/coffe.svg'
 import aiIcon from '@/layout/Navbar/assets/svgs/ai.svg'
 import { useMode } from '@/hooks'
-import { MenuLabelStyle } from './menuListStyle'
+import { MenuLabelStyle } from './menu-list-style'
 import { AntMenuStyle } from '@/style/plugin/ant-design'
 const { SubMenu } = Menu
 const menuList = [

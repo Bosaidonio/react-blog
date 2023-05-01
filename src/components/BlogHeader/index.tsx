@@ -1,14 +1,14 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-24 21:41:23
+ * @LastEditTime: 2023-04-30 11:31:57
  * @Description: Do not edit
  */
 import React, { FC } from 'react'
 import { ReactSVG } from 'react-svg'
-import classnames from 'classnames'
 import { useLocation } from 'react-router'
-import styles from '@/components/BlogHeader/index.module.scss'
+import { BlogHeaderStyle, BlogHeaderTitleStyle, DescTextStyle, TitleIconsStyle } from './blog-header-style'
+import { useMode } from '@/hooks'
 
 export interface BlogHeaderProps {
   title: string
@@ -20,22 +20,19 @@ export interface BlogHeaderProps {
 const BlogHeader: FC<BlogHeaderProps> = ({ title, desc, icon, isCenter, customStyle }) => {
   const location = useLocation()
   const isHomePage = location.pathname === '/'
-  const homeStyle = {
-    background: `#f9f9f9 url('https://www.ihewro.com/usr/uploads/2022/01/2429933165.png') no-repeat center`,
-    backgroundSize: '100% 100%',
-  }
 
+  const { theme } = useMode()
   return (
-    <header className={classnames(styles['header-md'], isHomePage || isCenter ? styles['center'] : '')} style={isHomePage ? homeStyle : {}}>
-      <h1 className={classnames(isHomePage ? styles['font-thin'] : '')} style={{ fontWeight: isHomePage ? 300 : 400, justifyContent: isHomePage || isCenter ? 'center' : 'unset', ...customStyle }}>
+    <header css={BlogHeaderStyle(theme, isHomePage, isCenter)}>
+      <h1 css={BlogHeaderTitleStyle(theme, isHomePage, isCenter, customStyle)}>
         {icon ? (
-          <span className={styles['title-icons']}>
+          <span css={TitleIconsStyle(theme)}>
             <ReactSVG src={icon} />
           </span>
         ) : null}
         {title}
       </h1>
-      <small className="text-muted tracking-widest">{desc}</small>
+      <small css={DescTextStyle(theme)}>{desc}</small>
     </header>
   )
 }

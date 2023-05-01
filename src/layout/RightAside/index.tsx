@@ -1,30 +1,50 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-02 22:02:09
+ * @LastEditTime: 2023-05-01 23:19:53
  * @Description: Do not edit
  */
 import { useMediaQuery } from 'react-responsive'
-import Sidebar from '@/layout/RightAside/Sidebar'
-import styles from '@/layout/RightAside/index.module.scss'
-import classNames from 'classnames'
 import { useState } from 'react'
+import { ReactSVG } from 'react-svg'
+import { useMount, useRequest } from 'ahooks'
+import { useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Tabs } from 'antd'
+
 import { ArticleRecord } from '@/types/article'
 import likeoutSvg from '@/assets/svgs/likeout.svg'
 import giftSvg from '@/assets/svgs/gift.svg'
 import commentSvg from '@/assets/svgs/comment.svg'
 import { CommentRecord } from '@/types/comment'
 import { getHotArticle, getHotComment, getRandomArticle } from '@/api/Articles'
-import { useMount, useRequest } from 'ahooks'
+import { useMode } from '@/hooks'
+import { State } from '@/store'
+import TabItem from '@/layout/RightAside/components/TabItem'
+import BlogInfo from '@/layout/RightAside/components/BlogInfo'
+import BabelCloud from '@/layout/RightAside/components/BabelCloud'
+import Category from '@/layout/RightAside/components/Category'
+import { RightAsideStyle, AntTabsStyle, DirectoryStyle, SidebarStyle, TabActiveStyle } from '@/layout/RightAside/right-aside-style'
+
+const { TabPane } = Tabs
 export interface TabsList {
   title: string
   icon: string
   children: ArticleRecord[] | CommentRecord[]
 }
 const RightAside = () => {
+  const { theme } = useMode()
   const isDeskbook = useMediaQuery({
     query: '(max-width: 1020px)',
   })
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const location = useLocation()
+  const category = useSelector((state: State) => state.category)
+  const isDirectory = location.pathname.indexOf('/article') > -1
+
+  const onTabClick = (key: string) => {
+    setCurrentIndex(Number(key))
+  }
   const [tabsList, setTabList] = useState<TabsList[]>([
     {
       title: '热门文章',
@@ -90,8 +110,41 @@ const RightAside = () => {
     runRandomArticle({})
   })
   return (
-    <div className={classNames(styles.rightaside, isDeskbook ? styles['aside-active'] : '')}>
-      <Sidebar tabsList={tabsList} />
+    <div css={RightAsideStyle(theme, isDeskbook)}>
+      <div css={SidebarStyle(theme, location.pathname.indexOf('article') > -1)}>
+        {isDirectory ? (
+          <div css={DirectoryStyle(theme)}>
+            <h5>文章目录</h5>
+            {/* <Anchor offsetTop={80} targetOffset={80} showInkInFixed>
+            {diffNodes(category)}
+          </Anchor> */}
+            <Category category={category} />
+          </div>
+        ) : (
+          <>
+            <Tabs id="custom-ant-tab" css={AntTabsStyle(theme)} defaultActiveKey={`${currentIndex}`} animated onTabClick={onTabClick}>
+              {tabsList.map((tab, index) => (
+                <TabPane
+                  tab={
+                    <ReactSVG
+                      css={TabActiveStyle(theme, index === currentIndex)}
+                      src={tab.icon}
+                      beforeInjection={(svg) => {
+                        svg.setAttribute('style', 'color: rgb(119, 119, 119)')
+                      }}
+                    />
+                  }
+                  key={index}
+                >
+                  <TabItem {...tab} currentIndex={index} />
+                </TabPane>
+              ))}
+            </Tabs>
+            <BlogInfo />
+            <BabelCloud />
+          </>
+        )}
+      </div>
     </div>
   )
 }

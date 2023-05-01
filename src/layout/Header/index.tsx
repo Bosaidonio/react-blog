@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-18 00:07:06
- * @LastEditTime: 2023-04-30 00:10:49
+ * @LastEditTime: 2023-04-30 13:10:12
  * @LastEditors: mario marioworker@163.com
  * @Description: 头部组件
  */
@@ -13,7 +13,8 @@ import ReactAplayer from '@/components/ReactAplayer'
 import FadeIn from '@/components/animation/FadeIn'
 import Opacity from '@/components/animation/Opacity'
 import LoginModal from '@/components/LoginModal'
-import logo from '@/assets/svgs/logo.svg'
+import logoLight from '@/assets/svgs/logo-light.gif'
+import logoDark from '@/assets/svgs/log-dark.gif'
 import { SearchOutlined, LoadingOutlined, CaretDownOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import ThemeButton from '@/components/ThemeButton'
 import { useMode } from '@/hooks'
@@ -39,7 +40,7 @@ import {
   RecordMessageStyle,
   SearchStyle,
   ThemeButtonStyle,
-} from '@/layout/Header/headerStyle'
+} from '@/layout/Header/header-style'
 import { HideOnMaxMediaMd } from '@/style/common'
 import { SerializedStyles } from '@emotion/react'
 
@@ -150,7 +151,7 @@ const Header: FC<HeaderProps> = ({ isCollapse, setIsCollapse, BoxModeStyle }) =>
       <div css={HeaderLeftStyle(isMobile)}>
         {isMobile ? <MenuUnfoldOutlined css={BreadCrumbsStyle()} onClick={() => setIsCollapse(!isCollapse)} /> : null}
         <div css={LogoStyle(theme, isMobile)}>
-          <img src={logo} alt="" />
+          <img src={theme.mode === 'light' ? logoLight : logoDark} alt="" />
           <h2>Mario's Blog</h2>
         </div>
       </div>

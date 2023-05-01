@@ -8,7 +8,7 @@ import { Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import routes, { RouteRule } from '@/router'
 import EmptyRouter from '@/views/EmptyRouter'
-import { AppStyle } from './appStyles'
+import { AppStyle } from './app-styles'
 import { useMode } from '@/hooks'
 import SpinLoading from '@/components/SpinLoading'
 

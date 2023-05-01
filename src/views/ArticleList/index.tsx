@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-08-28 19:22:28
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-04-02 22:01:36
+ * @LastEditTime: 2023-04-30 13:51:05
  * @Description: Do not edit
  */
 import { useState } from 'react'
@@ -10,8 +10,8 @@ import ArticleItem from '@/views/ArticleList/components/ArticleItem'
 import PinnedArticle from '@/views/Home/components/PinnedArticle'
 import { useMount, useRequest } from 'ahooks'
 import { getArticleList } from '@/api/Articles'
-import styles from '@/views/ArticleList/index.module.scss'
 import { useNavigate } from 'react-router-dom'
+import { ArticleListStyle } from './article-list-style'
 export interface Article {
   _id: string
   title: string
@@ -80,7 +80,7 @@ const ArticleList = () => {
   })
 
   return (
-    <div className={styles['article-list']}>
+    <div css={ArticleListStyle()}>
       {articleList?.map((article, index) =>
         article.isPinned ? (
           <PinnedArticle key={index} index={index} {...article} handleClick={onPreviewDesc} />
