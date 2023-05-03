@@ -59,6 +59,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
+    "analyze": "env ANALYZE=true craco build",
     "prepare": "husky install",
     "commit": "git add . && cz-customizable"
   },
