@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-17 16:23:57
- * @LastEditTime: 2023-04-24 20:38:37
+ * @LastEditTime: 2023-05-03 18:36:09
  * @LastEditors: mario marioworker@163.com
  * @Description: 配置文件
  */
@@ -11,7 +11,7 @@ const WebpackBar = require('webpackbar')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const path = require('path')
-
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 // 防止create-react-app 构建时清空控制台
 // process.stdout.isTTY = false
 const resolve = (localPath) => {
@@ -105,5 +105,16 @@ module.exports = {
         },
       ],
     ],
+  },
+  jest: {
+    configure: {
+      // 指定测试文件目录
+      roots: ['<rootDir>/tests'],
+      moduleNameMapper: {
+        // 处理别名
+        '^@/(.*)$': '<rootDir>/src/$1',
+      },
+      testMatch: ['<rootDir>/tests/**/*.{js,jsx,ts,tsx}'],
+    },
   },
 }

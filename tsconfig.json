@@ -23,7 +23,8 @@
     "jsxImportSource": "@emotion/react"
   },
   "include": [
-    "src"
+    "src",
+    "tests"
   ],
   "extends": "./paths.json"
 }

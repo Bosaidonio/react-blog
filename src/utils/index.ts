@@ -20,7 +20,7 @@ export const reaplceLink = (str: string) => {
     if (/https:\/\/unpkg.com\/emoji-datasource-google/.test(result)) {
       return result
     } else {
-      return `<a href=${result} style='text-decoration: underline;' target='_blank'>${result}</a>`
+      return `<a href='${result}' style='text-decoration: underline;' target='_blank'>${result}</a>`
     }
   })
   return str
@@ -47,6 +47,10 @@ const getChildrenByLevel = (currentLevelItem: NodeElement, arr: NodeElement[], l
   const children = []
   for (let i = 0, len = arr.length; i < len; i++) {
     const levelItem = arr[i]
+    // 排除 hLevel 小于等于 0 的情况
+    if (levelItem.hLevel <= 0) {
+      continue
+    }
     // 只查找当前遍历这级的子级
     if (-levelItem.hLevel < minusCurrentLevel) {
       children.push(levelItem)
@@ -76,6 +80,9 @@ const getTree = function (result: NodeElement[], arr: NodeElement[], level: numb
   }
   // 首先将数组第一位移除掉，并添加到结果集中
   let currentItem = arr.shift()
+  while (currentItem && currentItem.hLevel <= 0) {
+    currentItem = arr.shift()
+  }
   if (currentItem) {
     currentItem.level = level
     result.push(currentItem)
@@ -89,6 +96,9 @@ const getTree = function (result: NodeElement[], arr: NodeElement[], level: numb
     // 如果当前级别没有子孙级则开始下一个
     if (children?.length === 0) {
       currentItem = arr.shift()
+      while (currentItem && currentItem.hLevel <= 0) {
+        currentItem = arr.shift()
+      }
       if (currentItem) {
         currentItem.level = level
         result.push(currentItem)
