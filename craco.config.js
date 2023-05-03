@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-17 16:23:57
- * @LastEditTime: 2023-05-03 18:36:09
+ * @LastEditTime: 2023-05-03 18:48:07
  * @LastEditors: mario marioworker@163.com
  * @Description: 配置文件
  */
@@ -34,18 +34,18 @@ module.exports = {
       //   react: 'React',
       //   'react-dom': 'ReactDOM',
       // }
-      webpackConfig.optimization.splitChunks = {
-        ...webpackConfig.optimization.splitChunks,
-        cacheGroups: {
-          commons: {
-            chunks: 'all',
-            // 将两个以上的chunk所共享的模块打包至commons组。
-            minChunks: 2,
-            name: 'commons',
-            priority: 80,
-          },
-        },
-      }
+      // webpackConfig.optimization.splitChunks = {
+      //   ...webpackConfig.optimization.splitChunks,
+      //   cacheGroups: {
+      //     commons: {
+      //       chunks: 'all',
+      //       // 将两个以上的chunk所共享的模块打包至commons组。
+      //       minChunks: 2,
+      //       name: 'commons',
+      //       priority: 80,
+      //     },
+      //   },
+      // }
       // 加载module.less文件时开启
       webpackConfig.module.rules = [
         ...webpackConfig.module.rules,
