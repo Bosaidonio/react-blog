@@ -39,7 +39,7 @@ jobs:
 
       - name: Print pull request merged status
         if: github.event_name == 'pull_request'
-        run: echo "Pull request merged status: ${{ github.event.pull_request.merged }}"
+        run: echo "Pull request merged status:'${{ github.event.pull_request.merged }}'"
 
       - name: Print push event
         if: github.event_name == 'push'
@@ -55,29 +55,3 @@ jobs:
       # 构建项目
       - name: Build project
         run: npm run build
-
-  # 合并PR任务
-  merge:
-    # 指定当前任务依赖的其他任务，这里是依赖build-and-test任务
-    needs: build-and-test
-    # 指定任务运行所需的虚拟环境
-    runs-on: ubuntu-latest
-    # 添加条件以确保PR未被合并，避免重复合并
-    if: github.event.pull_request.merged == false
-    steps:
-      # 检出代码仓库，并获取PR的源分支
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      # 合并PR的步骤
-      - name: Merge PR
-        run: |
-          # 切换到目标分支（例如，master分支）
-          git checkout master
-          # 将PR的源分支合并到目标分支，禁用Fast-forward模式和编辑合并信息
-          git merge --no-ff --no-edit ${{ github.head_ref }}
-          # 将合并后的代码推送到远程仓库的目标分支
-          git push origin master
