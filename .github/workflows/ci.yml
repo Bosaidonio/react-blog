@@ -37,6 +37,21 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Print pull request merged status
+        if: github.event_name == 'pull_request'
+        run: echo "Pull request merged status: ${{ github.event.pull_request.merged }}"
+
+      - name: Print push event
+        if: github.event_name == 'push'
+        run: echo "Push event detected"
+        
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
+
       # 构建项目
       - name: Build project
         run: npm run build
@@ -60,9 +75,9 @@ jobs:
       # 合并PR的步骤
       - name: Merge PR
         run: |
-          # 切换到目标分支（例如，main分支）
-          git checkout main
+          # 切换到目标分支（例如，master分支）
+          git checkout master
           # 将PR的源分支合并到目标分支，禁用Fast-forward模式和编辑合并信息
           git merge --no-ff --no-edit ${{ github.head_ref }}
           # 将合并后的代码推送到远程仓库的目标分支
-          git push origin main
+          git push origin master
