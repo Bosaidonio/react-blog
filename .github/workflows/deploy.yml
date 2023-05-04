@@ -41,4 +41,4 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         source: "build/*"
-        target: "/usr/share/nginx/html" # 将此路径替换为你的 Nginx 服务器上的目标文件夹路径
+        target: "/usr/share/nginx/html"

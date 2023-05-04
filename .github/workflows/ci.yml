@@ -27,15 +27,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 14 # 或者你的项目所需的Node.js版本
-
+          node-version: 14.18.0
+          
+      # 缓存node_modules
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./yarn.lock') }}
+          restore-keys: |
+              ${{ runner.os }}-build-${{ env.cache-name }}-
+              ${{ runner.os }}-build-
+              ${{ runner.os }}-
+              
       # 安装项目依赖
       - name: Install dependencies
-        run: npm install
+        run: yarn install --frozen-lockfile
 
       # 运行测试用例
       - name: Run tests
-        run: npm test -- --coverage
+        run: yarn test -- --coverage
 
       - name: Print pull request merged status
         if: github.event_name == 'pull_request'
@@ -54,4 +65,4 @@ jobs:
 
       # 构建项目
       - name: Build project
-        run: npm run build
+        run: yarn build
