@@ -228,3 +228,14 @@ export const debounce = <T extends (...args: any[]) => any>(fn: T, delay: number
     }, delay)
   }
 }
+
+/**
+ * 将Uint8Array转换为字符串
+ *
+ * @param {Uint8Array} array - 要转换为字符串的Uint8Array
+ * @return {string} 转换后的字符串
+ */
+export const uint8ArrayToString = (array: Uint8Array): string => {
+  let decoder = new TextDecoder()
+  return decoder.decode(array)
+}

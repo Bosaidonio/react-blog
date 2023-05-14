@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-23 22:59:13
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-05-01 22:51:41
+ * @LastEditTime: 2023-05-05 22:18:31
  * @Description: 暗色主题
  */
 
@@ -9,8 +9,10 @@ import { boxShadow, breakpoints, fontSizes, fonts, mediaQueries, spaces } from '
 import { ArticleDark } from './components/article-theme'
 import { BabelCloudDark } from './components/babel-cloud-style'
 import { BlogInfoDark } from './components/blog-info-theme'
-import { AntDesignDark } from './plugin/ant-design'
-import { AplayerDark } from './plugin/aplayer'
+import { BreadCrumbDark } from './components/bread-crumb-theme'
+import { AntDesignDark } from './plugin/ant-design-theme'
+import { AplayerDark } from './plugin/aplayer-theme'
+import { VditorDark } from './plugin/vditor-theme'
 
 const DarkTheme = {
   mode: 'dark',
@@ -39,6 +41,10 @@ const DarkTheme = {
     ...BlogInfoDark,
     /* 标签云 */
     ...BabelCloudDark,
+    /* 面包屑 */
+    ...BreadCrumbDark,
+    /* vditor编辑器 */
+    ...VditorDark,
   },
   fonts,
   fontSizes,

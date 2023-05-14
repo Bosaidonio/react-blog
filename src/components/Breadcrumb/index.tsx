@@ -1,10 +1,10 @@
 import { ReactSVG } from 'react-svg'
-import styles from '@/components/Breadcrumb/index.module.scss'
 import backSvg from '@/assets/svgs/back.svg'
 import homeSvg from '@/assets/svgs/home.svg'
-import { warrperClass } from '@/utils/dom'
 import { useNavigate } from 'react-router-dom'
 import { FC } from 'react'
+import { useMode } from '@/hooks'
+import { BreadCrumbIconStyle, BreadCrumbItemStyle, BreadCrumbLinkStyle, BreadCrumbSeparatorStyle, BreadCrumbStyle } from './bread-crumb-style'
 interface BreadcrumbProps {
   goBack?: () => void
 }
@@ -13,17 +13,18 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ goBack }) => {
   const goHome = () => {
     navigate('/')
   }
+  const { theme } = useMode()
   return (
-    <ol className={warrperClass(styles, 'breadcrumb bg-white-pure')}>
+    <ol css={BreadCrumbStyle(theme)}>
       <li onClick={() => (goBack ? goBack() : goHome())}>
-        <div className="flex" style={{ alignItems: 'center' }}>
-          <div className={warrperClass(styles, goBack ? 'home-icons' : '')}>
+        <div css={BreadCrumbItemStyle(theme)}>
+          <div css={BreadCrumbIconStyle(theme, !!goBack)}>
             <ReactSVG src={goBack ? backSvg : homeSvg} />
           </div>
-          <div style={{ marginLeft: '5px' }}>{goBack ? '返回' : '首页'}</div>
+          <div css={BreadCrumbLinkStyle(theme)}>{goBack ? '返回' : '首页'}</div>
         </div>
       </li>
-      <li className={warrperClass(styles, 'active')}>正文&nbsp;&nbsp;</li>
+      <li css={BreadCrumbSeparatorStyle(theme)}>正文&nbsp;&nbsp;</li>
     </ol>
   )
 }

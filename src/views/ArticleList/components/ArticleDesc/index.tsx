@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 18:27:32
- * @LastEditTime: 2023-05-03 17:23:09
+ * @LastEditTime: 2023-05-14 13:23:36
  * @LastEditors: mario marioworker@163.com
  * @Description: 文章详情组件
  */
@@ -19,6 +19,7 @@ import CommentList from '@/views/CommentList'
 import { CommentProp } from '@/views/CommentList/components/Comment'
 import { ArticleWarrperStyle, CommentCloseStyle } from './article-desc-style'
 import { useMode } from '@/hooks'
+import { parseAndModifyCodeBlocks } from '@/utils/dom'
 
 interface IPreviewOptions {
   mode: 'dark' | 'light'
@@ -85,25 +86,10 @@ const PreviewArticleDesc = () => {
           title: result.data.title,
           desc: result.data.simpleDesc,
         })
-        setMarkdown(handleHtml(result.data.articleContent))
+        setMarkdown(result.data.articleContent)
       }
     },
   })
-  const handleHtml = (markdown: string) => {
-    const reg = /(\[scoped\]\s+(warning|success|danger)\s+(提示|注意|危险)(.*)\n?(.*)?\n?\[\/scoped\])/gi
-    return markdown.replace(reg, (result) => {
-      const finallyStr = result.replace(/\n+/g, '')
-      const replaceResult = /(\[scoped\]\s+(warning|success|danger)\s+(提示|注意|危险)(.*)\n?(.*)?\n?\[\/scoped\])/gi.exec(finallyStr)
-      if (replaceResult) {
-        const type = replaceResult[2]
-        const tip = replaceResult[3]
-        const content = replaceResult[4]
-        return `<div class="custom-block ${type}">${tip ? `<p class="custom-block-title">${tip}</p>` : ''}${content}</div>`
-      } else {
-        return `<div>解析异常</div>`
-      }
-    })
-  }
 
   // 文章预览配置
   const options: IPreviewOptions = {
@@ -111,12 +97,21 @@ const PreviewArticleDesc = () => {
     hljs: {
       enable: true,
       style: 'native',
-      lineNumber: true,
+      lineNumber: false,
     },
     // 设置代码块主题
     theme: {
       current: 'light',
     },
+    transform: (html) => {
+      console.log('html', html)
+
+      const modifyHtml = parseAndModifyCodeBlocks(html)
+      console.log('modifyHtml', modifyHtml)
+
+      return modifyHtml
+    },
+
     // media: {
     //   audio: true,
     //   video: true,
