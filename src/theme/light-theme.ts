@@ -1,7 +1,7 @@
 /*
  * @Date: 2023-04-23 22:59:13
  * @LastEditors: mario marioworker@163.com
- * @LastEditTime: 2023-05-01 22:53:35
+ * @LastEditTime: 2023-05-05 21:30:47
  * @Description: 白色主题
  */
 
@@ -9,8 +9,10 @@ import { boxShadow, breakpoints, fontSizes, fonts, mediaQueries, spaces } from '
 import { ArticleLight } from './components/article-theme'
 import { BabelCloudLight } from './components/babel-cloud-style'
 import { BlogInfoLight } from './components/blog-info-theme'
-import { AntDesignLight } from './plugin/ant-design'
-import { AplayerLight } from './plugin/aplayer'
+import { BreadCrumbLight } from './components/bread-crumb-theme'
+import { AntDesignLight } from './plugin/ant-design-theme'
+import { AplayerLight } from './plugin/aplayer-theme'
+import { VditorLight } from './plugin/vditor-theme'
 
 const LightTheme = {
   mode: 'light',
@@ -28,6 +30,7 @@ const LightTheme = {
     backgroundAisde: '#f9f9f9',
     backgroundHover: '#ececec',
     boxShadowPrimary: '#e1e1e1',
+
     /* 播放器颜色 */
     ...AplayerLight,
     /* ant-design颜色 */
@@ -40,6 +43,10 @@ const LightTheme = {
     ...BlogInfoLight,
     /* 标签云 */
     ...BabelCloudLight,
+    /* 面包屑 */
+    ...BreadCrumbLight,
+    /* vditor编辑器 */
+    ...VditorLight,
   },
   fonts,
   fontSizes,
