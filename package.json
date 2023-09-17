@@ -28,7 +28,7 @@
     "antd": "4.17.0",
     "aplayer": "^1.10.1",
     "classnames": "^2.3.1",
-    "craco-less": "^1.20.0",
+    "craco-less": "^2.0.0",
     "cz-customizable": "^7.0.0",
     "emoji-mart": "^5.2.2",
     "party-js": "^2.1.2",
@@ -42,7 +42,7 @@
     "react-redux": "^7.2.6",
     "react-responsive": "^9.0.0-beta.5",
     "react-router-dom": "6",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "react-spring": "^9.3.1",
     "react-svg": "^14.1.7",
     "redux": "^4.1.2",
@@ -64,6 +64,10 @@
     "commit": "git add . && cz-customizable"
   },
   "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
     "extends": [
       "react-app",
       "react-app/jest",

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2021-11-17 16:23:57
- * @LastEditTime: 2023-05-03 19:20:12
+ * @LastEditTime: 2023-06-11 20:29:38
  * @LastEditors: mario marioworker@163.com
  * @Description: 配置文件
  */
@@ -75,7 +75,7 @@ module.exports = {
     },
   ],
   style: {
-    postcss: {
+    postcssOptions: {
       plugins: [require('autoprefixer')],
     },
   },
