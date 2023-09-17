@@ -1,7 +1,7 @@
 /*
  * @Author: Mario
  * @Date: 2022-03-01 18:27:32
- * @LastEditTime: 2023-05-14 13:23:36
+ * @LastEditTime: 2023-06-11 16:38:56
  * @LastEditors: mario marioworker@163.com
  * @Description: 文章详情组件
  */
@@ -104,8 +104,6 @@ const PreviewArticleDesc = () => {
       current: 'light',
     },
     transform: (html) => {
-      console.log('html', html)
-
       const modifyHtml = parseAndModifyCodeBlocks(html)
       console.log('modifyHtml', modifyHtml)
 
@@ -115,7 +113,7 @@ const PreviewArticleDesc = () => {
     // media: {
     //   audio: true,
     //   video: true,
-    //   iframe: true,
+    //   iframe: false,
     //   externalLink: true,
     // },
     // markdown: {

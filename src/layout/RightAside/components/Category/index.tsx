@@ -110,7 +110,6 @@ const Category = ({ category }: any) => {
       )
     })
   }
-  console.log('category', category)
 
   return category.length > 0 ? (
     <div className={warrperClass(styles, 'tags l-h-2x box-shadow-wrap-normal')}>

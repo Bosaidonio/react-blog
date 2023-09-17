@@ -20,6 +20,7 @@ interface AsideProps {
   setInitWidth: (arg: number) => void
   setIsCollapse: (args: boolean) => void
 }
+
 const Aside: FC<AsideProps> = ({ isCollapse, setIsCollapse, initWidth, setInitWidth }) => {
   const isMobile = useMediaQuery({
     query: '(max-width: 767px)',
@@ -52,7 +53,7 @@ const Aside: FC<AsideProps> = ({ isCollapse, setIsCollapse, initWidth, setInitWi
                 <img src="https://cdn.mariowork.com/auth/avatar.jpeg" alt="" />
               </div>
               <div css={UserNameStyle(theme)}>
-                <strong>捡故事的人</strong>
+                <strong>来自水星使者</strong>
                 <CaretDownOutlined />
               </div>
               <span css={UserDescStyle(theme)}>认真生活</span>
